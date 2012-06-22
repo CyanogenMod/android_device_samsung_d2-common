@@ -149,12 +149,17 @@ lib/libv8.so
 
 # Wi-Fi
 bin/macloader
+bin/brcm_poke_helper
 etc/wifi/bcmdhd_apsta.bin_b1
 etc/wifi/bcmdhd_apsta.bin_b2
 etc/wifi/bcmdhd_p2p.bin_b1
 etc/wifi/bcmdhd_p2p.bin_b2
 etc/wifi/bcmdhd_sta.bin_b1
 etc/wifi/bcmdhd_sta.bin_b2
+etc/wifi/bcmdhd_mfg.bin_b1
+etc/wifi/bcmdhd_mfg.bin_b2
+etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_mfg.txt_murata
 etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_murata
 etc/wifi/wpa_supplicant.conf
