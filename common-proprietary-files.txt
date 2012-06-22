@@ -158,7 +158,6 @@ etc/wifi/bcmdhd_sta.bin_b2
 etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_murata
 etc/wifi/wpa_supplicant.conf
-etc/wifi/default_ap.conf
 
 # Firmware
 etc/firmware/a225p5_pm4.fw
