@@ -5,6 +5,7 @@ bin/ds_fmc_appd
 bin/immvibed
 bin/mpdecision
 bin/port-bridge
+bin/time_services
 bin/usbhub
 bin/usbhub_init
 
