@@ -1,0 +1,97 @@
+# Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+#start camera server as daemon
+service qcamerasvr /system/bin/mm-qcamera-daemon
+        class late_start
+        user system
+        group system camera inet
+
+#start GNSS/Sensor interface daemon
+#service gsiff_daemon /system/bin/gsiff_daemon
+#    class late_start
+#    user system
+#    group qcom_oncrpc
+
+# on emmc mount the partition containing firmware
+on emmc-fs
+   mkdir /tombstones 0771 system system
+   mount ext4 /dev/block/mmcblk0p16 /tombstones nosuid nodev barrier=1
+   mkdir /tombstones/modem 0771 system system
+   mkdir /tombstones/lpass 0771 system system
+   mkdir /tombstones/wcnss 0771 system system
+   mkdir /tombstones/dsps 0771 system system
+   mkdir /firmware 0771 system system
+   wait /dev/block/mmcblk0p1
+   mount vfat /dev/block/mmcblk0p1 /firmware ro gid=1000,umask=0006,fmask=0006,dmask=0006,shortname=lower
+   exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
+   exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
+
+on post-fs
+   mount ext4 /dev/block/mmcblk0p14 /system ro remount barrier=1
+
+on boot
+   write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
+   start qcamerasvr
+
+service thermald /system/bin/thermald
+   class main
+   user root
+   group root
+
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+   user root
+   disabled
+
+service kickstart /system/bin/qcks l
+    oneshot
+    disabled
+
+service qseecomd /system/bin/qseecomd
+   class late_start
+   user system
+   group system
+
+# Start kickstart if mdm is detected
+on property:ro.baseband=mdm
+    mkdir /data/qcks 0770 system system
+    start kickstart
+
+
+# 2011-12-08/systemsw/kyo/ bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/bugmailer.sh -v
+	class main
+	disabled
+	oneshot
+	keycodes 114 115 116
+	
+# TVout
+service TvoutService_C /system/bin/bintvoutservice
+     class main
+     user system
+     group graphics	

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="Android">
+    <item name="none">0</item>
+    <item name="screen.on">75</item>
+    <item name="bluetooth.active">32</item>
+    <item name="bluetooth.on">0.3</item>
+    <item name="screen.full">201</item>
+    <item name="wifi.on">0.3</item>
+    <item name="wifi.active">83</item>
+    <item name="wifi.scan">52</item>
+    <item name="dsp.audio">34</item>
+    <item name="dsp.video">265</item>
+    <item name="radio.active">242</item>
+    <item name="radio.scanning">82</item>
+    <item name="gps.on">1</item>
+    <array name="radio.on">
+        <value>2.7</value>
+        <value>3</value>
+    </array>
+    <array name="cpu.speeds">
+        <value>192000</value>
+        <value>384000</value>
+        <value>432000</value>
+        <value>486000</value>
+        <value>540000</value>
+        <value>594000</value>
+        <value>648000</value>
+        <value>702000</value>
+        <value>756000</value>
+        <value>810000</value>
+        <value>864000</value>
+        <value>918000</value>
+        <value>972000</value>
+        <value>1026000</value>
+        <value>1080000</value>
+        <value>1134000</value>
+        <value>1188000</value>
+        <value>1242000</value>
+        <value>1296000</value>
+        <value>1350000</value>
+        <value>1404000</value>
+        <value>1458000</value>
+        <value>1512000</value>
+    </array>
+    <item name="cpu.idle">2</item>
+    <array name="cpu.active">
+        <value>55</value>
+        <value>75</value>
+        <value>95</value>
+        <value>120</value>
+        <value>148</value>
+        <value>165</value>
+        <value>190</value>
+        <value>215</value>
+        <value>230</value>
+        <value>249</value>
+        <value>274</value>
+        <value>299</value>
+        <value>324</value>
+        <value>349</value>
+        <value>374</value>
+        <value>399</value>
+        <value>424</value>
+        <value>449</value>
+        <value>474</value>
+        <value>499</value>
+        <value>524</value>
+        <value>549</value>
+        <value>577</value>
+    </array>
+    <item name="battery.capacity">1850</item>
+</device>
