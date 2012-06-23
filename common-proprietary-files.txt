@@ -110,9 +110,6 @@ lib/libmlplatform.so
 lib/libyamaha.so
 lib/libmplmpu.so
 
-# Lights
-lib/hw/lights.msm8960.so
-
 # Camera
 bin/mm-qcamera-daemon
 lib/hw/camera.msm8960.so
