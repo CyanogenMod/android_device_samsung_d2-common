@@ -33,7 +33,13 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
 char const *const LCD_FILE = "/sys/class/leds/lcd-backlight/brightness";
 char const *const LED_BLINK_FILE = "/sys/class/sec/led/led_blink";
+char const *const LED_PATTERN_FILE = "/sys/class/sec/led/led_pattern";
 char const *const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
+
+#define BATTERY_CHARGING 1
+#define BATTERY_ERROR 2
+#define BATTERY_LOW 4
+#define BATTERY_CHARGED 5
 
 void init_g_lock(void)
 {
@@ -143,9 +149,8 @@ static int close_lights(struct light_device_t *dev)
 static int set_light_leds(struct light_state_t const *state)
 {
     int rc = 0;
-    int fd;
 
-    LOGD("set_light_leds: flashMode=%d, flashOnMS=%d, flashOffMs=%d, color=%d",
+    LOGV("%s: flashMode=%d, flashOnMS=%d, flashOffMs=%d, color=%d", __func__,
                     state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
 
     switch (state->flashMode) {
@@ -161,6 +166,23 @@ static int set_light_leds(struct light_state_t const *state)
     default:
         rc = -EINVAL;
     }
+
+    if (rc != 0)
+        LOGE("set color failed rc = %d\n", rc);
+
+    return rc;
+}
+
+static int
+set_light_battery(struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    int rc = 0;
+
+    LOGV("%s mode=%d color=0x%08x",
+            __func__,state->flashMode, state->color);
+
+    rc = write_int(LED_PATTERN_FILE, state->color);
 
     if (rc != 0)
         LOGE("set color failed rc = %d\n", rc);
@@ -194,6 +216,10 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 		set_light = set_light_leds_notifications;
 	else if (0 == strcmp(LIGHT_ID_ATTENTION, name))
 		set_light = set_light_leds_attention;
+#if 0
+    else if (0 == strcmp(LIGHT_ID_BATTERY, name))
+         set_light = set_light_battery;
+#endif
 	else
 		return -EINVAL;
 
