@@ -76,14 +76,17 @@ static int write_rgb(int value, int on, int off)
     int fd;
     static int already_warned;
 
+    int color = value & 0x00ffffff;
+
     already_warned = 0;
+
 
     LOGV("write_rgb: value %d, on %d, off %d", value, on, off);
     fd = open(LED_BLINK_FILE, O_RDWR);
 
     if (fd >= 0) {
         char buffer[20];
-        int bytes = sprintf(buffer, "0x%x %d %d\n", (on == 0 && off == 0) ? 0 : value, on, off);
+        int bytes = sprintf(buffer, "0x%x %d %d\n", (on == 0 && off == 0) ? 0 : color, on, off);
         int amt = write(fd, buffer, bytes);
         close(fd);
         return amt == -1 ? -errno : 0;
