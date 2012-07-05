@@ -26,5 +26,5 @@
     <bool name="alwaysUsePreferredPreviewSize">true</bool>
     <bool name="noFaceDetectOnFrontCamera">true</bool>
     <bool name="enableZSL">true</bool>
-    <bool name="samsungQualcomCamera">false</bool>
+    <bool name="samsungQualcomCamera">true</bool>
 </resources>
