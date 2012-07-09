@@ -192,10 +192,6 @@ on post-fs-data
     # Enable the setgid bit on the directory
     chmod 2770 /data/bluetooth
 
-# MTP Device permission.
-    chmod 0660 /dev/usb_mtp_gadget
-    chown system system /dev/usb_mtp_gadget
-
     # Enabling a thermal daemon
     setprop persist.thermal.monitor true
 
