@@ -26,23 +26,9 @@ on early-fs
     # ko files for bthid
     insmod /lib/modules/bthid.ko
 
-# files for exfat
-    insmod /system/lib/modules/exfat_core.ko
-    insmod /system/lib/modules/exfat_fs.ko
-
 on emmc-fs
 # mount mmc partitions
-    wait /dev/block/mmcblk0p14
-    mount ext4 /dev/block/mmcblk0p14 /system ro barrier=1
-    wait /dev/block/mmcblk0p15
-    exec /system/bin/e2fsck -p /dev/block/mmcblk0p15
-    mount ext4 /dev/block/mmcblk0p15 /data nosuid nodev noatime barrier=1 discard,noauto_da_alloc,journal_async_commit
-    mount ext4 /dev/block/mmcblk0p16 /persist nosuid nodev barrier=1
-    wait /dev/block/mmcblk0p17 
-    exec /system/bin/e2fsck -p /dev/block/mmcblk0p17
-    mount ext4 /dev/block/mmcblk0p17 /cache nosuid nodev barrier=1
-    wait /dev/block/mmcblk0p11
-    mount ext4 /dev/block/mmcblk0p11 /efs nosuid nodev barrier=1
+    mount_all /fstab.d2
 
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
