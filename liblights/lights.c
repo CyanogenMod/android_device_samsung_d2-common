@@ -53,7 +53,7 @@ static int write_int(char const *path, int value)
 
 	already_warned = 0;
 
-	LOGV("write_int: path %s, value %d", path, value);
+	ALOGV("write_int: path %s, value %d", path, value);
 	fd = open(path, O_RDWR);
 
 	if (fd >= 0) {
@@ -64,7 +64,7 @@ static int write_int(char const *path, int value)
 		return amt == -1 ? -errno : 0;
 	} else {
 		if (already_warned == 0) {
-			LOGE("write_int failed to open %s\n", path);
+			ALOGE("write_int failed to open %s\n", path);
 			already_warned = 1;
 		}
 		return -errno;
@@ -81,7 +81,7 @@ static int write_rgb(int value, int on, int off)
     already_warned = 0;
 
 
-    LOGV("write_rgb: value %d, on %d, off %d", value, on, off);
+    ALOGV("write_rgb: value %d, on %d, off %d", value, on, off);
     fd = open(LED_BLINK_FILE, O_RDWR);
 
     if (fd >= 0) {
@@ -92,7 +92,7 @@ static int write_rgb(int value, int on, int off)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            LOGE("write_rgb failed to open %s\n", LED_BLINK_FILE);
+            ALOGE("write_rgb failed to open %s\n", LED_BLINK_FILE);
             already_warned = 1;
         }
         return -errno;
@@ -142,7 +142,7 @@ set_light_buttons(struct light_device_t* dev,
 
 static int close_lights(struct light_device_t *dev)
 {
-	LOGV("close_light is called");
+	ALOGV("close_light is called");
 	if (dev)
 		free(dev);
 
@@ -153,7 +153,7 @@ static int set_light_leds(struct light_state_t const *state)
 {
     int rc = 0;
 
-    LOGV("%s: flashMode=%d, flashOnMS=%d, flashOffMs=%d, color=%d", __func__,
+    ALOGV("%s: flashMode=%d, flashOnMS=%d, flashOffMs=%d, color=%d", __func__,
                     state->flashMode, state->flashOnMS, state->flashOffMS, state->color);
 
     switch (state->flashMode) {
@@ -164,14 +164,14 @@ static int set_light_leds(struct light_state_t const *state)
         rc = write_rgb(state->color, state->flashOnMS, state->flashOffMS);
         break;
     case LIGHT_FLASH_HARDWARE:
-        LOGV("hardware flash, do nothing");
+        ALOGV("hardware flash, do nothing");
         break;
     default:
         rc = -EINVAL;
     }
 
     if (rc != 0)
-        LOGE("set color failed rc = %d\n", rc);
+        ALOGE("set color failed rc = %d\n", rc);
 
     return rc;
 }
@@ -182,13 +182,13 @@ set_light_battery(struct light_device_t* dev,
 {
     int rc = 0;
 
-    LOGV("%s mode=%d color=0x%08x",
+    ALOGV("%s mode=%d color=0x%08x",
             __func__,state->flashMode, state->color);
 
     rc = write_int(LED_PATTERN_FILE, state->color);
 
     if (rc != 0)
-        LOGE("set color failed rc = %d\n", rc);
+        ALOGE("set color failed rc = %d\n", rc);
 
     return rc;
 }
