@@ -306,6 +306,6 @@
     </integer-array>
 
     <!-- Workaround for devices with broken keyboards -->
-    <!-- <bool name="config_forceDisableHardwareKeyboard">true</bool> -->
+    <bool name="config_forceDisableHardwareKeyboard">true</bool>
 
 </resources>
