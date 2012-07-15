@@ -39,6 +39,8 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 # FIXME: Overlay has an issue when playing video in landscape mode
 COMMON_GLOBAL_CFLAGS += -DQCOM_ROTATOR_KERNEL_FORMATS
 
+COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
+
 # MTP
 BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
 
