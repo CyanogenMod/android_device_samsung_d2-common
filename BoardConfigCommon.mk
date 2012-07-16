@@ -39,9 +39,6 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 # FIXME: Overlay has an issue when playing video in landscape mode
 COMMON_GLOBAL_CFLAGS += -DQCOM_ROTATOR_KERNEL_FORMATS
 
-# MTP
-BOARD_MTP_DEVICE := "/dev/usb_mtp_gadget"
-
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2-common/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
