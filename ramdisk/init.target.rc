@@ -29,8 +29,8 @@
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
         class late_start
-        user system
-        group system camera inet
+        user media
+        group system camera inet input
 
 #start GNSS/Sensor interface daemon
 #service gsiff_daemon /system/bin/gsiff_daemon
