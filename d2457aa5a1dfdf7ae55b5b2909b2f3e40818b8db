@@ -1,0 +1,8 @@
+Change-Id: Id2457aa5a1dfdf7ae55b5b2909b2f3e40818b8db
+Code-Review+2: Steve Kondik <shade@chemlab.org>
+Verified+1: Steve Kondik <shade@chemlab.org>
+Submitted-by: Steve Kondik <shade@chemlab.org>
+Submitted-at: Mon, 16 Jul 2012 23:57:03 +0400
+Reviewed-on: http://review.cyanogenmod.com/19271
+Project: CyanogenMod/android_device_samsung_d2-common
+Branch: refs/heads/ics
