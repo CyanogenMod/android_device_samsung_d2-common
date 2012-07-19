@@ -51,6 +51,7 @@ lib/libC2D2.so
 lib/libOpenVG.so
 lib/libsc-a2xx.so
 lib/libsc-a3xx.so
+lib/libmm-color-convertor.so
 
 # Radio
 bin/netmgrd
