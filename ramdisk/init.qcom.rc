@@ -47,6 +47,7 @@ on post-fs-data
     chown media_rw media_rw /data/media
 
 on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
     exec system/bin/btnvtool -O
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
     chown bluetooth bluetooth ro.bt.bdaddr_path
