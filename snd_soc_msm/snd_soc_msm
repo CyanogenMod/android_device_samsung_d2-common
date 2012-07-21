@@ -16,9 +16,9 @@ SectionUseCase."HiFi Voice Recognition" {
 File "HiFi_Voice_Recognition"
 Comment "Voice Recognition use case"
 }
-SectionUseCase."Voice Call1" {
+SectionUseCase."Voice Call" {
 File "Voice_Call1"
-Comment "Voice Call1 use case"
+Comment "Voice Call use case"
 }
 SectionUseCase."Video Call" {
 File "Video_Call"

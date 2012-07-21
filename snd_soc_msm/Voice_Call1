@@ -1,7 +1,7 @@
-# Voice Call1 (Voice call1) use case config file for MSM8960
+# Voice_Call (Voice_Call) use case config file for MSM8960
 
 SectionVerb
-	Name "Voice Call1"
+	Name "Voice_Call"
 
 	# ALSA PCMs
 	PlaybackPCM 2
@@ -11,7 +11,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Speaker"
+	Name "Voice_CallSpeaker"
 
 	EnableSequence
 	EndSequence
@@ -29,7 +29,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Speaker Extra Vol"
+	Name "Voice_CallSpeaker Extra Vol"
 
 	EnableSequence
 	EndSequence
@@ -47,7 +47,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Main Mic"
+	Name "Voice_CallMain Mic"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -67,7 +67,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Sub Mic"
+	Name "Voice_CallSub Mic"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -85,7 +85,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Samsung Dualmic SPK"
+	Name "Voice_CallSamsung Dualmic SPK"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -105,7 +105,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Samsung Dualmic RCV"
+	Name "Voice_CallSamsung Dualmic RCV"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -123,7 +123,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Headset"
+	Name "Voice_CallHeadset"
 
 	EnableSequence
 	EndSequence
@@ -141,7 +141,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Headset Mic"
+	Name "Voice_CallHeadset Mic"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -159,7 +159,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Handset"
+	Name "Voice_CallHandset"
 
 	EnableSequence
 	EndSequence
@@ -177,7 +177,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Handset Extra Vol"
+	Name "Voice_CallHandset Extra Vol"
 
 	EnableSequence
 	EndSequence
@@ -195,7 +195,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Hac Handset"
+	Name "Voice_CallHac Handset"
 
 	EnableSequence
 	EndSequence
@@ -213,7 +213,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Dock"
+	Name "Voice_CallDock"
 
 	EnableSequence
 	EndSequence
@@ -231,7 +231,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Lineout"
+	Name "Voice_CallLineout"
 
 	EnableSequence
 	EndSequence
@@ -249,7 +249,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Speaker Headset"
+	Name "Voice_CallSpeaker Headset"
 
 	EnableSequence
 	EndSequence
@@ -267,7 +267,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Speaker Lineout"
+	Name "Voice_CallSpeaker Lineout"
 
 	EnableSequence
 	EndSequence
@@ -285,7 +285,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Hdmi Rx"
+	Name "Voice_CallHdmi Rx"
 
 	EnableSequence
 	EndSequence
@@ -321,7 +321,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1Hdmi Tx"
+	Name "Voice_CallHdmi Tx"
 
 	EnableSequence
 		'HDMI_RX_Voice Mixer CSVoice':1:1
@@ -339,7 +339,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1TTY Headset Rx"
+	Name "Voice_CallTTY Headset Rx"
 
 	EnableSequence
 	EndSequence
@@ -357,7 +357,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1TTY Headset Tx"
+	Name "Voice_CallTTY Headset Tx"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -375,7 +375,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1TTY Full Rx"
+	Name "Voice_CallTTY Full Rx"
 
 	EnableSequence
 	EndSequence
@@ -393,7 +393,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1TTY Full Tx"
+	Name "Voice_CallTTY Full Tx"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -411,7 +411,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1BT Sco Mono Rx"
+	Name "Voice_CallBT Sco Mono Rx"
 
 	EnableSequence
 	EndSequence
@@ -429,7 +429,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1BT Sco Mono Tx"
+	Name "Voice_CallBT Sco Mono Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -448,7 +448,7 @@ EndSection
 
 
 SectionVerb
-	Name "Voice Call1BT Sco Mono Nrec Rx"
+	Name "Voice_CallBT Sco Mono Nrec Rx"
 
 	EnableSequence
 	EndSequence
@@ -466,7 +466,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1BT Sco Mono Nrec Tx"
+	Name "Voice_CallBT Sco Mono Nrec Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -485,7 +485,7 @@ EndSection
 
 
 SectionVerb
-	Name "Voice Call1BT Sco Stereo Rx"
+	Name "Voice_CallBT Sco Stereo Rx"
 
 	EnableSequence
 	EndSequence
@@ -493,8 +493,7 @@ SectionVerb
 	DisableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:0
 		'Voice_Tx Mixer AUX_PCM_TX_Voice':1:0
-	EndSequence
-
+	EndSequenceVoice_Call
 	# ALSA PCMs
 	PlaybackPCM 2
 	capturePCM 2
@@ -503,7 +502,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1BT Sco Stereo Tx"
+	Name "Voice_CallBT Sco Stereo Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -522,7 +521,7 @@ EndSection
 
 
 SectionVerb
-	Name "Voice Call1BT Sco Stereo Nrec Rx"
+	Name "Voice_CallBT Sco Stereo Nrec Rx"
 
 	EnableSequence
 	EndSequence
@@ -540,7 +539,7 @@ SectionVerb
 EndSection
 
 SectionVerb
-	Name "Voice Call1BT Sco Stereo Nrec Tx"
+	Name "Voice_CallBT Sco Stereo Nrec Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -2185,7 +2184,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1"
+	Name "Play Voice_Call"
 
 	# ALSA PCMs
 	CapturePCM 2
@@ -2195,7 +2194,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Speaker"
+	Name "Play Voice_CallSpeaker"
 
 	EnableSequence
 	EndSequence
@@ -2213,7 +2212,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Speaker Extra Vol"
+	Name "Play Voice_CallSpeaker Extra Vol"
 
 	EnableSequence
 	EndSequence
@@ -2231,7 +2230,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Main Mic"
+	Name "Play Voice_CallMain Mic"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2256,7 +2255,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Sub Mic"
+	Name "Play Voice_CallSub Mic"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2280,7 +2279,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Samsung Dualmic SPK"
+	Name "Play Voice_CallSamsung Dualmic SPK"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2310,7 +2309,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Samsung Dualmic RCV"
+	Name "Play Voice_CallSamsung Dualmic RCV"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2334,7 +2333,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Headset"
+	Name "Play Voice_CallHeadset"
 
 	EnableSequence
 		'HPHL DAC Switch':1:1
@@ -2364,7 +2363,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Headset Mic"
+	Name "Play Voice_CallHeadset Mic"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2384,7 +2383,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Dock"
+	Name "Play Voice_CallDock"
 
 	EnableSequence
 	EndSequence
@@ -2402,7 +2401,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Lineout"
+	Name "Play Voice_CallLineout"
 
 	EnableSequence
 	EndSequence
@@ -2420,7 +2419,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Handset"
+	Name "Play Voice_CallHandset"
 
 	EnableSequence
 	EndSequence
@@ -2438,7 +2437,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Handset Extra Vol"
+	Name "Play Voice_CallHandset Extra Vol"
 
 	EnableSequence
 	EndSequence
@@ -2456,7 +2455,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Hac Handset"
+	Name "Play Voice_CallHac Handset"
 
 	EnableSequence
 	EndSequence
@@ -2474,7 +2473,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Speaker Headset"
+	Name "Play Voice_CallSpeaker Headset"
 
 	EnableSequence
 	EndSequence
@@ -2492,7 +2491,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Speaker Lineout"
+	Name "Play Voice_CallSpeaker Lineout"
 
 	EnableSequence
 	EndSequence
@@ -2510,7 +2509,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Hdmi Rx"
+	Name "Play Voice_CallHdmi Rx"
 
 	EnableSequence
 	EndSequence
@@ -2528,7 +2527,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1Hdmi Tx"
+	Name "Play Voice_CallHdmi Tx"
 
 	EnableSequence
 		'HDMI_RX_Voice Mixer CSVoice':1:1
@@ -2546,7 +2545,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1TTY Headset Rx"
+	Name "Play Voice_CallTTY Headset Rx"
 
 	EnableSequence
 	EndSequence
@@ -2564,7 +2563,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1TTY Headset Tx"
+	Name "Play Voice_CallTTY Headset Tx"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2582,7 +2581,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1TTY Full Rx"
+	Name "Play Voice_CallTTY Full Rx"
 
 	EnableSequence
 	EndSequence
@@ -2600,7 +2599,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1TTY Full Tx"
+	Name "Play Voice_CallTTY Full Tx"
 
 	EnableSequence
 		'PRI_RX_Voice Mixer CSVoice':1:1
@@ -2618,7 +2617,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Mono Rx"
+	Name "Play Voice_CallBT Sco Mono Rx"
 
 	EnableSequence
 	EndSequence
@@ -2636,7 +2635,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Mono Tx"
+	Name "Play Voice_CallBT Sco Mono Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -2654,7 +2653,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Mono Nrec Rx"
+	Name "Play Voice_CallBT Sco Mono Nrec Rx"
 
 	EnableSequence
 	EndSequence
@@ -2672,7 +2671,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Mono Nrec Tx"
+	Name "Play Voice_CallBT Sco Mono Nrec Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -2690,7 +2689,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Stereo Rx"
+	Name "Play Voice_CallBT Sco Stereo Rx"
 
 	EnableSequence
 	EndSequence
@@ -2708,7 +2707,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Stereo Tx"
+	Name "Play Voice_CallBT Sco Stereo Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
@@ -2726,7 +2725,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Stereo Nrec Rx"
+	Name "Play Voice_CallBT Sco Stereo Nrec Rx"
 
 	EnableSequence
 	EndSequence
@@ -2744,7 +2743,7 @@ SectionModifier
 EndSection
 
 SectionModifier
-	Name "Play Voice Call1BT Sco Stereo Nrec Tx"
+	Name "Play Voice_CallBT Sco Stereo Nrec Tx"
 
 	EnableSequence
 		'AUX_PCM_RX_Voice Mixer CSVoice':1:1
