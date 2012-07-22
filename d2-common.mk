@@ -46,7 +46,8 @@ PRODUCT_COPY_FILES += \
 	device/samsung/d2-common/snd_soc_msm/VoIP2:system/etc/snd_soc_msm/VoIP2 \
 	device/samsung/d2-common/snd_soc_msm/VoIP3:system/etc/snd_soc_msm/VoIP3 \
 	device/samsung/d2-common/snd_soc_msm/VoIP4:system/etc/snd_soc_msm/VoIP4 \
-	device/samsung/d2-common/snd_soc_msm/VoIP5:system/etc/snd_soc_msm/VoIP5
+	device/samsung/d2-common/snd_soc_msm/VoIP5:system/etc/snd_soc_msm/VoIP5 \
+	device/samsung/d2-common/audio_policy.conf:system/etc/audio_policy.conf
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
