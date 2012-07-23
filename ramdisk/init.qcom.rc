@@ -157,6 +157,10 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
+    # For disabling softkeys
+    chown root system /sys/class/leds/button-backlight/max_brightness
+    chmod 0664 /sys/class/leds/button-backlight/max_brightness
+
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
