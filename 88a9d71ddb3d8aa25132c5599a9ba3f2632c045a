@@ -1,0 +1,8 @@
+Change-Id: I88a9d71ddb3d8aa25132c5599a9ba3f2632c045a
+Code-Review+2: Steve Kondik <shade@chemlab.org>
+Verified+1: Steve Kondik <shade@chemlab.org>
+Submitted-by: Steve Kondik <shade@chemlab.org>
+Submitted-at: Sun, 29 Jul 2012 06:10:59 +0400
+Reviewed-on: http://review.cyanogenmod.com/20283
+Project: CyanogenMod/android_device_samsung_d2-common
+Branch: refs/heads/jellybean
