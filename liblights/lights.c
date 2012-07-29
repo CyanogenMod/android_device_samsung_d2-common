@@ -34,9 +34,6 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 char const*const PANEL_FILE = "/sys/class/leds/lcd-backlight/brightness";
 char const*const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
 
-char const*const LED_RED = "/sys/class/sec/led/led_r";
-char const*const LED_GREEN = "/sys/class/sec/led/led_g";
-char const*const LED_BLUE = "/sys/class/sec/led/led_b";
 char const*const LED_BLINK = "/sys/class/sec/led/led_blink";
 char const*const LED_BRIGHTNESS = "/sys/class/sec/led/led_br_lev";
 
@@ -58,32 +55,32 @@ struct led_config g_BatteryStore;
 
 void init_g_lock(void)
 {
-	pthread_mutex_init(&g_lock, NULL);
+    pthread_mutex_init(&g_lock, NULL);
 }
 
 static int write_int(char const *path, int value)
 {
-	int fd;
-	static int already_warned;
+    int fd;
+    static int already_warned;
 
-	already_warned = 0;
+    already_warned = 0;
 
-	ALOGV("write_int: path %s, value %d", path, value);
-	fd = open(path, O_RDWR);
+    ALOGV("write_int: path %s, value %d", path, value);
+    fd = open(path, O_RDWR);
 
-	if (fd >= 0) {
-		char buffer[20];
-		int bytes = sprintf(buffer, "%d\n", value);
-		int amt = write(fd, buffer, bytes);
-		close(fd);
-		return amt == -1 ? -errno : 0;
-	} else {
-		if (already_warned == 0) {
-			ALOGE("write_int failed to open %s\n", path);
-			already_warned = 1;
-		}
-		return -errno;
-	}
+    if (fd >= 0) {
+        char buffer[20];
+        int bytes = sprintf(buffer, "%d\n", value);
+        int amt = write(fd, buffer, bytes);
+        close(fd);
+        return amt == -1 ? -errno : 0;
+    } else {
+        if (already_warned == 0) {
+            ALOGE("write_int failed to open %s\n", path);
+            already_warned = 1;
+        }
+        return -errno;
+    }
 }
 
 static int read_int(char const *path)
@@ -163,11 +160,11 @@ static int set_light_backlight(struct light_device_t *dev,
 
 static int close_lights(struct light_device_t *dev)
 {
-	ALOGV("close_light is called");
-	if (dev)
-		free(dev);
+    ALOGV("close_light is called");
+    if (dev)
+        free(dev);
 
-	return 0;
+    return 0;
 }
 
 /* LEDs */
@@ -176,9 +173,6 @@ static int write_leds(struct led_config led)
     int err = 0;
 
     pthread_mutex_lock(&g_lock);
-    err = write_int(LED_RED, led.red);
-    err = write_int(LED_GREEN, led.green);
-    err = write_int(LED_BLUE, led.blue);
     err = write_str(LED_BLINK, led.blink);
     pthread_mutex_unlock(&g_lock);
 
@@ -209,8 +203,8 @@ static int set_light_leds(struct light_state_t const *state, int type)
             led.red = (colorRGB >> 16) & 0xFF;
             led.green = (colorRGB >> 8) & 0xFF;
             led.blue = colorRGB & 0xFF;
-            snprintf(led.blink, MAX_WRITE_CMD, "0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
-            ALOGD("set_light_leds 0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+            snprintf(led.blink, MAX_WRITE_CMD, "0x%06x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+            ALOGD("set_light_leds 0x%06x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
         break;
     default:
         return -EINVAL;
@@ -243,8 +237,8 @@ static int set_light_battery(struct light_device_t *dev,
         led.red = (colorRGB >> 16) & 0xFF;
         led.green = (colorRGB >> 8) & 0xFF;
         led.blue = colorRGB & 0xFF;
-        snprintf(led.blink, MAX_WRITE_CMD, "0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
-        ALOGD("set_light_battery 0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+        snprintf(led.blink, MAX_WRITE_CMD, "0x%06x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+        ALOGD("set_light_battery 0x%06x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
     }
 
     g_BatteryStore = led;
@@ -295,15 +289,15 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 }
 
 static struct hw_module_methods_t lights_module_methods = {
-	.open =  open_lights,
+    .open =  open_lights,
 };
 
 struct hw_module_t HAL_MODULE_INFO_SYM = {
-	.tag = HARDWARE_MODULE_TAG,
-	.version_major = 1,
-	.version_minor = 0,
-	.id = LIGHTS_HARDWARE_MODULE_ID,
-	.name = "D2 Lights Module",
-	.author = "The CyanogenMod Project",
-	.methods = &lights_module_methods,
+    .tag = HARDWARE_MODULE_TAG,
+    .version_major = 1,
+    .version_minor = 0,
+    .id = LIGHTS_HARDWARE_MODULE_ID,
+    .name = "D2 Lights Module",
+    .author = "The CyanogenMod Project",
+    .methods = &lights_module_methods,
 };
