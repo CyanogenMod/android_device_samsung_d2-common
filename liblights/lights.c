@@ -200,7 +200,7 @@ static int set_light_leds(struct light_state_t const *state, int type)
                 led.red = 0;
                 led.green = 0;
                 led.blue = 0;
-                snprintf(g_BatteryStore.blink, MAX_WRITE_CMD, "0x000000 0 0");
+                snprintf(g_BatteryStore.blink, MAX_WRITE_CMD, "0x000000 0 0 0");
             }
             led = g_BatteryStore;
         break;
@@ -209,8 +209,8 @@ static int set_light_leds(struct light_state_t const *state, int type)
             led.red = (colorRGB >> 16) & 0xFF;
             led.green = (colorRGB >> 8) & 0xFF;
             led.blue = colorRGB & 0xFF;
-            snprintf(led.blink, MAX_WRITE_CMD, "0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
-            ALOGD("set_light_leds 0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+            snprintf(led.blink, MAX_WRITE_CMD, "0x%x 0 %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+            ALOGD("set_light_leds 0x%x 0 %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
         break;
     default:
         return -EINVAL;
@@ -238,12 +238,12 @@ static int set_light_battery(struct light_device_t *dev,
         led.red = 0;
         led.green = 0;
         led.blue = 0;
-        snprintf(led.blink, MAX_WRITE_CMD, "0x000000 0 0");
+        snprintf(led.blink, MAX_WRITE_CMD, "0x000000 0 0 0");
     } else {
         led.red = (colorRGB >> 16) & 0xFF;
         led.green = (colorRGB >> 8) & 0xFF;
         led.blue = colorRGB & 0xFF;
-        snprintf(led.blink, MAX_WRITE_CMD, "0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
+        snprintf(led.blink, MAX_WRITE_CMD, "0x%x 0 %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
         ALOGD("set_light_battery 0x%x %d %d", colorRGB, state->flashOnMS, state->flashOffMS);
     }
 
