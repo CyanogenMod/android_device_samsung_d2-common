@@ -19,13 +19,13 @@
 <resources>
 
     <!-- Which default transition effect to use on the workspace -->
-    <string name="config_workspaceDefaultTransitionEffect">Tablet</string>
+    <!-- <string name="config_workspaceDefaultTransitionEffect">Tablet</string> -->
 
     <!-- Whether to fade the adjacent screens when scrolling -->
-    <bool name="config_workspaceDefualtFadeInAdjacentScreens">true</bool>
+    <!-- <bool name="config_workspaceDefualtFadeInAdjacentScreens">true</bool> -->
 
     <!-- Workspace grid size -->
-    <integer name="config_workspaceRows">5</integer>
-    <integer name="config_workspaceColumns">4</integer>
+    <!-- <integer name="config_workspaceRows">5</integer>
+    <integer name="config_workspaceColumns">4</integer> -->
 
 </resources>
