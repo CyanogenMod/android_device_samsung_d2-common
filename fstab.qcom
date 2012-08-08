@@ -7,6 +7,6 @@
 /dev/block/mmcblk0p14                                   /system             ext4      ro,barrier=1                                                                              wait
 /dev/block/mmcblk0p11                                   /efs                ext4      nosuid,nodev,barrier=1                                                                    wait,check
 /dev/block/mmcblk0p17                                   /cache              ext4      nosuid,nodev,barrier=1                                                                    wait,check
-/dev/block/mmcblk0p15                                   /data               ext4      noatime,nosuid,nodev,barrier=1,discard,noauto_da_alloc,journal_async_commit               wait,check
+/dev/block/mmcblk0p15                                   /data               ext4      noatime,nosuid,nodev,barrier=1,discard,noauto_da_alloc,journal_async_commit               wait,check,encryptable=footer
 /dev/block/mmcblk0p16                                   /persist            ext4      nosuid,nodev,barrier=1                                                                    wait,check
 

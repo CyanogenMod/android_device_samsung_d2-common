@@ -59,7 +59,7 @@ PRODUCT_COPY_FILES += \
     device/samsung/d2-common/ramdisk/init.qcom.sh:root/init.qcom.sh \
     device/samsung/d2-common/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
     device/samsung/d2-common/ramdisk/init.target.rc:root/init.target.rc \
-    device/samsung/d2-common/fstab.d2:root/fstab.d2 \
+    device/samsung/d2-common/fstab.qcom:root/fstab.qcom \
     device/samsung/d2-common/ramdisk/initlogo.rle:root/initlogo.rle \
     device/samsung/d2-common/ramdisk/ueventd.rc:root/ueventd.rc \
 	device/samsung/d2-common/ramdisk/init.emmc.rc:root/init.emmc.rc \

@@ -32,7 +32,7 @@ on early-fs
 
 on emmc-fs
 # mount mmc partitions
-    mount_all /fstab.d2
+    mount_all /fstab.qcom
 
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
