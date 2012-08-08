@@ -75,7 +75,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
 # Lights
-PRODUCT_PACKAGES += lights.msm8960
+PRODUCT_PACKAGES += lights.msm8960 power.msm8960
 
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
