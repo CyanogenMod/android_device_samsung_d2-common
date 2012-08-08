@@ -182,3 +182,6 @@ etc/wifi/wpa_supplicant.conf
 etc/firmware/cyttsp_8960_cdp.hex
 etc/firmware/vidc_1080p.fw
 
+# Perf
+lib/libqc-opt.so
+
