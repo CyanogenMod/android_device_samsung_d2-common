@@ -25,7 +25,8 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
-#define BOOSTPULSE_PATH "/sys/devices/system/cpu/cpufreq/ondemand/boostpulse"
+#define BOOSTPULSE_ONDEMAND "/sys/devices/system/cpu/cpufreq/ondemand/boostpulse"
+#define BOOSTPULSE_INTERACTIVE "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
 
 struct d2_power_module {
     struct power_module base;
@@ -62,12 +63,14 @@ static int boostpulse_open(struct d2_power_module *d2)
     pthread_mutex_lock(&d2->lock);
 
     if (d2->boostpulse_fd < 0) {
-        d2->boostpulse_fd = open(BOOSTPULSE_PATH, O_WRONLY);
+        d2->boostpulse_fd = open(BOOSTPULSE_ONDEMAND, O_WRONLY);
 
         if (d2->boostpulse_fd < 0) {
-            if (!d2->boostpulse_warned) {
+            d2->boostpulse_fd = open(BOOSTPULSE_INTERACTIVE, O_WRONLY);
+
+            if (d2->boostpulse_fd < 0 && !d2->boostpulse_warned) {
                 strerror_r(errno, buf, sizeof(buf));
-                ALOGE("Error opening %s: %s\n", BOOSTPULSE_PATH, buf);
+                ALOGE("Error opening boostpulse: %s\n", buf);
                 d2->boostpulse_warned = 1;
             }
         }
@@ -91,7 +94,13 @@ static void d2_power_hint(struct power_module *module, power_hint_t hint,
 
 	    if (len < 0) {
 	        strerror_r(errno, buf, sizeof(buf));
-		ALOGE("Error writing to %s: %s\n", BOOSTPULSE_PATH, buf);
+		    ALOGE("Error writing to boostpulse: %s\n", buf);
+
+            pthread_mutex_lock(&d2->lock);
+            close(d2->boostpulse_fd);
+            d2->boostpulse_fd = -1;
+            d2->boostpulse_warned = 0;
+            pthread_mutex_unlock(&d2->lock);
 	    }
 	}
         break;
