@@ -158,9 +158,6 @@ cameradata/datapattern_front_420sp.yuv
 # General
 lib/libdiag.so
 
-# Webkit
-lib/libv8.so
-
 # Wi-Fi
 bin/macloader
 bin/brcm_poke_helper
