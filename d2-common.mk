@@ -30,26 +30,9 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Audio configuration
-    #dupilcate to make snd_soc_msm with snd_soc_msm_2x work with open source audio hal  
 PRODUCT_COPY_FILES += \
-	device/samsung/d2-common/snd_soc_msm/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
-	device/samsung/d2-common/snd_soc_msm/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm_2x \
-	device/samsung/d2-common/snd_soc_msm/Call_DL_Rec:system/etc/snd_soc_msm/Call_DL_Rec \
-	device/samsung/d2-common/snd_soc_msm/Call_UL_DL_Rec:system/etc/snd_soc_msm/Call_UL_DL_Rec \
-	device/samsung/d2-common/snd_soc_msm/DSP_Loopback:system/etc/snd_soc_msm/DSP_Loopback \
-	device/samsung/d2-common/snd_soc_msm/HiFi:system/etc/snd_soc_msm/HiFi \
-	device/samsung/d2-common/snd_soc_msm/HiFi_Low_Power:system/etc/snd_soc_msm/HiFi_Low_Power \
-	device/samsung/d2-common/snd_soc_msm/HiFi_Rec:system/etc/snd_soc_msm/HiFi_Rec \
-	device/samsung/d2-common/snd_soc_msm/HiFi_Voice_Recognition:system/etc/snd_soc_msm/HiFi_Voice_Recognition \
-	device/samsung/d2-common/snd_soc_msm/Loopback:system/etc/snd_soc_msm/Loopback \
-	device/samsung/d2-common/snd_soc_msm/Video_Call:system/etc/snd_soc_msm/Video_Call \
-	device/samsung/d2-common/snd_soc_msm/Voice_Call1:system/etc/snd_soc_msm/Voice_Call1 \
-	device/samsung/d2-common/snd_soc_msm/VoIP1:system/etc/snd_soc_msm/VoIP1 \
-	device/samsung/d2-common/snd_soc_msm/VoIP2:system/etc/snd_soc_msm/VoIP2 \
-	device/samsung/d2-common/snd_soc_msm/VoIP3:system/etc/snd_soc_msm/VoIP3 \
-	device/samsung/d2-common/snd_soc_msm/VoIP4:system/etc/snd_soc_msm/VoIP4 \
-	device/samsung/d2-common/snd_soc_msm/VoIP5:system/etc/snd_soc_msm/VoIP5 \
-	device/samsung/d2-common/audio_policy.conf:system/etc/audio_policy.conf
+	device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
+	device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
