@@ -2299,6 +2299,30 @@ SectionDevice
 EndSection
 
 SectionDevice
+    Name "Voice Earpiece"
+    Comment "Handset Rx device for voice call"
+
+    EnableSequence
+        'PRI_RX Channels':0:One
+        'RX1 MIX1 INP1':0:RX1
+        'EAR PA Gain':0:POS_6_DB
+        'DAC1 Switch':1:1
+        'RX1 Digital Volume':1:69%
+    EndSequence
+
+    DisableSequence
+        'RX1 MIX1 INP1':0:ZERO
+        'DAC1 Switch':1:0
+        'EAR PA Gain':0:ZERO
+        'RX1 Digital Volume':1:0
+    EndSequence
+
+    ACDBID  71:1
+    EffectsMixerCTL "SRS TruMedia"
+
+EndSection
+
+SectionDevice
 	Name "TTY Handset Rx"
 	Comment "TTY HCO Handset Rx device"
 
@@ -2373,6 +2397,33 @@ SectionDevice
 EndSection
 
 SectionDevice
+    Name "Voice Speaker"
+    Comment "Speaker Rx device for voice call"
+
+    EnableSequence
+        'PRI_RX Channels':0:Two
+        'RX5 MIX1 INP1':0:RX1
+        'RX5 MIX1 INP2':0:RX2
+        'RX6 DSM MUX':0:DSM_INV
+        'LINEOUT2 Volume':1:100%
+        'LINEOUT4 Volume':1:100%
+        'RX5 Digital Volume':1:67.7%
+    EndSequence
+
+    DisableSequence
+        'RX5 MIX1 INP1':0:ZERO
+        'RX5 MIX1 INP2':0:ZERO
+        'LINEOUT2 Volume':1:0
+        'LINEOUT4 Volume':1:0
+        'RX5 Digital Volume':1:65%
+    EndSequence
+
+    ACDBID  15:1
+    EffectsMixerCTL "SRS TruMedia"
+
+EndSection
+
+SectionDevice
 	Name "Headphones"
 	Comment "Headset Rx device"
 
@@ -2401,6 +2452,38 @@ SectionDevice
 
 	ACDBID	10:1
 	EffectsMixerCTL "SRS TruMedia"
+
+EndSection
+
+SectionDevice
+    Name "Voice Headphones"
+    Comment "Headset Rx device for voice call"
+
+    EnableSequence
+        'PRI_RX Channels':0:Two
+        'RX1 MIX1 INP1':0:RX1
+        'RX2 MIX1 INP1':0:RX2
+        'HPHL DAC Switch':1:1
+        'HPHR DAC Switch':1:1
+        'HPHL Volume':1:100%
+        'HPHR Volume':1:100%
+        'RX1 Digital Volume':2:67.7%
+        'RX2 Digital Volume':2:67.7%
+    EndSequence
+
+    DisableSequence
+        'RX1 MIX1 INP1':0:ZERO
+        'RX2 MIX1 INP1':0:ZERO
+        'HPHL DAC Switch':1:0
+        'HPHR DAC Switch':1:0
+        'HPHL Volume':1:0
+        'HPHR Volume':1:0
+        'RX1 Digital Volume':1:0
+        'RX2 Digital Volume':1:0
+    EndSequence
+
+    ACDBID  10:1
+    EffectsMixerCTL "SRS TruMedia"
 
 EndSection
 
