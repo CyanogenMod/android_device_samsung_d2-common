@@ -51,8 +51,6 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
 
-# HAX
-#BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
-#BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
-#TARGET_PROVIDES_LIBAUDIO := true
+# Workaround for low volume after source switch
+BOARD_HAS_SAMSUNG_VOLUME_BUG := true
 
