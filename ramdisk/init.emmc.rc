@@ -180,12 +180,12 @@ service ril-daemon /system/bin/rild
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag log system drmrpc
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log system drmrpc
 
 service secril-daemon /system/bin/sec-ril
     class main
     user root
-    group radio cache inet misc audio sdcard_rw diag log
+    group radio cache inet misc audio sdcard_rw qcom_diag log
 
 service macloader /system/bin/macloader
     class main
