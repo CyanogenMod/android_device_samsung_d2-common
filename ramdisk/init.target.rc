@@ -95,3 +95,9 @@ service TvoutService_C /system/bin/bintvoutservice
      class main
      user system
      group graphics	
+
+# qrngd will drop permissions after startup
+service qrngd /system/bin/qrngd -f
+     class main
+     user root
+     group root

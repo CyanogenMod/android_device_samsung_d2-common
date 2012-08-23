@@ -5,6 +5,7 @@
 /dev/tty                  0666   root       root
 /dev/random               0666   root       root
 /dev/urandom              0666   root       root
+
 /dev/ashmem               0666   root       root
 /dev/binder               0666   root       root
 /dev/rtc0                 0600   system     system
@@ -42,6 +43,8 @@
 /dev/graphics/*           0660   system     graphics
 /dev/msm_hw3dm            0660   system     graphics
 /dev/msm_rotator          0660   system     graphics
+/dev/hw_random            0660   system     system
+
 /dev/input/*              0660   root       input
 /dev/eac                  0660   root       audio
 /dev/cam                  0660   root       camera

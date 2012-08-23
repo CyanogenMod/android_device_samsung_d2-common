@@ -67,6 +67,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
+# QRNGD
+PRODUCT_PACKAGES += qrngd
+
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
