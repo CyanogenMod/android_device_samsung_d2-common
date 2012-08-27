@@ -48,6 +48,10 @@ PRODUCT_COPY_FILES += \
 	device/samsung/d2-common/ramdisk/init.bt.rc:root/init.bt.rc \
 	device/samsung/d2-common/ramdisk/init.sensor.rc:root/init.sensor.rc
 
+#Torch
+PRODUCT_PACKAGES := \
+    Torch
+
 # Vold configuration
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
