@@ -22,6 +22,7 @@ PRODUCT_COPY_FILES += device/common/gps/gps.conf_US_SUPL:system/etc/gps.conf
 ## (2) Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/d2-common/d2-common-vendor.mk)
 
+
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
 
@@ -47,10 +48,18 @@ PRODUCT_COPY_FILES += \
 	device/samsung/d2-common/ramdisk/init.emmc.rc:root/init.emmc.rc \
 	device/samsung/d2-common/ramdisk/init.bt.rc:root/init.bt.rc \
 	device/samsung/d2-common/ramdisk/init.sensor.rc:root/init.sensor.rc
+    
+#torch
+PRODUCT_PACKAGES := \
+    Torch
 
 # Vold configuration
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
+    
+# Recovery configuration
+PRODUCT_COPY_FILES += \
+    device/samsung/d2-common/recovery.fstab:recovery/root/etc/recovery.fstab
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
