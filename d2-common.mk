@@ -48,6 +48,9 @@ PRODUCT_COPY_FILES += \
 	device/samsung/d2-common/ramdisk/init.bt.rc:root/init.bt.rc \
 	device/samsung/d2-common/ramdisk/init.sensor.rc:root/init.sensor.rc
 
+# Torch
+PRODUCT_PACKAGES := Torch
+
 # Vold configuration
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
@@ -69,6 +72,39 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # QRNGD
 PRODUCT_PACKAGES += qrngd
+
+#common build.props
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.hsxpa=1 \
+    ro.ril.gprsclass=10 \
+    persist.radio.add_power_save=1 \
+    persist.radio.snapshot_disabled=1 \
+    com.qc.hardware=true \
+    com.qc.hdmi_out=true \
+    ro.hdmi.enable=true \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.gps.qmienabled=true \
+    ro.telephony.call_ring.multiple=0 \
+    ro.sf.lcd_density=320 \
+    ro.ril.transmitpower=true \
+    ro.opengles.version=131072 \
+    persist.audio.fluence.mode=endfire \
+    persist.audio.vr.enable=false \
+    persist.audio.handset.mic=digital \
+    persist.audio.speaker.location=high \
+    persist.timed.enable=true \
+    ro.emmc.sdcard.partition=17 \
+    ro.use_data_netmgrd=true \
+    persist.data_netmgrd_nint=16 \
+    media.stagefright.enable-player=true \
+    media.stagefright.enable-http=true \
+    media.stagefright.enable-fma2dp=false \
+    media.stagefright.enable-aac=true \
+    media.stagefright.enable-qcp=true \
+    lpa.decode=false \
+    lpa.use-stagefright=false \
+    rild.libpath=/system/lib/libril-qc-qmi-1.so \
+    ril.subscription.types=NV,RUIM
 
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
