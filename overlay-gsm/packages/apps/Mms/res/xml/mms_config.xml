@@ -37,11 +37,11 @@
     <!-- If true, The text message over 160 characters will be sent in multi part.
          If false, The text message over 160 characters will be sent
          via multi media message. -->
-    <bool name="enableMultipartSMS">false</bool>
+    <bool name="enableMultipartSMS">true</bool>
 
     <!-- If true, the text message will be split every 160 characters.
          If false, the text will never be split before being sent. -->
-    <bool name="enableSplitSMS">true</bool>
+    <bool name="enableSplitSMS">false</bool>
 
     <!-- UAProf URL -->
     <string name="uaProfUrl">http://wap.samsungmobile.com/uaprof/GT-I9100.xml</string>
