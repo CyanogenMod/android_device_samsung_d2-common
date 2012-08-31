@@ -39,21 +39,17 @@ PRODUCT_COPY_FILES += \
 	device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Ramdisk
-PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/ramdisk/init.qcom.rc:root/init.qcom.rc \
-    device/samsung/d2-common/ramdisk/init.qcom.usb.rc:root/init.qcom.usb.rc \
-    device/samsung/d2-common/ramdisk/init.qcom.sh:root/init.qcom.sh \
-    device/samsung/d2-common/ramdisk/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    device/samsung/d2-common/ramdisk/init.target.rc:root/init.target.rc \
-    device/samsung/d2-common/fstab.qcom:root/fstab.qcom \
-    device/samsung/d2-common/ramdisk/initlogo.rle:root/initlogo.rle \
-    device/samsung/d2-common/ramdisk/ueventd.rc:root/ueventd.rc \
-	device/samsung/d2-common/ramdisk/init.emmc.rc:root/init.emmc.rc \
-	device/samsung/d2-common/ramdisk/init.bt.rc:root/init.bt.rc \
-	device/samsung/d2-common/ramdisk/init.sensor.rc:root/init.sensor.rc
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    initlogo.rle \
+    init.bt.rc \
+    init.qcom.rc \
+    init.qcom.usb.rc \
+    init.target.rc \
+    ueventd.qcom.rc
 
 # Torch
-PRODUCT_PACKAGES := Torch
+PRODUCT_PACKAGES += Torch
 
 # Vold configuration
 PRODUCT_COPY_FILES += \
