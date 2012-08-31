@@ -1,0 +1,267 @@
+# Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+on early-init
+    mkdir /firmware 0771 system system
+    symlink /data/tombstones /tombstones
+    mkdir /efs 0771 system system
+
+on emmc-fs
+    mount_all fstab.qcom
+
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+    wait /dev/block/platform/msm_sdcc.1/by-name/cache
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache nosuid nodev barrier=1
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/modem
+    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower dmask=177 fmask=177
+
+on boot
+    write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
+    write /sys/devices/i2c-3/3-005b/update_fw 1   
+    start qcamerasvr
+
+on post-fs-data
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+
+    # create directory for ril data
+    mkdir /data/misc/radio 0775 radio radio
+    mkdir /data/misc/radio/hatp 0775 radio system
+
+    #HDCP2.X : The directory permission is temporary.
+    mkdir /efs/drm 0775  system system
+    mkdir /efs/drm/dxhdcp2 0774  system system
+
+    # permission for TZIC
+    chown system system /dev/tzic
+
+    # sensor
+    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
+    chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
+    chown system radio /sys/class/sensors/barometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/proximity_sensor/enable
+    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
+    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
+    chown system radio /sys/class/sensors/light_sensor/enable
+
+    # sensor
+    chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
+    chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
+    chown system radio /sys/class/sensors/barometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/proximity_sensor/enable
+    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
+    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
+    chown system radio /sys/class/sensors/light_sensor/enable
+
+    #earjack
+    chown system radio /sys/class/audio/earjack/select_jack
+    chown media system /sys/class/audio/earjack/reselect_jack
+    chown system radio /sys/class/audio/earjack/key_state
+    chown system radio /sys/class/audio/earjack/state
+
+    #OTG Test
+    chown system radio /sys/class/host_notify/usb_otg/booster
+    chmod 0660 /sys/class/host_notify/usb_otg/booster
+
+    #Essential node for usbservice
+    mkdir /dev/bus/ 755 root root
+    mkdir /dev/bus/usb 755 root root
+
+    # wifi
+    mkdir /efs/wifi 0775 system system
+
+    # Permission for fast dormacy for RIL
+    chown system radio /sys/devices/virtual/sec/bamdmux/waketime
+
+    # for TRP/TIS
+    write /data/.psm.info 1
+    chown system root /data/.psm.info
+    chmod 0660 /data/.psm.info
+
+    # icd
+    exec icd_check
+    chown system system /dev/icd
+    chmod 0644 /dev/icd
+    write /dev/icdr 0
+    chown system system /dev/icdr
+    chmod 0644 /dev/icdr
+    chown system system /dev/tzic
+
+    # h2k permission
+    chmod 0644 /efs/redata.bin
+
+    # Permissions for Camera
+    chown system radio /sys/class/camera/rear/rear_camfw
+    chown system radio /sys/class/camera/rear/rear_camtype
+    chown system radio /sys/class/camera/rear/rear_flash
+    chown system radio /sys/class/camera/front/front_camfw
+    chown system radio /sys/class/camera/front/front_camtype
+    chown system camera /sys/class/flash/flash/flash_power
+    chmod 660 /sys/class/flash/flash/flash_power
+
+    chown system system /sys/class/sec/led/led_r
+    chown system system /sys/class/sec/led/led_g
+    chown system system /sys/class/sec/led/led_b
+    chown system system /sys/class/sec/led/led_pattern
+    chown system system /sys/class/sec/led/led_blink
+
+    # Permissions for NCM
+    chmod 0660 /sys/class/android_usb/android0/terminal_version
+    chown system system /sys/class/android_usb/android0/terminal_version
+
+    # SEC DVFS sysfs node
+    chown system system /sys/power/cpufreq_max_limit
+    chown system system /sys/power/cpufreq_min_limit
+    chown system system /sys/power/cpufreq_table
+    chmod 664 /sys/power/cpufreq_max_limit
+    chmod 664 /sys/power/cpufreq_min_limit
+    chmod 664 /sys/power/cpufreq_table
+
+    chown radio system /sys/class/sec/sec_touchkey/touch_sensitivity
+    chown radio system /sys/class/sec/sec_touchkey/touchkey_firm_update
+    chown radio system /sys/class/sec/sec_touchscreen/set_tsp_for_inputmethod
+    chown system radio /sys/class/sec/tsp_noise_test/disp_all_deltadata
+    chown system radio /sys/class/sec/tsp_noise_test/disp_all_refdata
+    chown system radio /sys/class/sec/tsp/cmd
+    chown radio system /sys/class/lcd/panel/power_reduce
+    chown radio system /sys/class/lcd/panel/gamma_mode
+    chown system radio /sys/class/sec/switch/reset_switch
+
+    # SAMSUNG CMC624
+    chown system system  /sys/class/mdnie/mdnie/lcdtype
+    chown system system  /sys/class/mdnie/mdnie/lcd_power
+    chown system media_rw /sys/class/mdnie/mdnie/scenario
+    chown system system /sys/class/mdnie/mdnie/tuning
+    chown system media_rw /sys/class/mdnie/mdnie/outdoor
+    chown system system  /sys/class/mdnie/mdnie/mdnie_temp
+    chown system system /sys/class/mdnie/mdnie/mode
+    chown system system /sys/class/mdnie/mdnie/negative
+    chown system media_rw /sys/class/mdnie/mdnie/playspeed
+    # permissions for NFC
+    setprop ro.nfc.port "I2C"
+    chmod 0600 /dev/pn544
+    chown nfc nfc /dev/pn544
+
+   # permission for CHARGING
+   chown system radio /sys/class/power_supply/battery/batt_reset_soc
+   chown system radio /sys/class/power_supply/battery/batt_slate_mode
+   chown system radio /sys/class/power_supply/battery/batt_reset_soc
+   chown system radio /sys/class/power_supply/battery/factory_mode
+   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/call
+   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/video
+   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/music
+   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/browser
+   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/hotspot
+   chown sdcard_rw sdcard_rw /sys/class/power_supply/battery/camera
+   chown system radio /sys/class/power_supply/battery/talk_wcdma
+   chown system radio /sys/class/power_supply/battery/talk_gsm
+   chown system radio /sys/class/power_supply/battery/call
+   chown system radio /sys/class/power_supply/battery/data_call
+   chown system radio /sys/class/power_supply/battery/gps
+   chown system radio /sys/class/power_supply/battery/wifi
+   chown system radio /sys/class/power_supply/battery/lte
+
+    # klaatu tdmb ownership
+    chown system system /dev/tdmb
+    chmod 0660 /dev/tdmb
+
+    # Vibetonz
+    chmod 0660 /dev/tspdrv
+    chown root shell /dev/tspdrv
+
+    # volume up/down key
+    chown radio system /sys/class/sec/sec_key/wakeup_keys
+
+    # Define TCP buffer sizes for various networks
+    #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.wifi    4096,221184,3461120,4096,221184,3461120
+    setprop net.tcp.buffersize.lte     4094,87380,2560000,4096,16384,1220608
+    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.hspa    4092,87380,704512,4096,16384,262144
+    setprop net.tcp.buffersize.hsupa   4092,87380,704512,4096,16384,262144
+    setprop net.tcp.buffersize.hsdpa   4092,87380,704512,4096,16384,110208
+    setprop net.tcp.buffersize.hspap   4092,87380,704512,4096,16384,262144
+    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
+    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
+    setprop net.tcp.buffersize.evdo_b  4094,87380,262144,4096,16384,262144
+
+#start camera server as daemon
+service qcamerasvr /system/bin/mm-qcamera-daemon
+    class late_start
+    user media
+    group system camera inet input graphics
+
+service thermald /system/bin/thermald
+    class main
+    user root
+    group root
+
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+    user root
+    disabled
+
+service kickstart /system/bin/qcks -i /firmware/image
+    oneshot
+    disabled
+
+service qrngd /system/bin/qrngd -f
+    class main
+    user root
+    group root
+
+service qseecomd /system/bin/qseecomd
+   class late_start
+   user system
+   group system
+
+# Start kickstart if mdm is detected
+on property:ro.baseband=mdm
+    mkdir /data/qcks 0770 system system
+    start kickstart
+
+# 2011-12-08/systemsw/kyo/ bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/bugmailer.sh -v
+	class main
+	disabled
+	oneshot
+	keycodes 114 115 116
+
