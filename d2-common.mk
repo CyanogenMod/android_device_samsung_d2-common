@@ -94,6 +94,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.vr.enable=false \
     persist.audio.handset.mic=digital \
     persist.audio.speaker.location=high \
+    ro.qc.sdk.audio.fluencetype=fluence \
     persist.timed.enable=true \
     ro.emmc.sdcard.partition=17 \
     ro.use_data_netmgrd=true \
