@@ -46,6 +46,8 @@ on emmc-fs
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower dmask=177 fmask=177
 
+    exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
+
 on boot
     write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
     write /sys/devices/i2c-3/3-005b/update_fw 1   
