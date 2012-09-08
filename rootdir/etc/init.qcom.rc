@@ -151,7 +151,7 @@ on boot
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
 # import cne init file
-on post-fs
+on emmc-fs
     export_rc /persist/init.cne.rc
     start qcom-post-fs
 
