@@ -30,7 +30,7 @@ USE_CAMERA_STUB := true
 
 # Kernel
 TARGET_KERNEL_SOURCE        := kernel/samsung/d2
-BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31
+BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
 BOARD_KERNEL_BASE           := 0x80200000
 BOARD_FORCE_RAMDISK_ADDRESS := 0x81500000
 BOARD_KERNEL_PAGESIZE       := 2048
