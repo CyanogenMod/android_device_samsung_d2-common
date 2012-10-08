@@ -1,0 +1,9 @@
+Change-Id: I2840757e80d49c5993adceee647cfbab3c52c33e
+Code-Review+2: Mike Kasick <mike@kasick.org>
+Verified+1: Mike Kasick <mike@kasick.org>
+Code-Review+1: Dan Pasanen <dan.pasanen@gmail.com>
+Submitted-by: Mike Kasick <mike@kasick.org>
+Submitted-at: Mon, 08 Oct 2012 10:52:08 -0700
+Reviewed-on: http://review.cyanogenmod.com/24443
+Project: CyanogenMod/android_device_samsung_d2-common
+Branch: refs/heads/jellybean
