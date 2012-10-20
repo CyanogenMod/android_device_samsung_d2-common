@@ -18,6 +18,9 @@
     <!-- LED Flashlight -->
     <bool name="has_led_flash">true</bool>
 
+    <!-- Disable the home key unlock setting -->
+    <bool name="config_disableHomeUnlockSetting">false</bool>
+
     <!-- Dock Settings -->
 <!--    <bool name="has_dock_settings">true</bool>-->
 
