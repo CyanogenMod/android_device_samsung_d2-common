@@ -935,6 +935,40 @@ SectionVerb
         PlaybackPCM 4
 
 EndSection
+
+SectionVerb
+	Name "HiFi Low PowerDock"
+
+	EnableSequence
+		'PRI_RX Audio Mixer MultiMedia3':1:1
+	EndSequence
+
+	DisableSequence
+		'PRI_RX Audio Mixer MultiMedia3':1:0
+	EndSequence
+
+	# ALSA PCMs
+	PlaybackPCM 4
+
+EndSection
+
+SectionVerb
+	Name "HiFiDock"
+
+	EnableSequence
+		'PRI_RX Audio Mixer MultiMedia1':1:1
+	EndSequence
+
+	DisableSequence
+		'PRI_RX Audio Mixer MultiMedia1':1:0
+	EndSequence
+
+	# ALSA PCMs
+	CapturePCM 0
+	PlaybackPCM 0
+
+EndSection
+
 }
 SectionUseCase."HiFi Rec" {
 Comment "Recording use case"
@@ -3809,6 +3843,29 @@ SectionDevice
 
 EndSection
 
+SectionDevice
+	Name "Dock"
+	Comment "Dock Rx device"
+
+	EnableSequence
+		'PRI_RX Channels':0:Two
+		'RX7 MIX1 INP1':0:RX1
+		'RX3 MIX1 INP1':0:RX2
+		'LINEOUT1 Volume':1:91%
+		'LINEOUT5 Volume':1:91%
+	EndSequence
+
+	DisableSequence
+		'RX7 MIX1 INP1':0:ZERO
+		'RX3 MIX1 INP1':0:ZERO
+		'LINEOUT1 Volume':1:0
+		'LINEOUT5 Volume':1:0
+	EndSequence
+
+	ACDBID  40:1
+
+EndSection
+
 SectionModifier
 	Name "Play Music"
 	Comment "Modifier for music playback"
@@ -5198,6 +5255,24 @@ SectionModifier
 EndSection
 
 SectionModifier
+	Name "Play VoiceDock"
+
+	EnableSequence
+	EndSequence
+
+	DisableSequence
+		'PRI_RX_Voice Mixer CSVoice':1:0
+		'Voice_Tx Mixer PRI_TX_Voice':1:0
+	EndSequence
+
+	# ALSA PCMs
+	PlaybackPCM 2
+	capturePCM 2
+	ACDBID 0:0
+
+EndSection
+
+SectionModifier
 	Name "Play VOIPPROXY Rx"
 
 	EnableSequence
@@ -5736,4 +5811,37 @@ SectionModifier
         PlaybackPCM 9
 
 EndSection
+
+SectionModifier
+	Name "Play MusicDock"
+	Comment "Modifier for docked music playback"
+
+	EnableSequence
+		'PRI_RX Audio Mixer MultiMedia1':1:1
+	EndSequence
+
+	DisableSequence
+		'PRI_RX Audio Mixer MultiMedia1':1:0
+	EndSequence
+
+	# ALSA PCMs
+	CapturePCM 0
+	PlaybackPCM 0
+EndSection
+
+SectionModifier
+	Name "Play LPADock"
+
+	EnableSequence
+		'PRI_RX Audio Mixer MultiMedia3':1:1
+	EndSequence
+
+	DisableSequence
+		'PRI_RX Audio Mixer MultiMedia3':1:0
+	EndSequence
+
+	# ALSA PCMs
+	PlaybackPCM 4
+EndSection
+
 # End of master file
