@@ -68,3 +68,6 @@ TARGET_NO_INITLOGO := true
 # Use Audience A2220 chip
 BOARD_HAVE_AUDIENCE_A2220 := true
 
+# Use USB Dock Audio
+BOARD_HAVE_DOCK_USBAUDIO := true
+
