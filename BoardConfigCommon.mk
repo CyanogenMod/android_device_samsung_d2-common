@@ -68,3 +68,5 @@ TARGET_NO_INITLOGO := true
 # Use Audience A2220 chip
 BOARD_HAVE_AUDIENCE_A2220 := true
 
+# Board has Qualcomm USB Audio
+BOARD_USES_QCOM_USBAUDIO := true
