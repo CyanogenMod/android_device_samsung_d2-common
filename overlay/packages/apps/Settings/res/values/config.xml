@@ -19,6 +19,6 @@
     <bool name="has_led_flash">true</bool>
 
     <!-- Dock Settings -->
-<!--    <bool name="has_dock_settings">true</bool>-->
+    <bool name="has_dock_settings">true</bool>
 
 </resources>
