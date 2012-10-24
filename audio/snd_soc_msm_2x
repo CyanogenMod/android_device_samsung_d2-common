@@ -2317,7 +2317,7 @@ SectionDevice
         'RX1 Digital Volume':1:0
     EndSequence
 
-    ACDBID  71:1
+    ACDBID  7:1
     EffectsMixerCTL "SRS TruMedia"
 
 EndSection
