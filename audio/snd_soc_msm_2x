@@ -2323,6 +2323,30 @@ SectionDevice
 EndSection
 
 SectionDevice
+	Name "Voice Earpiece Extra Gain"
+	Comment "Handset Rx device for voice call with extra gain"
+
+	EnableSequence
+		'PRI_RX Channels':0:One
+		'RX1 MIX1 INP1':0:RX1
+		'EAR PA Gain':0:POS_6_DB
+		'DAC1 Switch':1:1
+		'RX1 Digital Volume':1:69%
+	EndSequence
+
+	DisableSequence
+		'RX1 MIX1 INP1':0:ZERO
+		'DAC1 Switch':1:0
+		'EAR PA Gain':0:ZERO
+		'RX1 Digital Volume':1:0
+	EndSequence
+
+	ACDBID	71:1
+	EffectsMixerCTL "SRS TruMedia"
+
+EndSection
+
+SectionDevice
 	Name "TTY Handset Rx"
 	Comment "TTY HCO Handset Rx device"
 
