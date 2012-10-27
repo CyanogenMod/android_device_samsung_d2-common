@@ -10,10 +10,9 @@ bin/usbhub_init
 
 # Thermal
 bin/thermald
-etc/thermald.conf
-etc/thermald.conf_F
-etc/thermald.conf_N
-etc/thermald.conf_S
+etc/thermald-8064.conf
+etc/thermald-8930.conf
+etc/thermald-8960.conf
 
 # Bluetooth firmware
 bin/bcm4334.hcd
@@ -37,29 +36,20 @@ lib/libaudioalsa.so
 # mmparser extended
 lib/libmmparser.so
 lib/libmmosal.so
-lib/libDivxDrm.so
+lib/libdivxdrm.so
 
-# Adreno GPU (Available on QDevNet)
+# Graphics
 lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 lib/egl/libGLESv2S3D_adreno200.so
-lib/libc2d2_z180.so
 lib/libgsl.so
 lib/libC2D2.so
 lib/libOpenVG.so
 lib/libsc-a2xx.so
-etc/firmware/a225p5_pm4.fw
-etc/firmware/a225_pfp.fw
-etc/firmware/a225_pm4.fw
-etc/firmware/yamato_pfp.fw
-etc/firmware/yamato_pm4.fw
-etc/firmware/leia_pfp_470.fw
-etc/firmware/leia_pm4_470.fw
-
-# Graphics
+lib/libsc-a3xx.so
 lib/libmm-color-convertor.so
 
 # Radio
@@ -113,7 +103,6 @@ bin/geomagneticd
 bin/orientationd
 lib/hw/sensors.msm8960.so
 lib/libakmd.so
-lib/libAKM.so
 lib/libinvensense_hal.so
 lib/libmllite.so
 lib/libmlplatform.so
@@ -130,7 +119,6 @@ lib/libvdis.so
 lib/libsecnativefeature.so
 lib/libgemini.so
 lib/liboemcamera.so
-lib/libsensor1.so
 lib/libmmmpod.so
 lib/libmmstereo.so
 lib/libmmcamera_faceproc.so
@@ -161,13 +149,9 @@ lib/libdiag.so
 # Wi-Fi
 bin/macloader
 bin/brcm_poke_helper
-etc/wifi/bcmdhd_apsta.bin_b1
 etc/wifi/bcmdhd_apsta.bin_b2
-etc/wifi/bcmdhd_p2p.bin_b1
 etc/wifi/bcmdhd_p2p.bin_b2
-etc/wifi/bcmdhd_sta.bin_b1
 etc/wifi/bcmdhd_sta.bin_b2
-etc/wifi/bcmdhd_mfg.bin_b1
 etc/wifi/bcmdhd_mfg.bin_b2
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_mfg.txt_murata
@@ -176,7 +160,13 @@ etc/wifi/nvram_net.txt_murata
 etc/wifi/wpa_supplicant.conf
 
 # Firmware
-etc/firmware/cyttsp_8960_cdp.hex
+etc/firmware/a225p5_pm4.fw
+etc/firmware/a225_pfp.fw
+etc/firmware/a225_pm4.fw
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
+etc/firmware/leia_pfp_470.fw
+etc/firmware/leia_pm4_470.fw
 etc/firmware/vidc_1080p.fw
 
 # Perf
