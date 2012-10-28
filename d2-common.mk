@@ -98,8 +98,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=false \
     lpa.use-stagefright=false \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    ril.subscription.types=NV,RUIM \
-    ro.telephony.ril.v3=skipnullaid
+    ril.subscription.types=NV,RUIM
 
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
