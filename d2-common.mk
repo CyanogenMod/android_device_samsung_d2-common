@@ -101,6 +101,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     ro.telephony.ril.v3=skipnullaid
 
+# Workaround for OV_BYPASS_3_LAYER screen flickering.
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.mdpcomp.maxlayer=2
+
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
