@@ -28,6 +28,9 @@
 on init
     write /sys/class/android_usb/android0/f_rndis/wceis 1
 
+on boot
+    write /sys/class/android_usb/f_mass_storage/inquiry_string "Samsung"
+
 service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
     class core
     user root
@@ -530,4 +533,23 @@ on property:sys.usb.config=diag,diag_mdm,ccid,adb
     write /sys/class/android_usb/android0/functions diag,adb,ccid
     write /sys/class/android_usb/android0/enable 1
     start adbd
+    setprop sys.usb.state $sys.usb.config
+
+on property:sys.usb.config=mass_storage
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04e8
+    write /sys/class/android_usb/android0/idProduct 685b
+    write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/enable 1
+    write /sys/devices/virtual/android_usb/android0/f_mass_storage/lun_ex/file /dev/block/vold/179:96
+    setprop sys.usb.state $sys.usb.config
+
+on property:sys.usb.config=mass_storage,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 04e8
+    write /sys/class/android_usb/android0/idProduct 685e
+    write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    write /sys/devices/virtual/android_usb/android0/f_mass_storage/lun_ex/file /dev/block/vold/179:96
     setprop sys.usb.state $sys.usb.config
