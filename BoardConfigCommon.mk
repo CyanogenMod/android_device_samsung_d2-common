@@ -32,9 +32,8 @@ USE_CAMERA_STUB := true
 TARGET_KERNEL_SOURCE        := kernel/samsung/d2
 BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
 BOARD_KERNEL_BASE           := 0x80200000
-BOARD_FORCE_RAMDISK_ADDRESS := 0x81500000
 BOARD_KERNEL_PAGESIZE       := 2048
-
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x81500000
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
 # Compatibilty with ICS drivers
