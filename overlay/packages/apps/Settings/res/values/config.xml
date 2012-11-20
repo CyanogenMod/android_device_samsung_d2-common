@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <!-- LED Flashlight -->
-    <bool name="has_led_flash">true</bool>
+    <!-- LED Flashlight
+     <bool name="has_led_flash">true</bool>-->
 
 </resources>
