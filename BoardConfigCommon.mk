@@ -40,6 +40,7 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 # Compatibilty with ICS drivers
 COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB 
 BOARD_LEGACY_NL80211_STA_EVENTS := true
+TARGET_PROVIDES_LIBLIGHT := true
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2-common/recovery/recovery_keys.c
