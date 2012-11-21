@@ -31,7 +31,7 @@ on early-init
     symlink /data/tombstones /tombstones
     mkdir /efs 0771 system system
 
-on emmc-fs
+on fs
     mount_all fstab.qcom
 
     # Keeping following partitions outside fstab file. As user may not have
