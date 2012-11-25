@@ -60,6 +60,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
 # Lights
+TARGET_PROVIDES_LIBLIGHT = true
 PRODUCT_PACKAGES += lights.msm8960
 
 # Increase the HWUI font cache since we have tons of RAM
