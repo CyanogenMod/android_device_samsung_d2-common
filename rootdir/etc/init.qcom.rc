@@ -280,7 +280,7 @@ service rmt_storage /system/bin/rmt_storage
     user root
     disabled
 
-on property:ro.emmc=1
+on property:ro.boot.emmc=true
     start rmt_storage
 
 #service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
