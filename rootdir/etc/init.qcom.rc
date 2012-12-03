@@ -26,7 +26,6 @@
 #
 
 import init.qcom.usb.rc
-import init.bt.rc
 
 on init
     # Set permissions for persist partition
@@ -79,6 +78,12 @@ on boot
     chmod 0660 /dev/ttyHS0
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+
+    # bluetooth LPM
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -284,43 +289,6 @@ service rmt_storage /system/bin/rmt_storage
 
 on property:ro.boot.emmc=true
     start rmt_storage
-
-#service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
-#    class late_start
-#    disabled
-#    oneshot
-
-#service bt-sap /system/bin/sapd 15
-#    class late_start
-#    disabled
-#    oneshot
-
-#service sapd /system/bin/sdptool add --channel=15 SAP
-#    class late_start
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
-#service dund /system/bin/sdptool add --channel=1 DUN
-#    class late_start
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
-#HCI_ENABLE_BT_DEV_UNDER_TEST_MODE ; thun.lim
-#service bt_dut_cmd /system/bin/bt_dut
-#    group bluetooth net_bt_admin
-#    class main
-#    disabled
-#    oneshot
-
-#BLUETOOTH_AUDIO_LOOPBACK_TEST_MODE
-#service bt_audio_dut_cmd /system/bin/bt_audio_dut
-#    group bluetooth net_bt_admin
-#    class main
-#    disabled
 
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
@@ -577,27 +545,6 @@ service time_daemon /system/bin/time_daemon
 on property:persist.timed.enable=true
     start time_daemon
 
-#service ftp /system/bin/sdptool add --psm=5257 --channel=20 FTP
-#    class late_start
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
-service map0 /system/bin/sdptool add --channel=16 MAS0
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service map1 /system/bin/sdptool add --channel=17 MAS1
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
 service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
@@ -626,12 +573,6 @@ service profiler_daemon /system/bin/profiler_daemon
 
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
-
-service hcidump /system/bin/sh /system/etc/hcidump.sh
-    user bluetooth
-    group bluetooth system net_bt_admin net_admin
-    disabled
-    oneshot
 
 service macloader /system/bin/macloader
     class main
