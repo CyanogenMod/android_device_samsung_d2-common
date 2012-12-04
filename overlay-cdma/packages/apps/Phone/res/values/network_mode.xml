@@ -24,4 +24,7 @@
         <item>"8"</item>
         <item>"4"</item>
     </string-array>
+
+    <!-- LTE/CDMA network mode to use for toggleLTE(true). -->
+    <integer name="toggleLTE_lte_cdma_nt_mode">8</integer>
 </resources>
