@@ -38,18 +38,24 @@ lib/libmmparser.so
 lib/libmmosal.so
 lib/libdivxdrm.so
 
-# Adreno GPU (Available on QDevNet)
+# Adreno GPU (Available on Nexus 4)
 lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 lib/egl/libGLESv2S3D_adreno200.so
+lib/egl/libplayback_adreno200.so
 lib/libc2d2_z180.so
 lib/libgsl.so
 lib/libC2D2.so
 lib/libOpenVG.so
+lib/libOpenCL.so
 lib/libsc-a2xx.so
+lib/libsc-a3xx.so
+lib/libllvm-a3xx.so
+lib/libllvm-arm.so
+lib/libc2d2_a3xx.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
@@ -57,6 +63,16 @@ etc/firmware/yamato_pfp.fw
 etc/firmware/yamato_pm4.fw
 etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
+etc/firmware/a225p5_pm4.fw
+etc/firmware/vidc_1080p.fw
+etc/firmware/vidc.b00
+etc/firmware/vidc.b01
+etc/firmware/vidc.b02
+etc/firmware/vidc.b03
+etc/firmware/vidc.mdt
+etc/firmware/vidcfw.elf
 
 # Graphics
 lib/libmm-color-convertor.so
@@ -170,8 +186,6 @@ etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_murata
 etc/wifi/wpa_supplicant.conf
 
-# Firmware
-etc/firmware/vidc_1080p.fw
 
 # Perf
 lib/libqc-opt.so
