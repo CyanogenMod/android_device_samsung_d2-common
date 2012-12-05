@@ -1,12 +1,5 @@
 # Bins
-bin/bridgemgrd
-bin/btnvtool
-bin/ds_fmc_appd
-bin/immvibed
 bin/mpdecision
-bin/port-bridge
-bin/usbhub
-bin/usbhub_init
 
 # Thermal
 bin/thermald
@@ -20,18 +13,8 @@ bin/bcm4334_murata.hcd
 bin/bcm4334_semco.hcd
 
 # Audio
-#lib/hw/alsa.msm8960.so
-#lib/hw/audio_policy.msm8960.so
-#lib/hw/audio.primary.msm8960.so
 lib/libacdbloader.so
-#lib/libalsa-intf.so
 lib/libaudcal.so
-lib/libaudioalsa.so
-#lib/libsamsungRecord.so
-#lib/libaudiopolicy_sec.so
-#lib/lib_Samsung_Resampler.so
-#lib/lib_SamsungRec_V01005.so
-#lib/libcontrolcsc.so
 
 # mmparser extended
 lib/libmmparser.so
@@ -52,27 +35,13 @@ lib/libC2D2.so
 lib/libOpenVG.so
 lib/libOpenCL.so
 lib/libsc-a2xx.so
-lib/libsc-a3xx.so
-lib/libllvm-a3xx.so
-lib/libllvm-arm.so
-lib/libc2d2_a3xx.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
-etc/firmware/yamato_pfp.fw
-etc/firmware/yamato_pm4.fw
 etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
-etc/firmware/a300_pfp.fw
-etc/firmware/a300_pm4.fw
 etc/firmware/a225p5_pm4.fw
 etc/firmware/vidc_1080p.fw
-etc/firmware/vidc.b00
-etc/firmware/vidc.b01
-etc/firmware/vidc.b02
-etc/firmware/vidc.b03
-etc/firmware/vidc.mdt
-etc/firmware/vidcfw.elf
 
 # Graphics
 lib/libmm-color-convertor.so
@@ -84,7 +53,6 @@ bin/qmiproxy
 bin/qmuxd
 bin/rmt_storage
 bin/rild
-bin/wdsdaemon
 lib/libsecril-client.so
 lib/libqmi.so
 lib/libqdi.so
@@ -126,8 +94,6 @@ lib/hw/nfc.MSM8960.so
 vendor/firmware/libpn544_fw.so
 
 # Sensors
-bin/geomagneticd
-bin/orientationd
 lib/hw/sensors.msm8960.so
 lib/libakmd.so
 lib/libinvensense_hal.so
@@ -175,7 +141,6 @@ lib/libdiag.so
 
 # Wi-Fi
 bin/macloader
-bin/brcm_poke_helper
 etc/wifi/bcmdhd_apsta.bin_b2
 etc/wifi/bcmdhd_p2p.bin_b2
 etc/wifi/bcmdhd_sta.bin_b2
