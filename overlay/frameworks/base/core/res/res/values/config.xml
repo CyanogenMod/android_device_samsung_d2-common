@@ -303,4 +303,5 @@
     <!-- Disable the home key unlock setting
     <bool name="config_disableHomeUnlockSetting">false</bool>-->
 
+    <bool name="config_enableWifiDisplay">true</bool>
 </resources>
