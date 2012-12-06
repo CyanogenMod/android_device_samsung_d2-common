@@ -100,6 +100,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM
 
+# We have the new GPS driver
+BOARD_HAVE_NEW_QC_GPS := true
+BOARD_HAVE_SAMSUNG_GPS := true
+
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
