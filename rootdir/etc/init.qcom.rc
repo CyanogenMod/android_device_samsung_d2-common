@@ -35,6 +35,10 @@ on init
     mkdir /storage 0550 system sdcard_r
     mkdir /storage/emulated 0555 root root
 
+    #External storage directories
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /storage/usbdisk 0000 system system
+
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export SECONDARY_STORAGE /storage/sdcard1
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
@@ -48,7 +52,7 @@ on init
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
     symlink /storage/usbdisk0 /usbdisk0
-    symlink /storage/usbdisk0 /mnt/usbdisk0
+    symlink /storage/usbdisk /mnt/usbdisk
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
