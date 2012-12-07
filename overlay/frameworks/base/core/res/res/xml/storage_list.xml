@@ -45,9 +45,11 @@
              android:emulated="true"
              android:mtpReserve="100" />
 
+<!--
+For some reason, this causes the MediaProvider to crash if connected to a computer
     <storage android:mountPoint="/storage/usbdisk0"
              android:storageDescription="@string/storage_usb"
              android:primary="false"
              android:removable="true" />
-
+-->
 </StorageList>
