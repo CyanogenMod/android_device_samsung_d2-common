@@ -75,19 +75,7 @@ lib/libqcci_legacy.so
 lib/libqmi_client_qmux.so
 
 # GPS
-bin/wiperiface_v02
-bin/quipc_igsn
-bin/quipc_main
-lib/hw/gps.default.so
-lib/libloc_eng.so
-lib/libloc_adapter.so
-lib/libgps.utils.so
 lib/libloc_api_v02.so
-lib/libcurl.so
-lib/libbson.so
-lib/libquipc_os_api.so
-lib/libquipc_ulp_adapter.so
-lib/libwifiscanner.so
 
 # NFC
 lib/hw/nfc.MSM8960.so
