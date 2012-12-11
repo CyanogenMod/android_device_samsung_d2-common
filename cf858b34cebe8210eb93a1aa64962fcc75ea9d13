@@ -1,0 +1,10 @@
+Change-Id: Icf858b34cebe8210eb93a1aa64962fcc75ea9d13
+Code-Review+2: Shareef Ali <shareefalis@cyanogenmod.org>
+Verified+1: Shareef Ali <shareefalis@cyanogenmod.org>
+Code-Review+1: Dan Pasanen <dan.pasanen@gmail.com>
+Code-Review+1: Ronald Ramsay II <ronaldramsayii@gmail.com>
+Submitted-by: Shareef Ali <shareefalis@cyanogenmod.org>
+Submitted-at: Mon, 10 Dec 2012 22:58:49 -0800
+Reviewed-on: http://review.cyanogenmod.org/28047
+Project: CyanogenMod/android_device_samsung_d2-common
+Branch: refs/heads/mr1-staging
