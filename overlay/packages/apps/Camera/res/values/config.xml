@@ -18,11 +18,11 @@
 -->
 
 <resources>
-	<!-- Samsung Camcorder Mode
+    <!-- Samsung Camcorder Mode -->
     <bool name="needsSamsungCamMode">true</bool>
-	Samsung Camera Settings
+    <!-- Samsung Camera Settings -->
     <bool name="hasSamsungCamSettings">true</bool>
     <bool name="needsEarlyVideoSize">true</bool>
     <bool name="noFaceDetectOnFrontCamera">true</bool>
-    <bool name="enableZSL">true</bool> -->
+    <bool name="enableZSL">true</bool>
 </resources>
