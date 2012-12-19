@@ -53,6 +53,10 @@ PRODUCT_PACKAGES += Torch
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
 
+# Wifi
+PRODUCT_PACKAGES += \
+    libnetcmdiface
+
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
