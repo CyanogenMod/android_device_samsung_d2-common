@@ -94,7 +94,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data_netmgrd_nint=16 \
     lpa.decode=true \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    ril.subscription.types=NV,RUIM
+    ril.subscription.types=NV,RUIM \
+    ro.telephony.ril.v3=needsSamsungDataCallMagic
 
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
