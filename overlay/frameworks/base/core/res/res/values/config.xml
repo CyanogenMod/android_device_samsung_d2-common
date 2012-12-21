@@ -303,5 +303,10 @@
     <!-- Disable the home key unlock setting
     <bool name="config_disableHomeUnlockSetting">false</bool>-->
 
+    <!-- Enable WFD -->
     <bool name="config_enableWifiDisplay">true</bool>
+
+    <!-- Enable multi-user -->
+    <integer name="config_multiuserMaximumUsers">8</integer>
+
 </resources>
