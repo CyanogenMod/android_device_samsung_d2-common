@@ -58,7 +58,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetoot
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
 
 # Disable initlogo, Samsungs framebuffer is weird
-TARGET_NO_INITLOGO := true
+#TARGET_NO_INITLOGO := true
 
 # HAX
 #BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
