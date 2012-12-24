@@ -1,0 +1,11 @@
+Change-Id: I299796fd06caf9c91def0510b9c5b2a290a8b43b
+Code-Review+2: Steve Kondik <shade@chemlab.org>
+Verified+1: Steve Kondik <shade@chemlab.org>
+Code-Review+1: john c craig <johnccraig80@gmail.com>
+Code-Review+1: Chris Yeninas <phantom@sundergaming.com>
+Code-Review+1: Ronald Ramsay II <ronaldramsayii@gmail.com>
+Submitted-by: Steve Kondik <shade@chemlab.org>
+Submitted-at: Sun, 23 Dec 2012 16:49:39 -0800
+Reviewed-on: http://review.cyanogenmod.org/28754
+Project: CyanogenMod/android_device_samsung_d2-common
+Branch: refs/heads/cm-10.1
