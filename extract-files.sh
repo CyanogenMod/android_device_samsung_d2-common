@@ -34,6 +34,21 @@ for FILE in `egrep -v '(^#|^$)' ../$DEVICE/device-proprietary-files.txt`; do
   fi
 done
 
+for FILE in `egrep -v '(^#|^$)' ../d2-common/proprietary-files.txt`; do
+  echo "Extracting /system/$FILE ..."
+  DIR=`dirname $FILE`
+  if [ ! -d $BASE/$DIR ]; then
+    mkdir -p $BASE/$DIR
+  fi
+  if [ "$SRC" = "adb" ]; then
+    adb pull /system/$FILE $BASE/$FILE
+  else
+    cp $SRC/system/$FILE $BASE/$FILE
+  fi
+done
+
+BASE=../../../vendor/$VENDOR/d2-common/proprietary
+rm -rf $BASE/*
 for FILE in `egrep -v '(^#|^$)' ../d2-common/common-proprietary-files.txt`; do
   echo "Extracting /system/$FILE ..."
   DIR=`dirname $FILE`
