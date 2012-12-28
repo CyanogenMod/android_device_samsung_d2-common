@@ -46,6 +46,33 @@ etc/firmware/vidc_1080p.fw
 # Graphics
 lib/libmm-color-convertor.so
 
+# Radio
+bin/netmgrd
+bin/sec-ril
+bin/qmiproxy
+bin/qmuxd
+bin/rmt_storage
+bin/rild
+lib/libsecril-client.so
+lib/libqmi.so
+lib/libqdi.so
+lib/libqdp.so
+lib/libqmiservices.so
+lib/libril.so
+lib/libreference-ril.so
+lib/libril-qcril-hook-oem.so
+lib/libdsutils.so
+lib/libdsi_netctrl.so
+lib/libidl.so
+lib/libnetmgr.so
+lib/libqmi_cci.so
+lib/libqmi_csi.so
+lib/libqmi_common_so.so
+lib/libqmi_encdec.so
+lib/libatparser.so
+lib/libqcci_legacy.so
+lib/libqmi_client_qmux.so
+
 # GPS
 lib/libloc_api_v02.so
 
