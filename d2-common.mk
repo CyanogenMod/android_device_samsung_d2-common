@@ -102,7 +102,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.svlte1x=true \
     ro.cdma.subscribe_on_ruim_ready=true \
     persist.radio.no_wait_for_card=1 \
-    keyguard.no_require_sim=true
+    keyguard.no_require_sim=true \
+    ro.ril.samsung_data_call_magic=true
 
 # Workaround for MDP underrun issue with 4-layer composition
 PRODUCT_PROPERTY_OVERRIDES += \
