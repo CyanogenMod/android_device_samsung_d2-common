@@ -58,7 +58,6 @@ lib/libqmi.so
 lib/libqdi.so
 lib/libqdp.so
 lib/libqmiservices.so
-lib/libril.so
 lib/libreference-ril.so
 lib/libril-qcril-hook-oem.so
 lib/libdsutils.so
