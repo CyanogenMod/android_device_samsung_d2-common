@@ -3242,7 +3242,7 @@ SectionDevice
         'MICBIAS1 CAPLESS Switch':1:0
     EndSequence
 
-    ACDBID  4:2
+    ACDBID  54:2
 
 EndSection
 
@@ -3472,42 +3472,32 @@ EndSection
 
 SectionDevice
 	Name "Speaker DMIC Endfire"
-	Comment "Dual MIC Endfire Tx device"
-    EnableSequence
-        'PRI_TX Channels':0:Two
-        'SLIM TX8 MUX':0:DEC2
-        'DEC2 MUX':0:ADC5
-        'ADC5 Volume':1:100%
-        'SLIM TX7 MUX':0:DEC4
-        'DEC4 MUX':0:ADC3
-        'ADC3 Volume':1:100%
-        'MICBIAS1 CAPLESS Switch':1:1
-        'MICBIAS3 CAPLESS Switch':1:1
-        'LINEOUT3 Volume':1:100%
-        'DEC4 Volume':2:75.8%
-        'DEC2 Volume':2:75.8%
-        'TX3 HPF cut off':0:MIN_3DB_150Hz
-        'TX4 HPF cut off':0:MIN_3DB_150Hz
-        'TX5 HPF cut off':0:MIN_3DB_150Hz
-    EndSequence
+	Comment "Call Main Mic Tx device"
 
-    DisableSequence
-        'SLIM TX7 MUX':0:ZERO
-        'DEC2 MUX':0:ZERO
-        'SLIM TX8 MUX':0:ZERO
-        'DEC4 MUX':0:ZERO
-        'MICBIAS1 CAPLESS Switch':1:0
-        'MICBIAS3 CAPLESS Switch':1:0
-        'LINEOUT3 Volume':1:0%
-        'DEC4 Volume':2:67.7%
-        'DEC2 Volume':2:67.7%
-        'TX3 HPF cut off':0:MIN_3DB_4Hz
-        'TX4 HPF cut off':0:MIN_3DB_4Hz
-        'TX5 HPF cut off':0:MIN_3DB_4Hz
-    EndSequence
+	EnableSequence
+		'PRI_TX Channels':0:One
+		'SLIM TX7 MUX':0:DEC4
+		'DEC4 MUX':0:ADC3
+		'ADC3 Volume':1:100%
+		'DEC4 Volume':2:67.7%
+		'MICBIAS1 CAPLESS Switch':1:1
+		'LINEOUT3 Volume':1:0%
+		'TX3 HPF cut off':0:MIN_3DB_150Hz
+		'TX4 HPF cut off':0:MIN_3DB_150Hz
+		'TX5 HPF cut off':0:MIN_3DB_150Hz
+	EndSequence
 
-	ACDBID	55:2
-	EffectsMixerCTL "SRS TruMedia"
+	DisableSequence
+		'SLIM TX7 MUX':0:ZERO
+		'DEC4 MUX':0:ZERO
+		'ADC3 Volume':1:0
+		'MICBIAS1 CAPLESS Switch':1:0
+		'TX3 HPF cut off':0:MIN_3DB_4Hz
+		'TX4 HPF cut off':0:MIN_3DB_4Hz
+		'TX5 HPF cut off':0:MIN_3DB_4Hz
+	EndSequence
+
+	ACDBID	4:2
 
 EndSection
 
