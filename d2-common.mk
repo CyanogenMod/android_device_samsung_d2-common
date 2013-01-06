@@ -104,10 +104,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.no_wait_for_card=1 \
     keyguard.no_require_sim=true
 
-# Workaround for MDP underrun issue with 4-layer composition
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.mdpcomp.maxlayer=3
-
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
