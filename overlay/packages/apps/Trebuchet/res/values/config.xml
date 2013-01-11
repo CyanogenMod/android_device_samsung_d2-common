@@ -18,12 +18,6 @@
 -->
 <resources>
 
-    <!-- Which default transition effect to use on the workspace -->
-    <string name="config_workspaceDefaultTransitionEffect">Tablet</string>
-
-    <!-- Whether to fade the adjacent screens when scrolling -->
-    <bool name="config_workspaceDefualtFadeInAdjacentScreens">true</bool>
-
     <!-- Workspace grid size -->
     <integer name="default_cell_count_y">5</integer>
     <integer name="default_cell_count_x">4</integer>
