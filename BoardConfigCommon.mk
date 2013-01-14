@@ -56,6 +56,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
+BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
