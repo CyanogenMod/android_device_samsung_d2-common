@@ -120,6 +120,7 @@ cameradata/SlimISP_GH.bin
 cameradata/SlimISP_ZC.bin
 cameradata/SlimISP_ZD.bin
 cameradata/SlimISP_ZE.bin
+cameradata/SlimISP_ZH.bin
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
 
