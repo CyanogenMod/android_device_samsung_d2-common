@@ -71,6 +71,8 @@ lib/libqmi_encdec.so
 lib/libatparser.so
 lib/libqcci_legacy.so
 lib/libqmi_client_qmux.so
+lib/libomission-avoidance.so
+lib/libfactoryutil.so
 
 # GPS
 lib/libloc_api_v02.so
