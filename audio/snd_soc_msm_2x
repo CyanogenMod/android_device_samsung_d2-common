@@ -876,11 +876,11 @@ SectionVerb
 	Name "HiFi Low PowerBT SCO Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -892,11 +892,11 @@ SectionVerb
 	Name "HiFi Low PowerBT SCO WB Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -1797,11 +1797,11 @@ SectionVerb
 	Name "HiFi TunnelBT SCO Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -1813,11 +1813,11 @@ SectionVerb
 	Name "HiFi TunnelBT SCO WB Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -4736,11 +4736,11 @@ SectionModifier
 	Name "Play LPABT SCO Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -4752,11 +4752,11 @@ SectionModifier
 	Name "Play LPABT SCO WB Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia3':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia3':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -5223,11 +5223,11 @@ SectionModifier
 	Name "Play TunnelBT SCO Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
 
 	# ALSA PCMs
@@ -5239,11 +5239,11 @@ SectionModifier
 	Name "Play TunnelBT SCO WB Rx"
 
 	EnableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:1
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:1
 	EndSequence
 
 	DisableSequence
-		'"AUX_PCM_RX Audio Mixer MultiMedia4':1:0
+		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
 
 	# ALSA PCMs
