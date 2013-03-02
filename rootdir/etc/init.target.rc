@@ -265,3 +265,8 @@ service bugreport /system/bin/bugmailer.sh -v
 	oneshot
 	keycodes 114 115 116
 
+service gpu_dcvsd /system/bin/gpu_dcvsd
+    class late_start
+    user root
+    oneshot
+
