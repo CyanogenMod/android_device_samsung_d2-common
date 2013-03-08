@@ -19,10 +19,12 @@
     <string-array name="preferred_network_mode_choices_lte">
         <item>LTE/CDMA/EvDo</item>
         <item>CDMA/EvDo auto</item>
+        <item>GSM Global Roaming</item>
     </string-array>
     <string-array name="preferred_network_mode_values_lte" translatable="false">
         <item>"8"</item>
         <item>"4"</item>
+        <item>"0"</item>
     </string-array>
 
     <!-- LTE/CDMA network mode to use for toggleLTE(true). -->
