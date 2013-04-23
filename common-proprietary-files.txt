@@ -118,11 +118,9 @@ lib/libchromatix_s5k6a3yx_vt.so
 cameradata/SlimISP_GC.bin
 cameradata/SlimISP_GD.bin
 cameradata/SlimISP_GE.bin
-cameradata/SlimISP_GH.bin
 cameradata/SlimISP_ZC.bin
 cameradata/SlimISP_ZD.bin
 cameradata/SlimISP_ZE.bin
-cameradata/SlimISP_ZH.bin
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
 
