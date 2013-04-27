@@ -18,5 +18,5 @@
 <resources>
     <!-- ==================== pie controls ==================== -->
     <!-- Actual width/height of the trigger views placed on the UI -->
-    <dimen name="pie_trigger_height">7dp</dimen>
+    <dimen name="pie_trigger_height">10dp</dimen>
 </resources>
