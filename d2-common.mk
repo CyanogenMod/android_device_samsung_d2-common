@@ -46,6 +46,13 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
 
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8960
+
+PRODUCT_COPY_FILES += \
+    device/samsung/d2-common/gps/gps.conf:system/etc/gps.conf
+
 # Torch
 PRODUCT_PACKAGES += Torch
 

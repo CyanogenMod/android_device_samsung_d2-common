@@ -28,6 +28,8 @@ USE_CAMERA_STUB := true
 # inherit from common msm8960
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/d2-common/include
+
 # Kernel
 TARGET_KERNEL_SOURCE        := kernel/samsung/d2
 BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
