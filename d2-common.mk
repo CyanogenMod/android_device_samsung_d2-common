@@ -36,6 +36,16 @@ PRODUCT_COPY_FILES += \
         device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
         device/samsung/d2-common/audio/audio_effects.conf:system/etc/audio_effects.conf
 
+# Keymaps
+PRODUCT_COPY_FILES += \
+       device/samsung/d2-common/keylayout/fsa9485.kl:system/usr/keylayout/fsa9485.kl \
+       device/samsung/d2-common/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
+       device/samsung/d2-common/keylayout/sec_key.kl:system/usr/keylayout/sec_key.kl \
+       device/samsung/d2-common/keylayout/sec_keys.kl:system/usr/keylayout/sec_keys.kl \
+       device/samsung/d2-common/keylayout/sec_powerkey.kl:system/usr/keylayout/sec_powerkey.kl \
+       device/samsung/d2-common/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
+       device/samsung/d2-common/keylayout/sii9234_rcp.kl:system/usr/keylayout/sii9234_rcp.kl
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
@@ -45,6 +55,13 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.target.rc \
     ueventd.qcom.rc
+
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8960
+
+PRODUCT_COPY_FILES += \
+    device/samsung/d2-common/gps/gps.conf:system/etc/gps.conf
 
 # Torch
 PRODUCT_PACKAGES += Torch
