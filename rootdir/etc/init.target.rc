@@ -209,6 +209,10 @@ on post-fs-data
     chmod 0660 /sys/vibrator/pwm_val
     chown system system /sys/vibrator/pwm_val
 
+    # Panel color temperature
+    chmod 0660 /sys/devices/virtual/sec/tsp/panel_colors
+    chown system system /sys/devices/virtual/sec/tsp/panel_colors
+
     # volume up/down key
     chown radio system /sys/class/sec/sec_key/wakeup_keys
 
