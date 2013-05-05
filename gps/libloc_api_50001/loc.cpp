@@ -1,4 +1,4 @@
-/* Copyright (c) 2011 - 2012, Code Aurora Forum. All rights reserved.
+/* Copyright (c) 2011 - 2012, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+ *     * Neither the name of The Linux Foundation nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -32,14 +32,16 @@
 
 #include <hardware/gps.h>
 #include <loc_eng.h>
+#include <loc_target.h>
 #include <loc_log.h>
 #include <msg_q.h>
 #include <dlfcn.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+
+#include <cutils/properties.h>
 
 //Globals defns
 static const ulpInterface * loc_eng_ulp_inf = NULL;
@@ -165,65 +167,6 @@ static const UlpPhoneContextInterface sLocEngUlpPhoneContextInterface =
 static loc_eng_data_s_type loc_afw_data;
 static int gss_fd = 0;
 
-#define TARGET_NAME_OTHER              0
-#define TARGET_NAME_APQ8064_STANDALONE 1
-#define TARGET_NAME_APQ8064_FUSION3    2
-
-static int read_a_line(const char * file_path, char * line, int line_size)
-{
-    FILE *fp;
-    int result = 0;
-
-    * line = '\0';
-    fp = fopen(file_path, "r" );
-    if( fp == NULL ) {
-        LOC_LOGE("open failed: %s: %s\n", file_path, strerror(errno));
-        result = -1;
-    } else {
-        int len;
-        fgets(line, line_size, fp);
-        len = strlen(line);
-        len = len < line_size - 1? len : line_size - 1;
-        line[len] = '\0';
-        LOC_LOGD("cat %s: %s", file_path, line);
-        fclose(fp);
-    }
-    return result;
-}
-
-#define LINE_LEN 100
-#define STR_LIQUID    "Liquid"
-#define STR_SURF      "Surf"
-#define STRLEN_LIQUID (sizeof(STR_LIQUID) - 1)
-#define STRLEN_SURF   (sizeof(STR_SURF) - 1)
-#define IS_STR_END(c) ((c) == '\0' || (c) == '\n' || (c) == '\r')
-
-static int get_target_name(void)
-{
-    int target_name = TARGET_NAME_OTHER;
-
-    char hw_platform[]      = "/sys/devices/system/soc/soc0/hw_platform"; // "Liquid" or "Surf"
-    char id[]               = "/sys/devices/system/soc/soc0/id"; //109
-    char mdm[]              = "/dev/mdm"; // No such file or directory
-
-    char line[LINE_LEN];
-
-    read_a_line( hw_platform, line, LINE_LEN);
-    if(( !memcmp(line, STR_LIQUID, STRLEN_LIQUID) && IS_STR_END(line[STRLEN_LIQUID]) ) ||
-       ( !memcmp(line, STR_SURF,   STRLEN_SURF)   && IS_STR_END(line[STRLEN_SURF])   )
-      ) {
-        if (!read_a_line( mdm, line, LINE_LEN)) {
-            target_name = TARGET_NAME_APQ8064_FUSION3;
-        } else {
-            read_a_line( id, line, LINE_LEN);
-            if(!strncmp(line, "109", strlen("109"))) {
-                target_name = TARGET_NAME_APQ8064_STANDALONE;
-            }
-        }
-    }
-    return target_name;
-}
-
 /*===========================================================================
 FUNCTION    gps_get_hardware_interface
 
@@ -265,10 +208,29 @@ const GpsInterface* gps_get_hardware_interface ()
 // for gps.c
 extern "C" const GpsInterface* get_gps_interface()
 {
+    targetEnumType target = TARGET_OTHER;
     loc_eng_read_config();
     //We load up libulp module at this point itself if ULP configured to be On
     if(gps_conf.CAPABILITIES & ULP_CAPABILITY) {
        loc_eng_ulp_inf = loc_eng_get_ulp_inf();
+    }
+
+    target = get_target();
+    LOC_LOGD("Target name check returned %s", loc_get_target_name(target));
+    //APQ8064
+    if(target == TARGET_APQ8064_STANDALONE) {
+        gps_conf.CAPABILITIES &= ~(GPS_CAPABILITY_MSA | GPS_CAPABILITY_MSB);
+        gss_fd = open("/dev/gss", O_RDONLY);
+        if (gss_fd < 0)
+            LOC_LOGE("GSS open failed: %s\n", strerror(errno));
+        else {
+            LOC_LOGD("GSS open success! CAPABILITIES %0lx\n", gps_conf.CAPABILITIES);
+        }
+    }
+    //MPQ8064
+    else if(target == TARGET_MPQ8064) {
+        LOC_LOGE("No GPS HW on this target (MPQ8064). Not returning interface");
+        return NULL;
     }
     return &sLocEngInterface;
 }
@@ -304,7 +266,13 @@ SIDE EFFECTS
 ===========================================================================*/
 static int loc_init(GpsCallbacks* callbacks)
 {
+    int retVal = -1;
     ENTRY_LOG();
+    if(callbacks == NULL) {
+        LOC_LOGE("loc_init failed. cb = NULL\n");
+        EXIT_LOG(%d, retVal);
+        return retVal;
+    }
     LOC_API_ADAPTER_EVENT_MASK_T event =
         LOC_API_ADAPTER_BIT_PARSED_POSITION_REPORT |
         LOC_API_ADAPTER_BIT_SATELLITE_REPORT |
@@ -323,22 +291,11 @@ static int loc_init(GpsCallbacks* callbacks)
                                     callbacks->release_wakelock_cb, /* release_wakelock_cb */
                                     callbacks->create_thread_cb, /* create_thread_cb */
                                     NULL, /* location_ext_parser */
-                                    NULL  /* sv_ext_parser */};
+                                    NULL, /* sv_ext_parser */
+                                    callbacks->request_utc_time_cb /* request_utc_time_cb */};
     gps_loc_cb = callbacks->location_cb;
     gps_sv_cb = callbacks->sv_status_cb;
 
-    if (get_target_name() == TARGET_NAME_APQ8064_STANDALONE)
-    {
-        gps_conf.CAPABILITIES &= ~(GPS_CAPABILITY_MSA | GPS_CAPABILITY_MSB);
-        gss_fd = open("/dev/gss", O_RDONLY);
-        if (gss_fd < 0) {
-            LOC_LOGE("GSS open failed: %s\n", strerror(errno));
-            return NULL;
-        }
-        LOC_LOGD("GSS open success! CAPABILITIES %0x\n", gps_conf.CAPABILITIES);
-    }
-
-    int retVal = -1;
     if (loc_eng_ulp_inf == NULL)
         retVal = loc_eng_init(loc_afw_data, &clientCallbacks, event,
                               NULL);
@@ -375,7 +332,7 @@ static void loc_cleanup()
     gps_sv_cb = NULL;
 
     /*
-     * if (get_target_name() == TARGET_NAME_APQ8064_STANDALONE)
+     * if (get_target() == TARGET_NAME_APQ8064_STANDALONE)
      * {
      *     close(gss_fd);
      *     LOC_LOGD("GSS shutdown.\n");
@@ -499,7 +456,6 @@ static int loc_inject_time(GpsUtcTime time, int64_t timeReference, int uncertain
 {
     ENTRY_LOG();
     int ret_val = loc_eng_inject_time(loc_afw_data, time, timeReference, uncertainty);
-
     EXIT_LOG(%d, ret_val);
     return ret_val;
 }
@@ -523,9 +479,32 @@ SIDE EFFECTS
 ===========================================================================*/
 static int loc_inject_location(double latitude, double longitude, float accuracy)
 {
+    static bool initialized = false;
+    static bool enable_cpi = true;
     ENTRY_LOG();
-    int ret_val = loc_eng_inject_location(loc_afw_data, latitude, longitude, accuracy);
 
+    if(!initialized)
+    {
+        char value[PROPERTY_VALUE_MAX];
+        memset(value, 0, sizeof(value));
+        (void)property_get("persist.gps.qc_nlp_in_use", value, "0");
+        if(0 == strcmp(value, "1"))
+        {
+            enable_cpi = false;
+            LOC_LOGI("GPS HAL coarse position injection disabled");
+        }
+        else
+        {
+            LOC_LOGI("GPS HAL coarse position injection enabled");
+        }
+        initialized = true;
+    }
+
+    int ret_val = 0;
+    if(enable_cpi)
+    {
+      ret_val = loc_eng_inject_location(loc_afw_data, latitude, longitude, accuracy);
+    }
     EXIT_LOG(%d, ret_val);
     return ret_val;
 }
@@ -835,8 +814,12 @@ SIDE EFFECTS
 static int loc_xtra_inject_data(char* data, int length)
 {
     ENTRY_LOG();
-    int ret_val = loc_eng_xtra_inject_data(loc_afw_data, data, length);
-
+    int ret_val = -1;
+    if( (data != NULL) && ((unsigned int)length <= XTRA_DATA_MAX_SIZE))
+        ret_val = loc_eng_xtra_inject_data(loc_afw_data, data, length);
+    else
+        LOC_LOGE("%s, Could not inject XTRA data. Buffer address: %p, length: %d",
+                 __func__, data, length);
     EXIT_LOG(%d, ret_val);
     return ret_val;
 }

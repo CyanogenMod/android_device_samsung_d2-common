@@ -14,7 +14,8 @@ LOCAL_SRC_FILES += \
     loc_log.cpp \
     loc_cfg.cpp \
     msg_q.c \
-    linked_list.c
+    linked_list.c \
+    loc_target.cpp
 
 LOCAL_CFLAGS += \
      -fno-short-enums \
@@ -31,7 +32,8 @@ LOCAL_COPY_HEADERS:= \
    loc_cfg.h \
    log_util.h \
    linked_list.h \
-   msg_q.h
+   msg_q.h \
+   loc_target.h
 
 LOCAL_MODULE := libgps.utils
 
