@@ -1,4 +1,4 @@
-/* Copyright (c) 2009-2012 Code Aurora Forum. All rights reserved.
+/* Copyright (c) 2009-2012, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of Code Aurora Forum, Inc. nor the names of its
+ *     * Neither the name of The Linux Foundation nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -68,6 +68,11 @@ typedef unsigned char boolean;
 #define FAILURE                 FALSE
 #define INVALID_ATL_CONNECTION_HANDLE -1
 
+enum loc_nmea_provider_e_type {
+    NMEA_PROVIDER_AP = 0, // Application Processor Provider of NMEA
+    NMEA_PROVIDER_MP // Modem Processor Provider of NMEA
+};
+
 enum loc_mute_session_e_type {
    LOC_MUTE_SESS_NONE = 0,
    LOC_MUTE_SESS_WAIT,
@@ -101,6 +106,7 @@ typedef struct
     gps_ni_notify_callback         ni_notify_cb;
     gps_acquire_wakelock           acquire_wakelock_cb;
     gps_release_wakelock           release_wakelock_cb;
+    gps_request_utc_time           request_utc_time_cb;
     ulp_network_location_request   ulp_network_callback;
     ulp_request_phone_context      ulp_phone_context_req_cb;
     boolean                        intermediateFix;
@@ -128,6 +134,13 @@ typedef struct
     // For muting session broadcast
     loc_mute_session_e_type        mute_session_state;
 
+    // For nmea generation
+    boolean generateNmea;
+    uint32_t sv_used_mask;
+    float hdop;
+    float pdop;
+    float vdop;
+
     // Address buffers, for addressing setting before init
     int    supl_host_set;
     char   supl_host_buf[101];
@@ -149,6 +162,7 @@ typedef struct loc_gps_cfg_s
   unsigned long  INTERMEDIATE_POS;
   unsigned long  ACCURACY_THRES;
   unsigned long  ENABLE_WIPER;
+  uint8_t        NMEA_PROVIDER;
   unsigned long  SUPL_VER;
   unsigned long  CAPABILITIES;
   uint8_t        GYRO_BIAS_RANDOM_WALK_VALID;
