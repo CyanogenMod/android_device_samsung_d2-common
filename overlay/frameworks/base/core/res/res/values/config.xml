@@ -312,4 +312,6 @@
     <!-- Boolean to enable Stylus gestures -->
     <bool name="config_stylusGestures">true</bool>
 
+    <!-- Panel auto brightness value -->
+    <integer name="config_panelAutoBrightnessValue">1</integer>
 </resources>

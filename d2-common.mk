@@ -76,7 +76,7 @@ PRODUCT_PACKAGES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mass_storage,adb
 
 # Lights
 PRODUCT_PACKAGES += lights.msm8960
