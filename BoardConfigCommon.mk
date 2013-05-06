@@ -30,6 +30,9 @@ USE_CAMERA_STUB := true
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/d2-common/include
 
+# Flags for driver compatibility
+COMMON_GLOBAL_CFLAGS += -DNEW_ION_API -DQCOM_BSP_CAMERA_ABI_HACK
+
 # Kernel
 TARGET_KERNEL_SOURCE        := kernel/samsung/d2
 BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
