@@ -80,7 +80,7 @@ PRODUCT_PACKAGES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mass_storage,adb
 
 # Lights
 PRODUCT_PACKAGES += lights.msm8960
@@ -98,8 +98,8 @@ PRODUCT_PACKAGES += qrngd
 
 #common build.props
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
+    ro.ril.hsxpa=3 \
+    ro.ril.gprsclass=12 \
     persist.radio.add_power_save=1 \
     persist.radio.snapshot_disabled=1 \
     com.qc.hardware=true \
