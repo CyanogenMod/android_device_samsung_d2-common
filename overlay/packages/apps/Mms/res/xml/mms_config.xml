@@ -23,13 +23,13 @@
 <mms_config version="3">
 
     <!-- Maximum message size in bytes for a MMS message -->
-    <int name="maxMessageSize">614400</int>
+    <int name="maxMessageSize">1258291</int>
 
     <!-- Maximum height for an attached image -->
-    <int name="maxImageHeight">1200</int>
+    <int name="maxImageHeight">1944</int>
 
     <!-- Maximum width for an attached image -->
-    <int name="maxImageWidth">1600</int>
+    <int name="maxImageWidth">2592</int>
 
     <!-- If true, The text message over 160 characters will be sent in multi part.
          If false, The text message over 160 characters will be sent
