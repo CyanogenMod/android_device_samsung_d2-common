@@ -111,6 +111,7 @@ lib/libchromatix_ov2720_default_video.so
 lib/libchromatix_ov2720_preview.so
 lib/libchromatix_s5k6a3yx_default_video.so
 lib/libchromatix_s5k6a3yx_preview.so
+lib/libchromatix_s5k6a3yx_smart_stay.so
 lib/libchromatix_s5k6a3yx_vt_hd.so
 lib/libchromatix_s5k6a3yx_vt.so
 
