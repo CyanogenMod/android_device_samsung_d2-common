@@ -17,6 +17,7 @@ lib/libacdbloader.so
 lib/libaudcal.so
 
 # mmparser extended
+lib/libExtendedExtractor.so
 lib/libmmparser.so
 lib/libmmosal.so
 lib/libdivxdrm.so
