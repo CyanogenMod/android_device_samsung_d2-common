@@ -27,5 +27,8 @@
 
     <!-- Flag indicating if the tty is enabled -->
     <bool name="tty_enabled">true</bool>
+    
+    <!-- Flag indicating if the phone is a world phone -->
+    <bool name="world_phone">true</bool>
 
 </resources>
