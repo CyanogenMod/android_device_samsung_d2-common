@@ -16,13 +16,21 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Mobile network settings, network mode choices for a device supporting CDMA and LTE [CHAR LIMIT=25] -->
-    <string-array name="preferred_network_mode_choices_lte">
+    <string-array name="preferred_network_mode_choices">
+        <item>LTE/CDMA/EvDo/GSM/WCDMA</item>
+        <item>LTE/GSM/WCDMA</item>
         <item>LTE/CDMA/EvDo</item>
         <item>CDMA/EvDo auto</item>
+        <item>GSM/WCDMA auto</item>
+        <item>GSM/WCDMA preferred</item>
     </string-array>
-    <string-array name="preferred_network_mode_values_lte" translatable="false">
+    <string-array name="preferred_network_mode_values" translatable="false">
+        <item>"10"</item>
+        <item>"9"</item>
         <item>"8"</item>
         <item>"4"</item>
+        <item>"3"</item>
+        <item>"0"</item>
     </string-array>
 
     <!-- LTE/CDMA network mode to use for toggleLTE(true). -->
