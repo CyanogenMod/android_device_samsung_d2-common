@@ -136,6 +136,8 @@ on post-fs-data
     chown system radio /sys/class/camera/front/front_camtype
     chown system camera /sys/class/flash/flash/flash_power
     chmod 660 /sys/class/flash/flash/flash_power
+    chmod 660 /sys/class/camera/rear/rear_flash
+
 
     chown system system /sys/class/sec/led/led_r
     chown system system /sys/class/sec/led/led_g
@@ -270,4 +272,8 @@ service bugreport /system/bin/bugmailer.sh -v
 	disabled
 	oneshot
 	keycodes 114 115 116
+on property:ro.yas_softiron.apexqtmo=true
+  write /sys/class/input/input3/ellipsoid_mode 0
+  write /sys/class/input/input3/static_matrix "10319 -477 45 -147 9510 171 -170 52 10187"\
+
 
