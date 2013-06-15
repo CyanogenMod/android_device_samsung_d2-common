@@ -94,8 +94,8 @@ on boot
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
     chmod 2770 /dev/socket/qmux_audio
-#    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-#    chmod 2770 /dev/socket/qmux_bluetooth
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
 
@@ -140,6 +140,12 @@ on boot
 
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
+
+    # Fix permissions on camera flash control
+    chmod 0660 /sys/devices/virtual/camera/rear/rear_flash
+    chown root camera /sys/devices/virtual/camera/rear/rear_flash
+
+
 
     #To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
@@ -190,6 +196,8 @@ on post-fs-data
     #mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0775 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+    write /dev/wcnss_wlan 1
+    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -212,6 +220,8 @@ on post-fs-data
     # For disabling softkeys *FIXME*
     chown root system /sys/class/leds/button-backlight/max_brightness
     chmod 0664 /sys/class/leds/button-backlight/max_brightness
+    chown root system /sys/class/leds/keyboard-backlight/max_brightness
+    chmod 0664 /sys/class/leds/keyboard-backlight/max_brightness
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
@@ -332,11 +342,11 @@ service netmgrd /system/bin/netmgrd
     class main
     disabled
 
-#service sensors /system/bin/sensors.qcom
-#    class late_start
-#    user root
-#    group root
-#    disabled
+service sensors /system/bin/sensors.qcom
+    class late_start
+    user root
+    group root
+    disabled
 
 on property:ro.use_data_netmgrd=false
 #netmgr not supported on specific target
@@ -542,6 +552,11 @@ on property:persist.ims.regmanager.mode=1
 on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+on property:bluetooth.hciattach=true
+    start hciattach
+
+on property:bluetooth.hciattach=false
+    setprop bluetooth.status off
 
 #service time_daemon /system/bin/time_daemon
 #    class late_start
