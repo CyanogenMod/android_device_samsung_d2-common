@@ -29,7 +29,10 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
-
+ifneq ($(VARIENT_MODEL),apexqtmo)
+## apexq merge colusion
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
+endif
 # Audio configuration
 PRODUCT_COPY_FILES += \
         device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
@@ -106,7 +109,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
     persist.radio.apm_sim_not_pwdn=1 \
     ro.telephony.call_ring.multiple=0 \
-    ro.sf.lcd_density=320 \
     ro.ril.transmitpower=true \
     ro.opengles.version=131072 \
     persist.audio.fluence.mode=endfire \
