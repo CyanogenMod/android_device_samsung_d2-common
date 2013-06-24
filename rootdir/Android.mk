@@ -63,9 +63,18 @@ LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES    := etc/init.qcom.modem_links.sh
 include $(BUILD_PREBUILT)
 
+ifneq ($(filter apexqtmo,$(TARGET_DEVICE)),)
 include $(CLEAR_VARS)
-LOCAL_MODULE       := init.qcom.coex.sh
+LOCAL_MODULE       := init.qcom.bt.sh
 LOCAL_MODULE_TAGS  := optional eng
 LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/init.qcom.coex.sh
+LOCAL_SRC_FILES    := etc/init.qcom.bt.sh
 include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE       := init.carrier.rc
+LOCAL_MODULE_TAGS  := optional eng
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES    := $(TARGET_ROOT_OUT)
+include $(BUILD_PREBUILT)
+endif
