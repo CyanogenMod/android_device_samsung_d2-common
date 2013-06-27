@@ -64,6 +64,10 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
 
+ifneq ($(filter apexqtmo,$(VARIENT_MODEL)),)
+PRODUCT_PACKAGES += init.qcom.coex.sh
+endif
+
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8960

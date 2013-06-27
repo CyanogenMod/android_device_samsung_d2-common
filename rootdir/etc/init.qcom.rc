@@ -273,7 +273,7 @@ on property:init.svc.p2p_supplicant=stopped
     stop dhcpcd
 
 on property:bluetooth.isEnabled=true
-    start btwlancoex
+    # start btwlancoex
     write /sys/class/bluetooth/hci0/idle_timeout 7000
 
 service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
@@ -354,7 +354,7 @@ on property:ro.data.large_tcp_window_size=true
 service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
     class late_start
     user bluetooth
-    group bluetooth net_bt_admin inet net_admin net_raw
+    group qcom_oncrpc bluetooth net_bt_admin system radio
     disabled
     oneshot
 
@@ -547,7 +547,7 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
 on property:bluetooth.hciattach=true
-    start hciattach
+    start btwlancoex
 
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
