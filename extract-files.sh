@@ -28,7 +28,11 @@ for FILE in `egrep -v '(^#|^$)' ../$DEVICE/device-proprietary-files.txt`; do
     mkdir -p $BASE/$DIR
   fi
   if [ "$SRC" = "adb" ]; then
-    adb pull /system/$FILE $BASE/$FILE
+    if adb pull /system/$FILE $BASE/$FILE 2> /dev/null; then
+	echo "Extraction was successful."
+    else
+	echo "Extracting /system/$FILE failed. Skipping ... "
+    fi
   else
     cp $SRC/system/$FILE $BASE/$FILE
   fi
