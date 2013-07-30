@@ -43,8 +43,35 @@ on fs
     wait /dev/block/platform/msm_sdcc.1/by-name/persist
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
 
+    wait /dev/block/platform/msm_sdcc.1/by-name/efs
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/efs /efs nosuid nodev barrier=1
+
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower dmask=177 fmask=177
+
+on fs_selinux
+    mount_all fstab.qcom
+    setprop ro.crypto.fuse_sdcard true
+    # SEPolicy Reload check should be done after mount data partition
+    setprop selinux.reload_policy 1
+
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+    #wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    #check_fs /dev/block/platform/msm_sdcc.1/by-name/persist ext4
+    #mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
+
+#    wait /dev/block/platform/msm_sdcc.1/by-name/efs
+#    check_fs /dev/block/platform/msm_sdcc.1/by-name/efs ext4
+#    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    chown system radio /efs
+    chmod 0771 /efs
+#    restorecon -R /efs
+
+    chown system radio /dev/block/platform/msm_sdcc.1/by-name
+    chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
 
 on boot
     write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
