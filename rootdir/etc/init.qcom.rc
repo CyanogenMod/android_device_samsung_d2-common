@@ -590,8 +590,36 @@ service profiler_daemon /system/bin/profiler_daemon
 
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
+    oneshot
+
+on property:ro.fuse_sdcard=true
+    start sdcard
+
+# This will make sure that sdcard service starts as late_start.
+on nonencrypted
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
+
+on property:vold.decrypt=trigger_restart_framework
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service macloader /system/bin/macloader
     class main
     oneshot
 
+service ssr_diag /system/bin/ssr_diag
+    class late_start
+    user system
+    group system
+
+# Limit to SoC reset (1) and independent SSR (3)
+on property:persist.sys.ssr.restart_level=1
+    write /sys/module/subsystem_restart/parameters/restart_level 1
+on property:persist.sys.ssr.restart_level=3
+    write /sys/module/subsystem_restart/parameters/restart_level 3
+
+on property:service.bootanim.exit=1
+    #write /sys/module/rmnet_usb/parameters/dump_ctrl_msg 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
