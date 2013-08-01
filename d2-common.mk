@@ -38,7 +38,8 @@ endif
 PRODUCT_COPY_FILES += \
         device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
         device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf \
-        device/samsung/d2-common/audio/audio_effects.conf:system/etc/audio_effects.conf
+        device/samsung/d2-common/audio/audio_effects.conf:system/etc/audio_effects.conf \
+        frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml
 
 # Keymaps
 PRODUCT_COPY_FILES += \
