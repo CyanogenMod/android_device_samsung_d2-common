@@ -73,6 +73,7 @@ lib/libomission_avoidance.so
 lib/libfactoryutil.so
 
 # GPS
+lib/libgeofence.so
 lib/libloc_api_v02.so
 
 # NFC
