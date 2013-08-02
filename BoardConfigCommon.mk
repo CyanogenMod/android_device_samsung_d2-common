@@ -72,3 +72,36 @@ TARGET_DISPLAY_INSECURE_MM_HEAP := true
 
 # Separate audio devices for VOIP
 BOARD_USES_SEPERATED_VOIP := true
+
+# SELinux
+BOARD_SEPOLICY_DIRS += \
+        device/samsung/d2-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+        file_contexts \
+        property_contexts \
+        te_macros \
+        bridge.te \
+        camera.te \
+        conn_init.te \
+        device.te \
+        dhcp.te \
+        domain.te \
+        drmserver.te \
+        file.te \
+        kickstart.te \
+        init.te \
+        mediaserver.te \
+        mpdecision.te \
+        netmgrd.te \
+        property.te \
+        qmux.te \
+        rild.te \
+        rmt.te \
+        sensors.te \
+        surfaceflinger.te \
+        system.te \
+        tee.te \
+        thermald.te \
+        ueventd.te \
+        wpa_supplicant.te
