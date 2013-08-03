@@ -20,11 +20,6 @@
 # definition file).
 #
 
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
-
 # inherit from common msm8960
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
