@@ -136,10 +136,10 @@ etc/wifi/bcmdhd_sta.bin_b2
 etc/wifi/bcmdhd_mfg.bin_b2
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_mfg.txt_murata
-etc/wifi/nvram_mfg.txt_semcosh
+etc/wifi/nvram_mfg.txt:etc/wifi/nvram_mfg.txt_semcosh
 etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_murata
-etc/wifi/nvram_net.txt_semcosh
+etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_semcosh
 etc/wifi/wpa_supplicant.conf
 
 
