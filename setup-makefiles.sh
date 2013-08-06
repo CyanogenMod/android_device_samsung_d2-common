@@ -30,6 +30,13 @@ for FILE in `egrep -v '(^#|^$)' ../$DEVICE/device-proprietary-files.txt`; do
   if [ $COUNT = "0" ]; then
     LINEEND=""
   fi
+      # Split the file from the destination (format is "file[:destination]")
+  OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
+  FILE=${PARSING_ARRAY[0]}
+  DEST=${PARSING_ARRAY[1]}
+  if [ -n "$DEST" ]; then
+    FILE=$DEST
+  fi
   echo "	$OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE
 done
 
@@ -41,6 +48,13 @@ for FILE in `egrep -v '(^#|^$)' ../d2-common/proprietary-files.txt`; do
   COUNT=`expr $COUNT - 1`
   if [ $COUNT = "0" ]; then
     LINEEND=""
+  fi
+  # Split the file from the destination (format is "file[:destination]")
+  OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
+  FILE=${PARSING_ARRAY[0]}
+  DEST=${PARSING_ARRAY[1]}
+  if [ -n "$DEST" ]; then
+    FILE=$DEST
   fi
   echo "        $OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE
 done
@@ -117,6 +131,14 @@ for FILE in `egrep -v '(^#|^$)' ../d2-common/common-proprietary-files.txt`; do
   COUNT=`expr $COUNT - 1`
   if [ $COUNT = "0" ]; then
     LINEEND=""
+  fi
+      # Split the file from the destination (format is "file[:destination]")
+  OLDIFS=$IFS IFS=":" PARSING_ARRAY=($FILE) IFS=$OLDIFS
+  FILE=${PARSING_ARRAY[0]}
+  DEST=${PARSING_ARRAY[1]}
+
+  if [ -n "$DEST" ]; then
+    FILE=$DEST
   fi
    echo "        $OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE
 done
