@@ -112,11 +112,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     ro.ril.transmitpower=true \
     ro.opengles.version=131072 \
-    persist.audio.fluence.mode=endfire \
     persist.audio.vr.enable=false \
-    persist.audio.handset.mic=digital \
     persist.audio.speaker.location=high \
-    ro.qc.sdk.audio.fluencetype=fluence \
     persist.timed.enable=true \
     ro.emmc.sdcard.partition=17 \
     ro.use_data_netmgrd=true \
@@ -138,6 +135,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_short_ons_1="" \
     persist.rild.nitz_short_ons_2="" \
     persist.rild.nitz_short_ons_3=""
+
+ifneq ($(VARIENT_MODEL),apexqtmo)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.fluence.mode=endfire \
+    persist.audio.handset.mic=digital \
+    ro.qc.sdk.audio.fluencetype=fluence
+endif
 
 # NFC Support
 PRODUCT_PACKAGES += \
