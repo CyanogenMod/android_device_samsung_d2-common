@@ -235,8 +235,16 @@ on post-fs-data
     # Vibetonz
     chmod 0660 /dev/tspdrv
     chown root shell /dev/tspdrv
-    chmod 0660 /sys/vibrator/pwm_val
-    chown system system /sys/vibrator/pwm_val
+	chown system system /sys/class/timed_output/vibrator/pwm_value
+	chmod 0660 /sys/class/timed_output/vibrator/pwm_value
+    chown system system /sys/class/timed_output/vibrator/pwm_max
+	chmod 0660 /sys/class/timed_output/vibrator/pwm_max
+	chown system system /sys/class/timed_output/vibrator/pwm_min
+	chmod 0660 /sys/class/timed_output/vibrator/pwm_min
+	chown system system /sys/class/timed_output/vibrator/pwm_default
+	chmod 0660 /sys/class/timed_output/vibrator/pwm_default
+	chown system system /sys/class/timed_output/vibrator/pwm_threshold
+	chmod 0660 /sys/class/timed_output/vibrator/pwm_threshold
 
     # Panel color temperature
     chmod 0660 /sys/class/lcd/panel/panel_colors
