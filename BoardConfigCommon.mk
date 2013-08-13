@@ -57,15 +57,9 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 # bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
-BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
-
-# HAX
-#BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
-#BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
-#TARGET_PROVIDES_LIBAUDIO := true
 
 # Use Audience A2220 chip
 BOARD_HAVE_AUDIENCE_A2220 := true
@@ -75,3 +69,6 @@ BOARD_HAVE_DOCK_USBAUDIO := true
 
 #camera abi compatiblily
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
+
+# Separate audio devices for VOIP
+BOARD_USES_SEPERATED_VOIP := true
