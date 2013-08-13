@@ -161,9 +161,7 @@ on post-fs-data
     chown system camera /sys/class/camera/rear/rear_flash
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
-    chown system camera /sys/class/flash/flash/flash_power
-    chmod 660 /sys/class/flash/flash/flash_power
-    chmod 660 /sys/class/camera/rear/rear_flash
+    chmod 0666 /sys/class/camera/rear/rear_flash
 
 
     chown system system /sys/class/sec/led/led_r
