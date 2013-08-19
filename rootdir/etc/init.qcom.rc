@@ -629,3 +629,19 @@ on property:service.bootanim.exit=1
     write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
+
+service orientationd /system/bin/orientationd
+    class main
+    user compass
+    group system input
+    disabled
+
+service geomagneticd /system/bin/geomagneticd
+    class main
+    user compass
+    group system input
+    disabled
+
+on property:ro.yas.enable=true
+    start orientationd
+    start geomagneticd

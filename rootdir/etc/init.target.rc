@@ -100,8 +100,6 @@ on post-fs-data
     chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
     chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
     chown system radio /sys/class/sensors/barometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
-    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
     chown system radio /sys/class/sensors/proximity_sensor/enable
     chown system radio /sys/class/sensors/proximity_sensor/prox_avg
     chown system radio /sys/class/sensors/proximity_sensor/prox_cal
@@ -112,11 +110,18 @@ on post-fs-data
     chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
     chown system radio /sys/class/sensors/barometer_sensor/calibration
     chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/name
     chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
+    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
     chown system radio /sys/class/sensors/proximity_sensor/enable
     chown system radio /sys/class/sensors/proximity_sensor/prox_avg
     chown system radio /sys/class/sensors/proximity_sensor/prox_cal
     chown system radio /sys/class/sensors/light_sensor/enable
+
+    chown system radio /sys/class/sensors/magnetic_sensor/name
+    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
+    chown system radio /sys/class/sensors/magnetic_sensor/vendor
 
     #earjack
     chown system radio /sys/class/audio/earjack/select_jack
