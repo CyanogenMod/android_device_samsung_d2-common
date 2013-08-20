@@ -1,0 +1,45 @@
+#!/system/bin/sh
+
+# accelerometer
+chown system.input /sys/class/input/input3/data
+chown system.input /sys/class/input/input3/delay
+chown system.input /sys/class/input/input3/enable
+chown system.input /sys/class/input/input3/filter_enable
+chown system.input /sys/class/input/input3/offset
+chown system.input /sys/class/input/input3/position
+chown system.input /sys/class/input/input3/threshold
+chown system.input /sys/class/input/input3/wake
+
+# geomagnetic
+chown system.input /sys/class/input/input4/data
+chown system.input /sys/class/input/input4/delay
+chown system.input /sys/class/input/input4/enable
+chown system.input /sys/class/input/input4/filter_enable
+chown system.input /sys/class/input/input4/filter_len
+chown system.input /sys/class/input/input4/filter_noise
+chown system.input /sys/class/input/input4/filter_threshold
+chown system.input /sys/class/input/input4/position
+chown system.input /sys/class/input/input4/wake
+
+# geomagnetic_raw
+chown compass.input /sys/class/input/input5/dynamic_matrix
+chown compass.input /sys/class/input/input5/offsets
+chown system.input /sys/class/input/input5/distortion
+chown system.input /sys/class/input/input5/ellipsoid_mode
+chown system.input /sys/class/input/input5/shape
+chown system.input /sys/class/input/input5/static_matrix
+
+# orientation
+chown system.input /sys/class/input/input6/data
+chown system.input /sys/class/input/input6/delay
+chown system.input /sys/class/input/input6/enable
+chown system.input /sys/class/input/input6/wake
+
+# i2c
+chown system.system /dev/i2c-12
+chmod 0666 /dev/i2c-12
+
+# compass
+echo 0 > /sys/class/input/input5/ellipsoid_mode 0
+echo "10566 405 -81 760 9775 486 -876 1324 9758" > /sys/class/input/input5/static_matrix
+
