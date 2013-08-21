@@ -90,7 +90,9 @@ static int check_vendor_module()
     return rv;
 }
 
+#ifdef FIX_ISO_PARAMS
 const static char * iso_values[] = {"auto,ISO100,ISO200,ISO400,ISO800","auto"};
+#endif
 
 static char * camera_fixup_getparams(int id, const char * settings)
 {
@@ -98,7 +100,9 @@ static char * camera_fixup_getparams(int id, const char * settings)
     params.unflatten(android::String8(settings));
 
     // fix params here
+#ifdef FIX_ISO_PARAMS
     params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
+#endif
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -113,6 +117,7 @@ char * camera_fixup_setparams(int id, const char * settings)
     params.unflatten(android::String8(settings));
 
     // fix params here
+#ifdef FIX_ISO_PARAMS
     if(params.get("iso")) {
         const char* isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
         if(strcmp(isoMode, "ISO100") == 0)
@@ -124,6 +129,7 @@ char * camera_fixup_setparams(int id, const char * settings)
         else if(strcmp(isoMode, "ISO800") == 0)
             params.set(android::CameraParameters::KEY_ISO_MODE, "800");
     }
+#endif
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
@@ -306,9 +312,13 @@ int camera_cancel_auto_focus(struct camera_device * device)
     if(!device)
         return -EINVAL;
 
+#ifdef NO_CANCEL_AUTOFOCUS
     /* APEXQ/EXPRESS: Calling cancel_auto_focus causes the camera to crash for unknown reasons. Disabling
      * it has no adverse effect. Return 0 */
-    return 0;// VENDOR_CALL(device, cancel_auto_focus);
+    return 0;
+#else
+    return VENDOR_CALL(device, cancel_auto_focus);
+#endif
 }
 
 int camera_take_picture(struct camera_device * device)
