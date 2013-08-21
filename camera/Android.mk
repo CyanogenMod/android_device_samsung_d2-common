@@ -4,8 +4,15 @@ ifeq ($(TARGET_PROVIDES_CAMERA_HAL),true)
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
+# Add wrappers for other sensors here
+ifneq ($(filter apexqtmo expressatt,$(TARGET_DEVICE)),)
 LOCAL_SRC_FILES := \
-    CameraWrapper.cpp
+    isx012-db8131m/CameraWrapper.cpp
+# Wrapper skeleton? Other devices may benefit from one.
+#else
+#LOCAL_SRC_FILES := \
+#    CameraWrapperSkeleton.cpp
+endif
 
 LOCAL_SHARED_LIBRARIES := \
     libhardware liblog libcamera_client libutils
