@@ -110,7 +110,6 @@
 /dev/sdioctl2             0640   radio      radio
 /dev/sdioctl3             0640   radio      radio
 /dev/sdioctl4             0640   radio      radio
-/dev/sdioctl4             0640   radio      radio
 /dev/sdioctl5             0640   radio      radio
 /dev/sdioctl6             0640   radio      radio
 /dev/sdioctl7             0640   radio      radio

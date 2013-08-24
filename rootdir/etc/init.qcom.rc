@@ -40,7 +40,7 @@ on init
     mkdir /storage/usbdisk0 0000 system system
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
-    export SECONDARY_STORAGE /storage/sdcard1
+    export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk0
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
@@ -51,12 +51,15 @@ on init
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
+    symlink /storage/sdcard1 /external_sd
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+    setprop qcom.audio.init complete
+    setprop qcom.thermal thermal-engine
     exec /system/bin/sh /init.qcom.early_boot.sh ${ro.board.platform}
     exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
@@ -179,7 +182,12 @@ on boot
 
 # import cne init file
 on post-fs
-    export_rc /persist/init.cne.rc
+    #export_rc /persist/init.cne.rc
+    # Increase max readahead size to 256 KB
+    write /sys/block/mmcblk0/queue/read_ahead_kb 256
+    # for controlling write performance boosting
+    chown system radio /sys/block/mmcblk0/bkops_en
+    chmod 0664 /sys/block/mmcblk0/bkops_en
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -260,6 +268,10 @@ on post-fs-data
     # Enable the setgid bit on the directory
     chmod 2770 /data/bluetooth
 
+    mkdir /data/audio/ 0770 media audio
+    # Enable the setgid bit on the directory
+    chmod 2770 /data/audio
+
     setprop vold.post_fs_data_done 1
 
 # Export GPIO56 for fusion targets to enable/disable hub
@@ -268,6 +280,10 @@ service usbhub_init /system/bin/usbhub_init
    user root
    disabled
    oneshot
+
+on property:init.svc.surfaceflinger=stopped
+    stop ppd
+    stop hdmid
 
 on property:ro.board.platform=msm7630_fusion
     start usbhub_init
@@ -334,8 +350,8 @@ service qmiproxy /system/bin/qmiproxy
 #For EncryptionMode - remove disabled, Modify class main
 service qmuxd /system/bin/qmuxd
     class main
-    user root
-    group radio log audio bluetooth qcom_diag
+    user radio
+    group radio audio bluetooth gps qcom_diag log
     disabled
 
 service netmgrd /system/bin/netmgrd
@@ -379,7 +395,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi  u:object_r:wpa_socket:s0
     disabled
     oneshot
 # New supplicant service config to support both BCM4334 / WCN3660
@@ -391,7 +407,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     #   user wifi
     #   group wifi inet keystore
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    socket wpa_wlan0 dgram 660 wifi wifi u:object_r:wpa_socket:s0
     disabled
     oneshot
 
@@ -492,7 +508,7 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     disabled
     oneshot
 
-service wifisdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
+service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
     class late_start
     group wifi inet
     disabled
@@ -572,8 +588,9 @@ service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
+    socket rild-cas stream 666  casdrm mmb
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log system drmrpc
+    group radio cache inet misc audio log qcom_diag sdcard_r shell sdcard_rw
 
 service secril-daemon /system/bin/sec-ril
     class main
@@ -594,6 +611,7 @@ service profiler_daemon /system/bin/profiler_daemon
     group root
     disabled
 
+# virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
     oneshot
