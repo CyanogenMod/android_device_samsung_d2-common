@@ -33,18 +33,24 @@ on early-init
 
 on fs
     mount_all fstab.qcom
+    setprop ro.crypto.fuse_sdcard true
 
     # Keeping following partitions outside fstab file. As user may not have
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
     wait /dev/block/platform/msm_sdcc.1/by-name/cache
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache nosuid nodev barrier=1
+    check_fs /dev/block/platform/msm_sdcc.1/by-name/cache ext4
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/cache /cache nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
 
     wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    check_fs /dev/block/platform/msm_sdcc.1/by-name/persist ext4
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
 
     wait /dev/block/platform/msm_sdcc.1/by-name/efs
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/efs /efs nosuid nodev barrier=1
+    check_fs /dev/block/platform/msm_sdcc.1/by-name/efs ext4
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    chown system radio /efs
+    chmod 0771 /efs
 
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower dmask=177 fmask=177
@@ -63,19 +69,19 @@ on fs_selinux
     #check_fs /dev/block/platform/msm_sdcc.1/by-name/persist ext4
     #mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
 
-#    wait /dev/block/platform/msm_sdcc.1/by-name/efs
-#    check_fs /dev/block/platform/msm_sdcc.1/by-name/efs ext4
-#    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
+    wait /dev/block/platform/msm_sdcc.1/by-name/efs
+    check_fs /dev/block/platform/msm_sdcc.1/by-name/efs ext4
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/efs /efs nosuid nodev noatime noauto_da_alloc,discard,journal_async_commit,errors=panic
     chown system radio /efs
     chmod 0771 /efs
-#    restorecon -R /efs
+    restorecon -R /efs
 
     chown system radio /dev/block/platform/msm_sdcc.1/by-name
     chmod 0775 /dev/block/platform/msm_sdcc.1/by-name
 
 on boot
     write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
-    write /sys/devices/i2c-3/3-005b/update_fw 1   
+    write /sys/devices/i2c-3/3-005b/update_fw 1
     start qcamerasvr
 
 on post-fs-data
@@ -182,12 +188,14 @@ on post-fs-data
     chown system system /sys/class/android_usb/android0/terminal_version
 
     # SEC DVFS sysfs node
-    chown system system /sys/power/cpufreq_max_limit
-    chown system system /sys/power/cpufreq_min_limit
-    chown system system /sys/power/cpufreq_table
+    chown radio system /sys/power/cpufreq_max_limit
+    chown radio system /sys/power/cpufreq_min_limit
+    chown radio system /sys/power/cpufreq_table
+    chown radio system /sys/class/kgsl/kgsl-3d0/max_pwrlevel
     chmod 664 /sys/power/cpufreq_max_limit
     chmod 664 /sys/power/cpufreq_min_limit
     chmod 664 /sys/power/cpufreq_table
+    chmod 664 /sys/class/kgsl/kgsl-3d0/max_pwrlevel
 
     chown radio system /sys/class/sec/sec_touchkey/touch_sensitivity
     chown radio system /sys/class/sec/sec_touchkey/touchkey_firm_update
@@ -209,6 +217,12 @@ on post-fs-data
     chown system system /sys/class/mdnie/mdnie/mode
     chown system system /sys/class/mdnie/mdnie/negative
     chown system media_rw /sys/class/mdnie/mdnie/playspeed
+    chown system system /sys/class/lcd/panel/window_type
+    chown radio system /sys/class/lcd/panel/power_reduce
+    chown system media_rw /sys/class/mdnie/mdnie/accessibility
+    chown radio system /sys/class/lcd/panel/siop_enable
+    chown radio system /sys/class/lcd/panel/temperature
+
     # permissions for NFC
     setprop ro.nfc.port "I2C"
     chmod 0600 /dev/pn544
@@ -279,9 +293,22 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     group system camera inet input graphics
 
 service thermald /system/bin/thermald
-    class main
-    user root
-    group root
+   class main
+   user root
+   group root
+   disabled
+
+service thermal-engine /system/bin/thermal-engine
+   class main
+   user root
+   group root
+   disabled 
+
+on property:qcom.thermal=thermald
+    start thermald
+    
+on property:qcom.thermal=thermal-engine
+    start thermal-engine
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     user root
@@ -301,16 +328,28 @@ service qrngd /system/bin/qrngd -f
 #   user system
 #   group system
 
+service efsrestorecon /system/bin/restorecon -R /efs
+    class late_start
+    user root
+    group root
+    disabled
+    oneshot
+
 # Start kickstart if mdm is detected
 on property:ro.baseband=mdm
     mkdir /data/qcks 0770 system system
     start kickstart
 
-# 2011-12-08/systemsw/kyo/ bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/bugmailer.sh -v
-	class main
-	disabled
-	oneshot
-	keycodes 114 115 116
+on property:init.svc.bootanim=stopped
+#   start usf-post-boot
+#   start run-mobicore
+    start efsrestorecon
 
+# bugreport is triggered by holding down volume down, volume up and power
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport
+    class main
+    disabled
+    oneshot
+    keycodes 114 115 116
 
