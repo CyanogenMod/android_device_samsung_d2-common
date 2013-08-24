@@ -76,10 +76,6 @@ PRODUCT_COPY_FILES += \
 # Torch
 PRODUCT_PACKAGES += Torch
 
-# Vold configuration
-PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
-
 # Wifi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
