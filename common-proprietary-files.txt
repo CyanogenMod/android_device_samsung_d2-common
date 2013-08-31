@@ -118,6 +118,7 @@ cameradata/SlimISP_GC.bin
 cameradata/SlimISP_GD.bin
 cameradata/SlimISP_GE.bin
 cameradata/SlimISP_GH.bin
+cameradata/SlimISP_WH.bin
 cameradata/SlimISP_ZC.bin
 cameradata/SlimISP_ZD.bin
 cameradata/SlimISP_ZE.bin
