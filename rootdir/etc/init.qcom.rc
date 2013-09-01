@@ -231,6 +231,10 @@ on post-fs-data
     chown root system /sys/class/leds/keyboard-backlight/max_brightness
     chmod 0664 /sys/class/leds/keyboard-backlight/max_brightness
 
+    # for BLN
+    chown root system /sys/devices/virtual/sec/sec_touchkey/touchkey_bln_enable
+    chmod 0666 /sys/devices/virtual/sec/sec_touchkey/touchkey_bln_enable
+
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
