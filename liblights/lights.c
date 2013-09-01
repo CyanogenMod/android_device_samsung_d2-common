@@ -37,6 +37,10 @@ char const*const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
 char const*const LED_BLINK = "/sys/class/sec/led/led_blink";
 char const*const KEYBOARD_FILE = "/sys/class/leds/keyboard-backlight/brightness";
 
+#ifdef USE_BLN
+char const*const BLN_FILE = "/sys/devices/virtual/sec/sec_touchkey/touchkey_bln_enable";
+#endif
+
 struct led_config {
     unsigned int color;
     int delay_on, delay_off;
@@ -181,6 +185,22 @@ set_light_keyboard(struct light_device_t* dev,
     return err;
 
 }
+
+#ifdef USE_BLN
+static int
+set_light_bln(struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    int err = 0;
+    int on = is_lit(state);
+
+    pthread_mutex_lock(&g_lock);
+    err = write_int(BLN_FILE, on?1:0);
+    pthread_mutex_unlock(&g_lock);
+
+    return err;
+}
+#endif
 
 static int close_lights(struct light_device_t *dev)
 {
@@ -341,7 +361,11 @@ static int open_lights(const struct hw_module_t *module, char const *name,
     else if (0 == strcmp(LIGHT_ID_BATTERY, name))
         set_light = set_light_leds_battery;
     else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
+#ifdef USE_BLN
+        set_light = set_light_bln;
+#else
         set_light = set_light_leds_notifications;
+#endif
     else if (0 == strcmp(LIGHT_ID_ATTENTION, name))
         set_light = set_light_leds_attention;
     else
