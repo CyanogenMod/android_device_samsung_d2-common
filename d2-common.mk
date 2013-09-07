@@ -16,8 +16,8 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-## (2) Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/d2-common/d2-common-vendor.mk)
+## Get non-open-source specific aspects
+$(call inherit-product, vendor/samsung/d2-common/d2-common-vendor.mk)
 
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
