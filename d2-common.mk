@@ -22,19 +22,22 @@ $(call inherit-product, vendor/samsung/d2-common/d2-common-vendor.mk)
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/d2-common/overlay
 
-ifneq ($(VARIENT_MODEL),expressatt)
+# Boot animation and screen size
+
+ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
-endif
-
-# Boot animation
-
-ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
-## merge colusion
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=320
+else
+# These poor devices have smaller screens
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=240
 endif
 
 # Audio configuration
