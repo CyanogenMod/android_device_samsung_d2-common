@@ -155,7 +155,6 @@ PRODUCT_PACKAGES += \
     libnfc_jni \
     Nfc \
     Tag \
-    XposedIstaller \
     com.android.nfc_extras
 
 # NFCEE access control
