@@ -110,7 +110,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.snapshot_disabled=1 \
     com.qc.hardware=true \
     persist.radio.apm_sim_not_pwdn=1 \
-    ro.telephony.call_ring.multiple=0 \
     ro.ril.transmitpower=true \
     ro.opengles.version=131072 \
     persist.audio.vr.enable=false \
