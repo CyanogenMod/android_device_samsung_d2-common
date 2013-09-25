@@ -26,7 +26,6 @@ lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 lib/egl/libGLESv2S3D_adreno200.so
-lib/egl/libplayback_adreno200.so
 lib/libc2d2_z180.so
 lib/libgsl.so
 lib/libC2D2.so
@@ -73,6 +72,7 @@ lib/libomission_avoidance.so
 lib/libfactoryutil.so
 
 # GPS
+lib/libgeofence.so
 lib/libloc_api_v02.so
 
 # NFC
@@ -118,6 +118,9 @@ cameradata/SlimISP_GC.bin
 cameradata/SlimISP_GD.bin
 cameradata/SlimISP_GE.bin
 cameradata/SlimISP_GH.bin
+cameradata/SlimISP_GH.bin
+cameradata/SlimISP_JH.bin
+cameradata/SlimISP_WH.bin
 cameradata/SlimISP_ZC.bin
 cameradata/SlimISP_ZD.bin
 cameradata/SlimISP_ZE.bin
@@ -135,11 +138,12 @@ etc/wifi/bcmdhd_sta.bin_b2
 etc/wifi/bcmdhd_mfg.bin_b2
 etc/wifi/nvram_mfg.txt
 etc/wifi/nvram_mfg.txt_murata
+etc/wifi/nvram_mfg.txt:etc/wifi/nvram_mfg.txt_semcosh
 etc/wifi/nvram_net.txt
 etc/wifi/nvram_net.txt_murata
+etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_semcosh
 etc/wifi/wpa_supplicant.conf
 
 
 # Perf
 lib/libqc-opt.so
-
