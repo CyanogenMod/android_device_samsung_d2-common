@@ -64,6 +64,7 @@ BOARD_HAVE_AUDIENCE_A2220 := true
 
 # Use USB Dock Audio
 BOARD_HAVE_DOCK_USBAUDIO := true
+BOARD_HAVE_SAMSUNG_AUDIO := true
 
 #camera abi compatiblily
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
