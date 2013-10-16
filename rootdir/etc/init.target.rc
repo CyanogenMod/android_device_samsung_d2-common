@@ -269,6 +269,10 @@ on post-fs-data
     chmod 0660 /sys/class/lcd/panel/panel_colors
     chown system system /sys/class/lcd/panel/panel_colors
 
+    # Auto Brightness
+    chown system system /sys/class/backlight/panel/auto_brightness
+    chmod 0660 /sys/class/backlight/panel/auto_brightness
+
     # volume up/down key
     chown radio system /sys/class/sec/sec_key/wakeup_keys
 
