@@ -331,4 +331,7 @@
     <!-- Panel auto brightness value -->
     <integer name="config_panelAutoBrightnessValue">1</integer>
 
+    <!-- Device supports LED flashlight -->
+    <bool name="config_enableTorch">true</bool>
+
 </resources>
