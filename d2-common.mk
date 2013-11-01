@@ -84,6 +84,9 @@ PRODUCT_PACKAGES += \
     libnetcmdiface \
     macloader
 
+PRODUCT_COPY_FILES += \
+    device/samsung/d2-common/misc/ipconfig.txt:data/misc/wifi/ipconfig.txt
+
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
