@@ -82,6 +82,9 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # Separate audio devices for VOIP
 BOARD_USES_SEPERATED_VOIP := true
 
+# Disable adaptive playback
+TARGET_NO_ADAPTIVE_PLAYBACK := true
+
 # SELinux
 BOARD_SEPOLICY_DIRS += \
         device/samsung/d2-common/sepolicy
