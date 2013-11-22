@@ -64,6 +64,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
        device/samsung/d2-common/media/media_profiles.xml:system/etc/media_profiles.xml
 
+# Tap & pay
+PRODUCT_COPY_FILES += \
+       frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml 
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
