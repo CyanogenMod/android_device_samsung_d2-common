@@ -76,8 +76,5 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
 # Needed for blobs
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
-# Don't build qcom camera HAL
-USE_DEVICE_SPECIFIC_CAMERA := true
-
 # Separate audio devices for VOIP
 BOARD_USES_SEPERATED_VOIP := true
