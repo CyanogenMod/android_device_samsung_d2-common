@@ -21,7 +21,7 @@
 *
 */
 
-#define LOG_NDEBUG 1
+#define LOG_NDEBUG 0
 #define LOG_PARAMETERS
 
 #define LOG_TAG "CameraWrapper"
@@ -100,6 +100,10 @@ static char * camera_fixup_getparams(int id, const char * settings)
     // fix params here
     params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
 
+    /* Face detection */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
+
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
@@ -111,6 +115,7 @@ char * camera_fixup_setparams(int id, const char * settings)
 {
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
+    const char KEY_SAMSUNG_CAMERA_MODE[] = "cam_mode";
 
     // fix params here
     if(params.get("iso")) {
@@ -123,6 +128,19 @@ char * camera_fixup_setparams(int id, const char * settings)
             params.set(android::CameraParameters::KEY_ISO_MODE, "400");
         else if(strcmp(isoMode, "ISO800") == 0)
             params.set(android::CameraParameters::KEY_ISO_MODE, "800");
+    }
+
+    /* Face detection */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
+
+    const char* camMode = params.get(KEY_SAMSUNG_CAMERA_MODE);
+    ALOGE("%s: camMode: %s invisiblek", __FUNCTION__, camMode);
+    if(strcmp(camMode, "0") == 0) {
+        /* ZSL */
+        ALOGE("%s: ZSL Enabled! invisiblek", __FUNCTION__);
+        params.set(android::CameraParameters::KEY_ZSL, "on");
+        params.set(android::CameraParameters::KEY_CAMERA_MODE, "1");
     }
 
     android::String8 strParams = params.flatten();
