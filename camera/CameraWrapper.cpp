@@ -21,7 +21,7 @@
 *
 */
 
-#define LOG_NDEBUG 1
+#define LOG_NDEBUG 0
 #define LOG_PARAMETERS
 
 #define LOG_TAG "CameraWrapper"
@@ -100,6 +100,10 @@ static char * camera_fixup_getparams(int id, const char * settings)
     // fix params here
     params.set(android::CameraParameters::KEY_SUPPORTED_ISO_MODES, iso_values[id]);
 
+    /* Face detection */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
+
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 
@@ -109,9 +113,15 @@ static char * camera_fixup_getparams(int id, const char * settings)
 
 char * camera_fixup_setparams(int id, const char * settings)
 {
+    bool isVideo = false;
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
+    const char KEY_SAMSUNG_CAMERA_MODE[] = "cam_mode";
+    const char* camMode = params.get(KEY_SAMSUNG_CAMERA_MODE);
 
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+        isVideo = !strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true");
+    }
     // fix params here
     if(params.get("iso")) {
         const char* isoMode = params.get(android::CameraParameters::KEY_ISO_MODE);
@@ -125,6 +135,20 @@ char * camera_fixup_setparams(int id, const char * settings)
             params.set(android::CameraParameters::KEY_ISO_MODE, "800");
     }
 
+    /* Face detection */
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
+    params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");
+
+    /* Samsung camcorder mode */
+    if (isVideo) {
+        params.set(KEY_SAMSUNG_CAMERA_MODE, "1");
+    } else {
+        params.set(KEY_SAMSUNG_CAMERA_MODE, "0");
+#ifdef ENABLE_ZSL
+        params.set(android::CameraParameters::KEY_ZSL, "on");
+        params.set(android::CameraParameters::KEY_CAMERA_MODE, "1");
+#endif
+    }
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
 

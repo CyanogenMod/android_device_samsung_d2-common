@@ -1,6 +1,10 @@
 # Currently only for apexqtmo and expressatt
 ifeq ($(TARGET_PROVIDES_CAMERA_HAL),true)
 
+ifneq ($(TARGET_PRODUCT),$(filter $(TARGET_PRODUCT),cm_apexqtmo cm_expressatt))
+    LOCAL_CFLAGS += -DENABLE_ZSL
+endif
+
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
