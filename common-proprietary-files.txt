@@ -90,7 +90,7 @@ lib/libmplmpu.so
 
 # Camera
 bin/mm-qcamera-daemon
-lib/hw/camera.msm8960.so
+lib/hw/vendor-camera.msm8960.so:lib/hw/camera.msm8960.so
 lib/libmmjpeg.so
 lib/libmmstillomx.so
 lib/libimage-jpeg-enc-omx-comp.so
