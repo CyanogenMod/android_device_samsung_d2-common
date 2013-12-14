@@ -72,7 +72,7 @@ BOARD_HAVE_DOCK_USBAUDIO := true
 #camera abi compatiblily
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
-ifeq ($(filter apexqtmo expressatt,$(VARIENT_MODEL)),)
+ifeq ($(filter cm_apexqtmo cm_expressatt,$(TARGET_PRODUCT)),)
   TARGET_NEED_CAMERA_ZSL := true
 endif
 
