@@ -47,7 +47,7 @@ on init
 
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
-    export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk0
+    export SECONDARY_STORAGE /storage/sdcard1:/storage/usbdisk
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
 
@@ -59,8 +59,8 @@ on init
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
     symlink /storage/sdcard1 /external_sd
-    symlink /storage/usbdisk0 /usbdisk0
-    symlink /storage/usbdisk0 /mnt/usbdisk0
+    symlink /storage/usbdisk /usbdisk
+    symlink /storage/usbdisk /mnt/usbdisk
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -641,9 +641,10 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1
     class late_start
     disabled
 
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/usbdisk /storage/usbdisk
     class late_start
     disabled
+
 on property:ro.fuse_sdcard=true
     start sdcard
 
