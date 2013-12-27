@@ -36,6 +36,10 @@ TARGET_KERNEL_SELINUX_CONFIG := m2selinux_defconfig
 
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
+# WiFi module
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
+WIFI_DRIVER_MODULE_NAME := "dhd"
+
 # Adreno configuration
 BOARD_EGL_CFG := device/samsung/d2-common/configs/egl.cfg
 
