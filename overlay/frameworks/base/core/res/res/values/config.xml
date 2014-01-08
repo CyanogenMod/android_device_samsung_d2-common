@@ -202,8 +202,8 @@
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
-        <item>"rndis0"</item>
-        <item>"usb0"</item>
+        <item>"rndis"</item>
+        <item>"usb"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -211,6 +211,7 @@
          should be empty.  An example would be "softap.*" -->
     <string-array translatable="false" name="config_tether_wifi_regexs">
         <item>"wlan0"</item>
+        <item>"softap.*"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
