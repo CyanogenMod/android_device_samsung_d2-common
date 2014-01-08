@@ -133,6 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.no_wait_for_card=0 \
     keyguard.no_require_sim=true \
     media.aac_51_output_enabled=true \
+    mm.enable.smoothstreaming=true \
     persist.rild.nitz_plmn="" \
     persist.rild.nitz_long_ons_0="" \
     persist.rild.nitz_long_ons_1="" \
