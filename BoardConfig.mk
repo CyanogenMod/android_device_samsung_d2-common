@@ -23,7 +23,7 @@
 # inherit from common msm8960
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/samsung/d2-common/include
+TARGET_SPECIFIC_HEADER_PATH := device/samsung/d2lte/include
 
 # Kernel
 TARGET_KERNEL_SOURCE        := kernel/samsung/d2
@@ -36,22 +36,28 @@ TARGET_KERNEL_SELINUX_CONFIG := m2selinux_defconfig
 
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
+# Assert
+TARGET_OTA_ASSERT_DEVICE := d2att,d2spr,d2tmo,d2cri,d2mtr,d2usc
+
+# Kernel
+TARGET_KERNEL_CONFIG		:= cyanogen_d2cri_defconfig
+
 # WiFi module
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_NAME := "dhd"
 
 # Adreno configuration
-BOARD_EGL_CFG := device/samsung/d2-common/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/d2lte/configs/egl.cfg
 
 # Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2-common/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2lte/recovery/recovery_keys.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/d2-common/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/samsung/d2lte/rootdir/etc/fstab.qcom
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
@@ -66,8 +72,8 @@ TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
 
 # bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2lte/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2lte/bluetooth/vnd_d2.txt
 
 # Disable initlogo, Samsungs framebuffer is weird
 TARGET_NO_INITLOGO := true
