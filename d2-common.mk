@@ -69,6 +69,7 @@ PRODUCT_PACKAGES += \
     fstab.qcom \
     initlogo.rle \
     init.bt.rc \
+    init.crda.sh \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.target.rc \
@@ -87,6 +88,7 @@ PRODUCT_PACKAGES += Torch
 # Wifi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
+    crda \
     macloader
 
 # Set default USB interface
