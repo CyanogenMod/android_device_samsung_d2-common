@@ -1,0 +1,7 @@
+# system.prop for d2lte
+#
+
+rild.libargs=-d /dev/smd0
+telephony.lteOnCdmaDevice=1
+ro.telephony.default_network=10
+persist.radio.mode_pref_nv10=1
