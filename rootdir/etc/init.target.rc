@@ -82,11 +82,14 @@ on boot
     start qcamerasvr
 
 on post-fs-data
+    rm -rf /data/tombstones
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
+    mkdir /tombstones/mdm 0771 system system
+    mkdir /tombstones/mdm2 0771 system system
 
     # create directory for ril data
     mkdir /data/misc/radio 0775 radio radio
