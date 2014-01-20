@@ -61,7 +61,6 @@ on early-boot
     setprop qcom.audio.init complete
     setprop qcom.thermal thermal-engine
     exec /system/bin/sh /init.qcom.early_boot.sh ${ro.board.platform}
-    exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
 
 on boot-pause
     exec system/bin/battery_charging
