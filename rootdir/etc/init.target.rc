@@ -323,6 +323,11 @@ service kickstart /system/bin/qcks -i /firmware/image
     oneshot
     disabled
 
+service qrngd /system/bin/qrngd -f
+    class main
+    user root
+    group root
+
 #service qseecomd /system/bin/qseecomd
 #   class late_start
 #   user system

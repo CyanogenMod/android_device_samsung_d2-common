@@ -109,6 +109,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
+# QRNGD
+PRODUCT_PACKAGES += qrngd
+
 #common build.props
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
