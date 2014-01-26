@@ -1,4 +1,43 @@
 #!/system/bin/sh
 
-echo "300 0 0 0 300 0 0 0 300" > /sys/class/input/input4/static_matrix
+# geomagnetic
+chown system.input /sys/class/input/input3/data
+chown system.input /sys/class/input/input3/delay
+chown system.input /sys/class/input/input3/enable
+chown system.input /sys/class/input/input3/filter_enable
+chown system.input /sys/class/input/input3/filter_len
+chown system.input /sys/class/input/input3/filter_noise
+chown system.input /sys/class/input/input3/filter_threshold
+chown system.input /sys/class/input/input3/position
+chown system.input /sys/class/input/input3/wake
+chmod 664 /sys/class/input/input3/data
+chmod 664 /sys/class/input/input3/delay
+chmod 664 /sys/class/input/input3/enable
+chmod 664 /sys/class/input/input3/filter_enable
+chmod 664 /sys/class/input/input3/filter_len
+chmod 664 /sys/class/input/input3/filter_noise
+chmod 664 /sys/class/input/input3/filter_threshold
+chmod 664 /sys/class/input/input3/position
+chmod 664 /sys/class/input/input3/wake
+
+# geomagnetic_raw
+chown compass.input /sys/class/input/input4/dynamic_matrix
+chown compass.input /sys/class/input/input4/offsets
+chown system.input /sys/class/input/input4/distortion
+chown system.input /sys/class/input/input4/ellipsoid_mode
+chown system.input /sys/class/input/input4/shape
+chown system.input /sys/class/input/input4/static_matrix
+chmod 664 /sys/class/input/input4/dynamic_matrix
+chmod 664 /sys/class/input/input4/offsets
+chmod 664 /sys/class/input/input4/distortion
+chmod 664 /sys/class/input/input4/ellipsoid_mode
+chmod 664 /sys/class/input/input4/shape
+chmod 664 /sys/class/input/input4/static_matrix
+
+# compass
+echo 0 > /sys/class/input/input4/ellipsoid_mode 0
+echo "10319 -477 45 -147 9510 171 -170 52 10187" > /sys/class/input/input4/static_matrix
+
+start geomagneticd
+
 
