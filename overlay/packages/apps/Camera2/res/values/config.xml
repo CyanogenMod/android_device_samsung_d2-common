@@ -19,5 +19,5 @@
 
 <resources>
     <bool name="enableZSL">true</bool>
-    <bool name="useContinuosFocusForTouch">true</bool>
+    <bool name="useContinuosFocusForTouch">false</bool>
 </resources>
