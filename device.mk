@@ -175,7 +175,6 @@ $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
 
 ifeq ($(filter cm_apexqtmo cm_expressatt,$(TARGET_PRODUCT)),)
     $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-    PRODUCT_COPY_FILES += device/samsung/d2lte/variant.sh:system/bin/variant.sh
 else
     $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 endif
