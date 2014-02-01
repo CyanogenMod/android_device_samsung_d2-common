@@ -19,5 +19,11 @@
 
 <resources>
     <bool name="enableZSL">true</bool>
-    <bool name="useContinuosFocusForTouch">false</bool>
+   <!-- Stay in continuous focus even if touch-to-focus is used
+         This option doesn't make sense if wantsFocusModes is on -->
+    <bool name="useContinuosFocusForTouch">true</bool>
+
+   <!-- Cancel autofocus if preview stopped. If camera HAL does not support
+        it set this value to false -->
+    <bool name="cancelAutoFocusOnPreviewStopped">false</bool>
 </resources>
