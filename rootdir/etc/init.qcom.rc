@@ -68,13 +68,22 @@ on early-boot
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system graphics /sys/class/graphics/fb1/vendor_name
     chown system graphics /sys/class/graphics/fb1/product_description
+    chown system system /sys/class/graphics/fb1/format_3d
     chmod 0664 /sys/class/graphics/fb1/hpd
     chmod 0664 /sys/class/graphics/fb1/vendor_name
     chmod 0664 /sys/class/graphics/fb1/product_description
     chmod 0664 /sys/class/graphics/fb1/video_mode
     chmod 0664 /sys/class/graphics/fb1/format_3d
+
+    #HDMID Permission for sys nodes
+    chown system graphics /sys/class/graphics/fb1/connected
+    chown system graphics /sys/class/graphics/fb1/edid_modes
+    chown system graphics /sys/class/graphics/fb1/power_state
+
+    chown system graphics /sys/class/graphics/fb1/hdcp_present
+    chown system graphics /sys/class/graphics/fb1/hdmi_mode
+
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
-    chown system system /sys/class/graphics/fb1/format_3d
     setprop qcom.audio.init complete
     setprop qcom.thermal thermal-engine
     exec /system/bin/sh /init.qcom.early_boot.sh ${ro.board.platform}
