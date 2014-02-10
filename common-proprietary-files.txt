@@ -27,11 +27,13 @@ lib/egl/libGLESv2_adreno200.so
 lib/egl/libq3dtools_adreno200.so
 lib/egl/libGLESv2S3D_adreno200.so
 lib/libc2d2_z180.so
+lib/libCB.so
 lib/libgsl.so
 lib/libC2D2.so
 lib/libOpenVG.so
 lib/libOpenCL.so
 lib/libsc-a2xx.so
+lib/libwvm.so
 etc/firmware/a225p5_pm4.fw
 etc/firmware/a225_pfp.fw
 etc/firmware/a225_pm4.fw
@@ -42,6 +44,7 @@ etc/firmware/vidc_1080p.fw
 
 # Graphics
 lib/libmm-color-convertor.so
+lib/libI420colorconvert.so
 
 # Radio
 bin/netmgrd
@@ -146,4 +149,3 @@ etc/wifi/wpa_supplicant.conf
 
 # Perf
 lib/libqc-opt.so
-
