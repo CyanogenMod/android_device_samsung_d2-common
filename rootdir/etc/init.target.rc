@@ -86,6 +86,10 @@ on boot
     # enable pulsing led on boot
     write /sys/class/sec/led/led_pattern 6
 
+on boot-pause
+    # do not enable led if booting into lpm
+    write /sys/class/sec/led/led_pattern 0
+
 on post-fs-data
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
