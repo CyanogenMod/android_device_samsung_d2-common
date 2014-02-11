@@ -105,6 +105,9 @@ on boot-pause
     exec system/bin/battery_charging
 
 on boot
+    # enable pulsing led on boot
+    write /sys/class/sec/led/led_pattern 6
+
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     exec system/bin/btnvtool -O
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
@@ -706,6 +709,11 @@ service geomagneticd /system/bin/geomagneticd
 on property:ro.yas.enable=true
     start orientationd
     start geomagneticd
+
+# boot completed
+on property:dev.bootcomplete=1
+    # disable pulsing led on boot complete
+    exec /system/bin/sh /system/etc/init.led.sh
 
 # CM Performance Profiles
 

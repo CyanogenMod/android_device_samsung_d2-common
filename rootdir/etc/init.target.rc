@@ -83,9 +83,6 @@ on boot
     write /sys/devices/i2c-3/3-005b/update_fw 1
     start qcamerasvr
 
-    # enable pulsing led on boot
-    write /sys/class/sec/led/led_pattern 6
-
 on post-fs-data
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -352,11 +349,6 @@ on property:init.svc.bootanim=stopped
 #   start usf-post-boot
 #   start run-mobicore
     start efsrestorecon
-
-# boot completed
-on property:dev.bootcomplete=1
-    # disable pulsing led on boot complete
-    exec /system/bin/sh /system/etc/init.led.sh
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
