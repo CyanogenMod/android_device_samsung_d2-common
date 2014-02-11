@@ -356,7 +356,7 @@ on property:init.svc.bootanim=stopped
 # boot completed
 on property:dev.bootcomplete=1
     # disable pulsing led on boot complete
-    write /sys/class/sec/led/led_pattern 0
+    exec /system/bin/sh /system/etc/init.led.sh
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
