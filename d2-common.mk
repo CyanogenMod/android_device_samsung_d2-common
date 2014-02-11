@@ -70,7 +70,6 @@ PRODUCT_PACKAGES += \
     initlogo.rle \
     init.bt.rc \
     init.crda.sh \
-    init.led.sh \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.target.rc \
