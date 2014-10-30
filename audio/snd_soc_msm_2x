@@ -3832,6 +3832,31 @@ SectionDevice
 EndSection
 
 SectionDevice
+	Name "Voice Recognition Headset"
+	Comment "VR Headset Mic Tx device"
+
+	EnableSequence
+        'PRI_TX Channels':0:One
+        'SLIM TX7 MUX':0:DEC4
+        'DEC4 MUX':0:ADC3
+        'ADC3 Volume':1:100%
+        'DEC4 Volume':2:67.7%
+        'MICBIAS1 CAPLESS Switch':1:1
+    EndSequence
+
+    DisableSequence
+        'SLIM TX7 MUX':0:ZERO
+        'DEC4 MUX':0:ZERO
+        'ADC3 Volume':1:0
+        'MICBIAS1 CAPLESS Switch':1:0
+    EndSequence
+	EndSequence
+
+	ACDBID  8:2
+
+EndSection
+
+SectionDevice
 	Name "TTY Handset Tx"
 	Comment "TTY VCO Handset Tx device"
 
