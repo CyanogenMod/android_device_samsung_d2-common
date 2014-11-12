@@ -112,8 +112,8 @@
     <EncoderProfile quality="high" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="17000000"
-             width="1920"
-             height="1080"
+             width="1280"
+             height="720"
              frameRate="30" />
 
       <Audio codec="aac"
@@ -177,8 +177,8 @@
     <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="17000000"
-             width="1920"
-             height="1080"
+             width="1280"
+             height="720"
              frameRate="30" />
 
       <Audio codec="aac"
@@ -207,8 +207,8 @@
     <EncoderProfile quality="timelapsehigh" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="17000000"
-             width="1920"
-             height="1080"
+             width="1280"
+             height="720"
              frameRate="30" />
 
       <!--
@@ -292,8 +292,8 @@
     <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="17000000"
-             width="1920"
-             height="1080"
+             width="1280"
+             height="720"
              frameRate="30" />
 
       <!--
@@ -414,8 +414,8 @@
     <EncoderProfile quality="timelapsehigh" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="17000000"
-             width="1920"
-             height="1080"
+             width="1280"
+             height="720"
              frameRate="30" />
 
        <!--
@@ -513,8 +513,8 @@
     -->
     <VideoEncoderCap name="h264" enabled="true"
         minBitRate="64000" maxBitRate="20000000"
-        minFrameWidth="176" maxFrameWidth="1920"
-        minFrameHeight="144" maxFrameHeight="1080"
+        minFrameWidth="176" maxFrameWidth="1280"
+        minFrameHeight="144" maxFrameHeight="720"
         minFrameRate="1" maxFrameRate="30" />
 
     <VideoEncoderCap name="h263" enabled="true"
@@ -525,8 +525,8 @@
 
     <VideoEncoderCap name="m4v" enabled="true"
         minBitRate="64000" maxBitRate="20000000"
-        minFrameWidth="176" maxFrameWidth="1920"
-        minFrameHeight="144" maxFrameHeight="1080"
+        minFrameWidth="176" maxFrameWidth="1280"
+        minFrameHeight="144" maxFrameHeight="720"
         minFrameRate="1" maxFrameRate="30" />
 
     <AudioEncoderCap name="aac" enabled="true"
@@ -581,9 +581,9 @@
         For this platform, it allows maximum 30MB(3MB per 1080p frame x 10
         frames) memory.
     -->
-    <VideoEditorCap  maxInputFrameWidth="1920"
-        maxInputFrameHeight="1088" maxOutputFrameWidth="1920"
-        maxOutputFrameHeight="1080" maxPrefetchYUVFrames="10"/>
+    <VideoEditorCap  maxInputFrameWidth="1280"
+        maxInputFrameHeight="720" maxOutputFrameWidth="1280"
+        maxOutputFrameHeight="720" maxPrefetchYUVFrames="10"/>
     <!--
         The VideoEditor Export codec profile and level values
         correspond to the values in OMX_Video.h.
