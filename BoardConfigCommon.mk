@@ -1,4 +1,4 @@
-# Copyright (C) 2009 The CyanogenMod Project
+# Copyright (C) 2014 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,71 +25,50 @@
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/d2-common/include
 
-# Kernel
-TARGET_KERNEL_SOURCE        := kernel/samsung/d2
-BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
-BOARD_KERNEL_BASE           := 0x80200000
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
-BOARD_KERNEL_PAGESIZE       := 2048
-TARGET_KERNEL_CONFIG        := cyanogen_d2_defconfig
-
+# Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
-# WiFi module
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_NAME := "dhd"
+# Kernel
+TARGET_KERNEL_CONFIG        := cyanogen_d2_defconfig
 
-# Adreno configuration
-BOARD_EGL_CFG := device/samsung/d2-common/configs/egl.cfg
-
-# Recovery
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d2-common/recovery/recovery_keys.c
-BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
-BOARD_USES_MMCUTILS := true
-BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_HAS_NO_MISC_PARTITION := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/d2-common/rootdir/etc/fstab.qcom
-
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1572864000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 28651290624
-BOARD_FLASH_BLOCK_SIZE := 131072
-
-# QCOM
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
-
-# bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
-
-# Disable initlogo, Samsungs framebuffer is weird
-TARGET_NO_INITLOGO := true
-
-# Use Audience A2220 chip
+# Audio
 BOARD_HAVE_AUDIENCE_A2220 := true
-
-# Use USB Dock Audio
 BOARD_HAVE_DOCK_USBAUDIO := true
-
-#camera abi compatiblily
-TARGET_DISPLAY_INSECURE_MM_HEAP := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
-ifeq ($(filter cm_apexqtmo cm_expressatt,$(TARGET_PRODUCT)),)
-  TARGET_NEED_CAMERA_ZSL := true
-  TARGET_ADD_ISO_MODE_1600 := true
-else
-  TARGET_NEED_DISABLE_AUTOFOCUS := true
-endif
-TARGET_NEED_DISABLE_FACE_DETECTION := true
-
-# Needed for blobs
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-
-# Separate audio devices for VOIP
+BOARD_HAVE_NEW_QCOM_CSDCLIENT := true
+BOARD_USES_FLUENCE_FOR_VOIP := true
+BOARD_USES_FLUENCE_INCALL := true
+BOARD_USES_SEPERATED_AUDIO_INPUT := true
 BOARD_USES_SEPERATED_VOIP := true
+
+# Bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
+BOARD_HAVE_BLUETOOTH_BCM := true
+
+# Camera
+TARGET_ADD_ISO_MODE_1600 := true
+TARGET_NEED_CAMERA_ZSL := true
+TARGET_NEED_EXPOSURE_HACK := true
+TARGET_NEED_SAMSUNG_CAMERA_MODE := true
+
+# GPS
+TARGET_NO_RPC := true
+
+# RIL
+BOARD_RIL_CLASS := ../../../device/samsung/d2-common/ril
+
+# Wifi
+BOARD_WLAN_DEVICE := bcmdhd
+BOARD_HAVE_SAMSUNG_WIFI := true
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_${BOARD_WLAN_DEVICE}
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_${BOARD_WLAN_DEVICE}
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
+
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/d2-common
+
