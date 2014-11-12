@@ -1,4 +1,119 @@
-# put anything that cannot be in d2-common
+# CPU
+bin/mpdecision
+bin/thermald
+lib/libqc-opt.so
+
+# Audio
+lib/libacdbloader.so
+lib/libaudcal.so
+lib/libcsd-client.so
+
+# Bluetooth
+vendor/firmware/bcm4334.hcd
+vendor/firmware/bcm4334_murata.hcd
+vendor/firmware/bcm4334_semco.hcd
+
+# Camera
+lib/hw/camera.msm8960.so:lib/hw/camera.vendor.msm8960.so
+lib/libmmcamera_frameproc.so
+lib/libmmcamera_statsproc30.so
+lib/libmmjpeg.so
+lib/libmmstillomx.so
+lib/libimage-jpeg-enc-omx-comp.so
+lib/libvdis.so
+lib/libgemini.so
+lib/liboemcamera.so
+lib/libchromatix_imx074_default_video.so
+lib/libchromatix_imx074_preview.so
+lib/libchromatix_ov2720_default_video.so
+lib/libchromatix_ov2720_preview.so
+lib/libchromatix_s5k6a3yx_default_video.so
+lib/libchromatix_s5k6a3yx_preview.so
+lib/libchromatix_s5k6a3yx_smart_stay.so
+lib/libchromatix_s5k6a3yx_vt_hd.so
+lib/libchromatix_s5k6a3yx_vt.so
+
+# Camera firmware
+cameradata/SlimISP_GC.bin
+cameradata/SlimISP_GD.bin
+cameradata/SlimISP_GE.bin
+cameradata/SlimISP_GH.bin
+cameradata/SlimISP_JH.bin
+cameradata/SlimISP_PH.bin
+cameradata/SlimISP_WH.bin
+cameradata/SlimISP_ZC.bin
+cameradata/SlimISP_ZD.bin
+cameradata/SlimISP_ZE.bin
+cameradata/SlimISP_ZH.bin
+
+# Media
+lib/libExtendedExtractor.so
+
+# NFC
+lib/hw/nfc.msm8960.so
+
+# QMI
+lib/libqdi.so
+lib/libqdp.so
+lib/libqmi_client_qmux.so
+vendor/lib/libdiag.so
+
+# GPS
+bin/irsc_util
+etc/sec_config
+lib/libloc_api_v02.so
+vendor/lib/libgeofence.so
+vendor/lib/libizat_core.so
+vendor/lib/liblbs_core.so
+vendor/lib/liblocationservice.so
+
 # Radio
-lib/libril-qc-qmi-1.so
-lib/libril.so
+bin/ds_fmc_appd
+bin/efsks
+bin/ks
+bin/qcks
+bin/qmiproxy
+bin/qmuxd
+bin/radish
+bin/rild
+bin/rmt_storage
+lib/libatparser.so
+lib/libcordon.so
+lib/libfactoryutil.so
+lib/libomission_avoidance.so
+lib/libreference-ril.so
+lib/libsecril-client.so
+lib/libxml.so
+vendor/lib/libconfigdb.so
+vendor/lib/libdsutils.so
+vendor/lib/libidl.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqmi.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqmiservices.so
+vendor/lib/libril-qcril-hook-oem.so
+
+# Sensors
+lib/hw/sensors.msm8960.so
+lib/libakmd.so
+lib/libinvensense_hal.so
+lib/libmllite.so
+lib/libmlplatform.so
+
+# Wi-Fi
+etc/wifi/bcmdhd_apsta.bin_b2
+etc/wifi/bcmdhd_p2p.bin_b2
+etc/wifi/bcmdhd_sta.bin_b2
+etc/wifi/bcmdhd_mfg.bin_b2
+etc/wifi/nvram_mfg.txt
+etc/wifi/nvram_mfg.txt_murata
+etc/wifi/nvram_mfg.txt_murata_b2
+etc/wifi/nvram_mfg.txt:etc/wifi/nvram_mfg.txt_semcosh
+etc/wifi/nvram_net.txt
+etc/wifi/nvram_net.txt_murata
+etc/wifi/nvram_net.txt_murata_b2
+etc/wifi/nvram_net.txt:etc/wifi/nvram_net.txt_semcosh
