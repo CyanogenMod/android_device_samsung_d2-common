@@ -11,7 +11,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libargs=-d /dev/smd0 \
     rild.libpath=/system/lib/libsec-ril.so \
-    ro.telephony.ril.v3=newDialCode \
+    ro.telephony.ril.config=newDialCode \
     ro.telephony.ril_class=d2lteRIL
 
 # gps
