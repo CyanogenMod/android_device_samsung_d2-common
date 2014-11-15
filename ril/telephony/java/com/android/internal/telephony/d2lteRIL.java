@@ -30,6 +30,10 @@ import java.util.Collections;
  */
 
 public class d2lteRIL extends SamsungQualcommRIL {
+    public d2lteRIL(Context context, int preferredNetworkType,
+            int cdmaSubscription, Integer instanceId) {
+        this(context, preferredNetworkType, cdmaSubscription);
+    }
 
     public d2lteRIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
