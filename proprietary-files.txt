@@ -46,6 +46,19 @@ cameradata/SlimISP_ZD.bin
 cameradata/SlimISP_ZE.bin
 cameradata/SlimISP_ZH.bin
 
+# DRM
+lib/drm/libfwdlockengine.so
+lib/libQSEEComAPI.so
+lib/liboemcrypto.so
+vendor/lib/drm/libdrmwvmplugin.so
+vendor/lib/libWVStreamControlAPI_L1.so
+vendor/lib/libWVphoneAPI.so
+vendor/lib/libdrmdecrypt.so
+vendor/lib/libwvdrm_L1.so
+vendor/lib/libwvm.so
+vendor/lib/mediadrm/libdrmclearkeyplugin.so
+vendor/lib/mediadrm/libwvdrmengine.so
+
 # Media
 lib/libExtendedExtractor.so
 
