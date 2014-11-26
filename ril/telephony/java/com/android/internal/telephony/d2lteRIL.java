@@ -527,7 +527,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             case RIL_REQUEST_WRITE_SMS_TO_SIM: ret =  responseInts(p); break;
             case RIL_REQUEST_DELETE_SMS_ON_SIM: ret =  responseVoid(p); break;
             case RIL_REQUEST_SET_BAND_MODE: ret =  responseVoid(p); break;
-            case RIL_REQUEST_QUERY_AVAILABLE_BAND_MODE: ret =  responseInts(p); break;
+            case RIL_REQUEST_QUERY_AVAILABLE_BAND_MODE: ret =  {2, 1, 0}; break;
             case RIL_REQUEST_STK_GET_PROFILE: ret =  responseString(p); break;
             case RIL_REQUEST_STK_SET_PROFILE: ret =  responseVoid(p); break;
             case RIL_REQUEST_STK_SEND_ENVELOPE_COMMAND: ret =  responseString(p); break;
