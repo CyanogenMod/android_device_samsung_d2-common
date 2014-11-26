@@ -89,7 +89,7 @@ bin/qmiproxy
 bin/qmuxd
 bin/radish
 bin/rild
-bin/rmt_storage
+bin/rmt_storage2
 lib/libatparser.so
 lib/libcordon.so
 lib/libfactoryutil.so
