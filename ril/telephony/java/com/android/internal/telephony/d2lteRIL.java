@@ -65,18 +65,15 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     private boolean mIsSendingSMS = false;
     protected boolean isGSM = false;
     public static final long SEND_SMS_TIMEOUT_IN_MS = 30000;
-    private boolean oldRilState = needsOldRilFeature("exynos4RadioState");
-    private boolean googleEditionSS = needsOldRilFeature("googleEditionSS");
-    private boolean driverCall = needsOldRilFeature("newDriverCall");
-    private boolean driverCallU = needsOldRilFeature("newDriverCallU");
-    private boolean dialCode = needsOldRilFeature("newDialCode");
     private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
 
     private Message mPendingGetSimStatus;
 
     public d2lteRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
-        this(context, preferredNetworkType, cdmaSubscription);
+        super(context, preferredNetworkType, cdmaSubscription);
+        mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
+        mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 4);
     }
 
     public d2lteRIL(Context context, int networkMode,
@@ -126,7 +123,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             p.readInt(); // - perso_unblock_retries
             cardStatus.mApplications[i] = appStatus;
         }
-        if (numApplications==1 && !isGSM && appStatus.app_type == appStatus.AppTypeFromRILInt(2)) { // usim
+        if (numApplications==1 && !isGSM && appStatus.app_type == appStatus.AppTypeFromRILInt(2)) {
             cardStatus.mApplications = new IccCardApplicationStatus[numApplications+2];
             cardStatus.mGsmUmtsSubscriptionAppIndex = 0;
             cardStatus.mApplications[cardStatus.mGsmUmtsSubscriptionAppIndex]=appStatus;
@@ -196,11 +193,8 @@ public class d2lteRIL extends RIL implements CommandsInterface {
 
     @Override
     protected Object responseSignalStrength(Parcel p) {
-        int numInts = 12;
+        int numInts = 13;
         int response[];
-
-        // This is a mashup of algorithms used in
-        // SamsungQualcommUiccRIL.java
 
         // Get raw data
         response = new int[numInts];
@@ -208,66 +202,14 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             response[i] = p.readInt();
         }
         //gsm
-        response[0] &= 0xff; //gsmDbm
-
+        response[0] &= 0xff;
         //cdma
-        // Take just the least significant byte as the signal strength
         response[2] %= 256;
         response[4] %= 256;
+        response[7] &= 0xff;
 
-        // RIL_LTE_SignalStrength
-        if (googleEditionSS && !isGSM){
-            response[8] = response[2];
-        }else if ((response[7] & 0xff) == 255 || response[7] == 99) {
-            // If LTE is not enabled, clear LTE results
-            // 7-11 must be -1 for GSM signal strength to be used (see
-            // frameworks/base/telephony/java/android/telephony/SignalStrength.java)
-            // make sure lte is disabled
-            response[7] = 99;
-            response[8] = SignalStrength.INVALID;
-            response[9] = SignalStrength.INVALID;
-            response[10] = SignalStrength.INVALID;
-            response[11] = SignalStrength.INVALID;
-        }else{ // lte is gsm on samsung/qualcomm cdma stack
-            response[7] &= 0xff;
-        }
+        return new SignalStrength(response[0], response[1], response[2], response[3], response[4], response[5], response[6], response[7], response[8], response[9], response[10], response[11], (response[12] != 0));
 
-        return new SignalStrength(response[0], response[1], response[2], response[3], response[4], response[5], response[6], response[7], response[8], response[9], response[10], response[11], (p.readInt() != 0));
-
-    }
-
-    @Override
-    protected RadioState getRadioStateFromInt(int stateInt) {
-        if(!oldRilState)
-             return super.getRadioStateFromInt(stateInt);
-        RadioState state;
-
-        /* RIL_RadioState ril.h */
-        switch(stateInt) {
-            case 0: state = RadioState.RADIO_OFF; break;
-            case 1:
-            case 2: state = RadioState.RADIO_UNAVAILABLE; break;
-            case 4:
-                // When SIM is PIN-unlocked, RIL doesn't respond with RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED.
-                // We notify the system here.
-                Rlog.d(RILJ_LOG_TAG, "SIM is PIN-unlocked now");
-                if (mIccStatusChangedRegistrants != null) {
-                    mIccStatusChangedRegistrants.notifyRegistrants();
-                }
-            case 3:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-            case 10:
-            case 13: state = RadioState.RADIO_ON; break;
-
-            default:
-                throw new RuntimeException(
-                                           "Unrecognized RIL_RadioState: " + stateInt);
-        }
-        return state;
     }
 
     @Override
@@ -301,8 +243,9 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             dc.isMT = (0 != p.readInt());
             dc.als = p.readInt();
             voiceSettings = p.readInt();
-            if (isGSM)
+            if (isGSM){
                 p.readInt();
+            }
             dc.isVoice = (0 == voiceSettings) ? false : true;
             dc.isVoicePrivacy = (0 != p.readInt());
             if (isGSM) {
@@ -368,8 +311,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         int response = p.readInt();
 
         switch(response) {
-            case RIL_UNSOL_RIL_CONNECTED: // Fix for NV/RUIM setting on CDMA SIM devices
-                // skip getcdmascriptionsource as if qualcomm handles it in the ril binary
+            case RIL_UNSOL_RIL_CONNECTED:
                 ret = responseInts(p);
                 setRadioPower(false, null);
                 setPreferredNetworkType(mPreferredNetworkType, null);
@@ -377,9 +319,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
                 if(mRilVersion >= 8)
                     setCellInfoListRate(Integer.MAX_VALUE, null);
                 notifyRegistrantsRilConnectionChanged(((int[])ret)[0]);
-                break;
-            case RIL_UNSOL_NITZ_TIME_RECEIVED:
-                handleNitzTimeReceived(p);
                 break;
             // SAMSUNG STATES
             case 11010: // RIL_UNSOL_AM:
@@ -472,18 +411,9 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             case RIL_REQUEST_UDUB: ret =  responseVoid(p); break;
             case RIL_REQUEST_LAST_CALL_FAIL_CAUSE: ret =  responseInts(p); break;
             case RIL_REQUEST_SIGNAL_STRENGTH: ret =  responseSignalStrength(p); break;
-                    //modification start
-                // prevent exceptions from happenimg because the null value is null or a hexadecimel. so convert if it is not null
-            case RIL_REQUEST_VOICE_REGISTRATION_STATE: ret =  responseVoiceDataRegistrationState(p); break;
-            case RIL_REQUEST_DATA_REGISTRATION_STATE: ret =  responseVoiceDataRegistrationState(p); break;
-                // this fixes bogus values the modem creates
-                // sometimes the  ril may print out
-                // (always on sprint)
-                // sprint: (empty,empty,31000)
-                // this problemaic on sprint, lte won't start, response is slow
-                //speeds up response time on eherpderpd/lte networks
+            case RIL_REQUEST_VOICE_REGISTRATION_STATE: ret = responseVoiceDataRegistrationState(p); break;
+            case RIL_REQUEST_DATA_REGISTRATION_STATE: ret = responseVoiceDataRegistrationState(p); break;
             case RIL_REQUEST_OPERATOR: ret =  operatorCheck(p); break;
-                    //end modification
             case RIL_REQUEST_RADIO_POWER: ret =  responseVoid(p); break;
             case RIL_REQUEST_DTMF: ret =  responseVoid(p); break;
             case RIL_REQUEST_SEND_SMS: ret =  responseSMS(p); break;
@@ -640,7 +570,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         return rr;
     }
 
-    // CDMA FIXES, this fixes  bogus values in nv/sim on d2/jf/t0 cdma family or bogus information from sim card
     private Object
     operatorCheck(Parcel p) {
         String response[] = (String[])responseStrings(p);
@@ -651,14 +580,14 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         }
         return response;
     }
-    // handle exceptions
+
     private Object
     responseVoiceDataRegistrationState(Parcel p) {
         String response[] = (String[])responseStrings(p);
         if (isGSM){
             return response;
         }
-        if ( response.length>=10){
+        if (response.length>=10){
             for(int i=6; i<=9; i++){
                 if (response[i]== null){
                     response[i]=Integer.toString(Integer.MAX_VALUE);
@@ -674,26 +603,11 @@ public class d2lteRIL extends RIL implements CommandsInterface {
 
         return response;
     }
-    // has no effect
-    // for debugging purposes , just generate out anything from response
-    public static String s(String a[]){
-        StringBuffer result = new StringBuffer();
-
-        for (int i = 0; i < a.length; i++) {
-            result.append( a[i] );
-            result.append(",");
-        }
-        return result.toString();
-    }
-    // end  of cdma fix
 
     /**
      * Set audio parameter "wb_amr" for HD-Voice (Wideband AMR).
      *
      * @param state: 0 = unsupported, 1 = supported.
-     * REQUIRED FOR JF FAMILY THIS SETS THE INFORMATION
-     * CRASHES WITHOUT THIS FUNCTION
-     * part of the new csd binary
      */
     private void setWbAmr(int state) {
         if (state == 1) {
@@ -762,42 +676,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         super.notifyRegistrantsCdmaInfoRec(infoRec);
     }
 
-    private void
-    handleNitzTimeReceived(Parcel p) {
-        String nitz = (String)responseString(p);
-        //if (RILJ_LOGD) unsljLogRet(RIL_UNSOL_NITZ_TIME_RECEIVED, nitz);
 
-        // has bonus long containing milliseconds since boot that the NITZ
-        // time was received
-        long nitzReceiveTime = p.readLong();
-
-        Object[] result = new Object[2];
-
-        String fixedNitz = nitz;
-        String[] nitzParts = nitz.split(",");
-        if (nitzParts.length == 4) {
-            // 0=date, 1=time+zone, 2=dst, 3=garbage that confuses GsmServiceStateTracker (so remove it)
-            fixedNitz = nitzParts[0]+","+nitzParts[1]+","+nitzParts[2]+",";
-        }
-
-        result[0] = fixedNitz;
-        result[1] = Long.valueOf(nitzReceiveTime);
-
-        boolean ignoreNitz = SystemProperties.getBoolean(
-                        TelephonyProperties.PROPERTY_IGNORE_NITZ, false);
-
-        if (ignoreNitz) {
-            if (RILJ_LOGD) riljLog("ignoring UNSOL_NITZ_TIME_RECEIVED");
-        } else {
-            if (mNITZTimeRegistrant != null) {
-                mNITZTimeRegistrant
-                .notifyRegistrant(new AsyncResult (null, result, null));
-            } else {
-                // in case NITZ time registrant isnt registered yet
-                mLastNITZTimeInfo = result;
-            }
-        }
-    }
 
     @Override
     protected Object
@@ -816,10 +695,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
         if (samsungEmergency && PhoneNumberUtils.isEmergencyNumber(address)) {
             dialEmergencyCall(address, clirMode, result);
-            return;
-        }
-        if(!dialCode){
-            super.dial(address, clirMode, uusInfo, result);
             return;
         }
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_DIAL, result);
