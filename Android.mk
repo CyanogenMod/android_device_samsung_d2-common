@@ -42,12 +42,21 @@ FIRMWARE_MODEM_IMAGES += \
     modem_fw.b23 modem_fw.b24 modem_fw.b25 modem_fw.b26 modem_fw.b27 modem_fw.b28 modem_fw.b29 \
     modem_fw.b31 modem_fw.mdt
 
+ifneq (d2bst, $(TARGET_DEVICE))
+FIRMWARE_MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(FIRMWARE_MODEM_IMAGES)))
+$(FIRMWARE_MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Modem Firmware link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware-mdm/image/$(notdir $(subst modem_fw,modem_f2,$@)) $@
+else
 FIRMWARE_MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(FIRMWARE_MODEM_IMAGES)))
 $(FIRMWARE_MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "Modem Firmware link: $@"
 	@mkdir -p $(dir $@)
 	@rm -rf $@
 	$(hide) ln -sf /firmware-mdm/image/$(notdir $@) $@
+endif
 
 ALL_DEFAULT_INSTALLED_MODULES += $(FIRMWARE_MODEM_SYMLINKS)
 
