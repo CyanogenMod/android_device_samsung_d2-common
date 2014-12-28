@@ -1,0 +1,20 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+#TODO: Add 'check' as fs_mgr_flags with data partition.
+# Currently we dont have e2fsck compiled. So fs check would failed.
+
+#<src>                                              <mnt_point>   <type>  <mnt_flags and options>                                                           <fs_mgr_flags>
+/dev/block/platform/msm_sdcc.1/by-name/boot         /boot         emmc    defaults                                                                          recoveryonly
+/dev/block/platform/msm_sdcc.1/by-name/recovery     /recovery     emmc    defaults                                                                          recoveryonly
+/dev/block/platform/msm_sdcc.1/by-name/system       /system       ext4    ro,errors=panic                                                                   wait
+/dev/block/platform/msm_sdcc.1/by-name/cache        /cache        ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,errors=panic,journal_async_commit  wait,check
+/dev/block/platform/msm_sdcc.1/by-name/userdata     /data         ext4    nosuid,nodev,noatime,noauto_da_alloc,journal_async_commit,errors=panic            wait,check,encryptable=footer
+
+/dev/block/platform/msm_sdcc.1/by-name/persist      /persist      ext4    nosuid,nodev,barrier=1                                                            wait,check
+/dev/block/platform/msm_sdcc.1/by-name/efs          /efs          ext4    nosuid,nodev,noatime,noauto_da_alloc,journal_async_commit,errors=panic            wait,check
+/dev/block/platform/msm_sdcc.1/by-name/modem        /firmware-mdm vfat    ro,shortname=lower,dmask=177,fmask=177                                            wait
+
+/devices/platform/msm_sdcc.3/mmc_host/mmc1*         auto          auto    defaults                                                                          voldmanaged=sdcard1:auto
+/devices/platform/msm_hsusb_host/usb*               auto          auto    defaults                                                                          voldmanaged=usbdisk:auto
