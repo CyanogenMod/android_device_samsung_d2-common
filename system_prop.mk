@@ -8,6 +8,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.handset.mic=digital \
     ro.qc.sdk.audio.fluencetype=fluence
 
+# camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1 \
+    media.stagefright.use-awesome=true
+
 # radio
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libsec-ril.so \
