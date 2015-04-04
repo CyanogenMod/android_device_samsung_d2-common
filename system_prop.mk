@@ -3,7 +3,6 @@
 
 # audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=true \
     persist.audio.fluence.mode=endfire \
     persist.audio.handset.mic=digital \
     ro.qc.sdk.audio.fluencetype=fluence
