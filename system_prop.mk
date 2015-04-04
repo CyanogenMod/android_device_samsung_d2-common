@@ -19,3 +19,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.izat.service_mask=0x0 \
     persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
+
+# camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.zsl.prop.enable=0
