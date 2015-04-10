@@ -51,6 +51,9 @@ TARGET_NEED_CAMERA_ZSL := true
 TARGET_NEED_EXPOSURE_HACK := true
 TARGET_NEED_SAMSUNG_CAMERA_MODE := true
 
+# Display
+BOARD_EGL_CFG := device/samsung/d2-common/configs/egl.cfg
+
 # GPS
 TARGET_NO_RPC := true
 
