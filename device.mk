@@ -34,6 +34,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/d2-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
     device/samsung/d2-common/audio/audio_policy.conf:system/etc/audio_policy.conf
 
+# Doze
+PRODUCT_PACKAGES += \
+    SamsungDoze
+
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8960 \
