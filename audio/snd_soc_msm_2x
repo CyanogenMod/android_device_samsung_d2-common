@@ -3832,10 +3832,10 @@ SectionDevice
 EndSection
 
 SectionDevice
-	Name "Voice Recognition Headset"
-	Comment "VR Headset Mic Tx device"
+    Name "Voice Recognition Headset"
+    Comment "VR Headset Mic Tx device"
 
-	EnableSequence
+    EnableSequence
         'PRI_TX Channels':0:One
         'SLIM TX7 MUX':0:DEC4
         'DEC4 MUX':0:ADC3
@@ -3850,9 +3850,8 @@ SectionDevice
         'ADC3 Volume':1:0
         'MICBIAS1 CAPLESS Switch':1:0
     EndSequence
-	EndSequence
 
-	ACDBID  8:2
+    ACDBID  8:2
 
 EndSection
 
