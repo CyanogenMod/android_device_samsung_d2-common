@@ -18,6 +18,9 @@
 -->
 
 <resources>
+    <!-- Set the automatic brightness mode on by default -->
     <bool name="def_screen_brightness_automatic_mode">true</bool>
+    <!-- Default screen brightness, from 0 to 255. -->
+    <integer name="def_screen_brightness">102</integer>
 </resources>
 
