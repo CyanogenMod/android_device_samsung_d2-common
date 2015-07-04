@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter d2att d2bst d2cri d2csp d2mtr d2spr d2tmo d2usc d2vzw,$(TARGET_DEVICE)),)
+ifneq ($(filter d2att d2bst d2cri d2csp d2mtr d2refreshspr d2spr d2tmo d2usc d2vzw,$(TARGET_DEVICE)),)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
 FIRMWARE_DSPS_IMAGES := \
@@ -43,8 +43,7 @@ FIRMWARE_MODEM_IMAGES += \
     modem_fw.b31 modem_fw.mdt
 
 FIRMWARE_MODEM_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(FIRMWARE_MODEM_IMAGES)))
-
-ifneq (d2bst, $(TARGET_DEVICE))
+ifeq ($(filter d2bst d2refreshspr,$(TARGET_DEVICE)),)
 $(FIRMWARE_MODEM_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "Modem Firmware link: $@"
 	@mkdir -p $(dir $@)
