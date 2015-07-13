@@ -3766,8 +3766,8 @@ SectionDevice
     EnableSequence
         'PRI_TX Channels':0:One
         'SLIM TX7 MUX':0:DEC3
-        'DEC3 MUX':0:ADC3
-        'ADC3 Volume':1:100
+        'DEC3 MUX':0:ADC4
+        'ADC4 Volume':1:100
         'DEC3 Volume':2:67.7%
         'MICBIAS1 CAPLESS Switch':1:1
     EndSequence
@@ -3775,7 +3775,7 @@ SectionDevice
     DisableSequence
         'SLIM TX7 MUX':0:ZERO
         'DEC3 MUX':0:ZERO
-        'ADC3 Volume':1:0
+        'ADC4 Volume':1:0
         'MICBIAS1 CAPLESS Switch':1:0
     EndSequence
 
@@ -3790,8 +3790,8 @@ SectionDevice
     EnableSequence
         'PRI_TX Channels':0:One
         'SLIM TX7 MUX':0:DEC3
-        'DEC3 MUX':0:ADC3
-        'ADC3 Volume':1:100
+        'DEC3 MUX':0:ADC4
+        'ADC4 Volume':1:100
         'DEC3 Volume':2:67.7%
         'MICBIAS1 CAPLESS Switch':1:1
     EndSequence
@@ -3799,7 +3799,7 @@ SectionDevice
     DisableSequence
         'SLIM TX7 MUX':0:ZERO
         'DEC3 MUX':0:ZERO
-        'ADC3 Volume':1:0
+        'ADC4 Volume':1:0
         'MICBIAS1 CAPLESS Switch':1:0
     EndSequence
 
