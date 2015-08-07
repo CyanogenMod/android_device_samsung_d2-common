@@ -428,9 +428,15 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     }
 
     private Object
-    responseVoiceDataRegistrationState(Parcel p) {
+    responseVoiceDataRegistrationState(Parcel p, boolean data) {
         String response[] = (String[])responseStrings(p);
         if (isGSM){
+            if (data &&
+                response.length > 4 &&
+                response[0].equals("1") &&
+                response[3].equals("102")) {
+                response[3] = "2";
+            }
             return response;
         }
         if (response.length>=10){
