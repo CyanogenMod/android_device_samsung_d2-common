@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2014 The CyanogenMod Project
+ * Copyright (C) 2012-2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,51 +21,34 @@ import static com.android.internal.telephony.RILConstants.*;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.AsyncResult;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
-import android.telephony.SmsMessage;
-import android.os.SystemProperties;
 import android.os.SystemClock;
-import android.provider.Settings;
-import android.text.TextUtils;
-import android.telephony.Rlog;
-
-import android.telephony.SignalStrength;
-
+import android.os.SystemProperties;
 import android.telephony.PhoneNumberUtils;
-import com.android.internal.telephony.RILConstants;
-import com.android.internal.telephony.gsm.SmsBroadcastConfigInfo;
+import android.telephony.Rlog;
+import android.telephony.SignalStrength;
 import com.android.internal.telephony.cdma.CdmaInformationRecords;
-import com.android.internal.telephony.cdma.CdmaInformationRecords.CdmaSignalInfoRec;
 import com.android.internal.telephony.cdma.SignalToneUtil;
+import com.android.internal.telephony.uicc.IccCardApplicationStatus;
+import com.android.internal.telephony.uicc.IccCardStatus;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.android.internal.telephony.uicc.IccCardApplicationStatus;
-import com.android.internal.telephony.uicc.IccCardStatus;
-
 /**
- * Qualcomm RIL for the Samsung family.
- * Quad core Exynos4 with Qualcomm modem and later is supported
- * Snapdragon S3 and later is supported
- * This RIL is univerisal meaning it supports CDMA and GSM radio.
- * Handles most GSM and CDMA cases.
+ * Qualcomm RIL for the Samsung d2 family.
  * {@hide}
  */
 public class d2lteRIL extends RIL implements CommandsInterface {
 
     private AudioManager mAudioManager;
-
-    private Object mSMSLock = new Object();
+    private boolean isGSM = false;
     private boolean mIsSendingSMS = false;
-    protected boolean isGSM = false;
     public static final long SEND_SMS_TIMEOUT_IN_MS = 30000;
     private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
+    private Object mSMSLock = new Object();
 
     public d2lteRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
@@ -508,8 +491,8 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     protected void notifyRegistrantsCdmaInfoRec(CdmaInformationRecords infoRec) {
         final int response = RIL_UNSOL_CDMA_INFO_REC;
 
-        if (infoRec.record instanceof CdmaSignalInfoRec) {
-            CdmaSignalInfoRec sir = (CdmaSignalInfoRec) infoRec.record;
+        if (infoRec.record instanceof CdmaInformationRecords.CdmaSignalInfoRec) {
+            CdmaInformationRecords.CdmaSignalInfoRec sir = (CdmaInformationRecords.CdmaSignalInfoRec) infoRec.record;
             if (sir != null
                     && sir.isPresent
                     && sir.signalType == SignalToneUtil.IS95_CONST_IR_SIGNAL_IS54B
