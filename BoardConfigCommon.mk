@@ -53,6 +53,7 @@ TARGET_IS_DERP2 := true
 
 # GPS
 TARGET_NO_RPC := true
+TARGET_GPS_HAL_PATH := device/samsung/d2-common/gps
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
