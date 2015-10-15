@@ -185,17 +185,17 @@
     <bool name="skip_restoring_network_selection">true</bool>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">true</bool>
+    <!--bool name="config_intrusiveNotificationLed">true</bool-->
 
     <!-- Does the notification LED support multiple colors?
          Used to decide if the user can change the colors -->
-    <bool name="config_multiColorNotificationLed">true</bool>
+    <!--bool name="config_multiColorNotificationLed">true</bool-->
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveBatteryLed">true</bool>
+    <!--bool name="config_intrusiveBatteryLed">true</bool-->
 
     <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
-    <bool name="config_multiColorBatteryLed">true</bool>
+    <!--bool name="config_multiColorBatteryLed">true</bool-->
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <integer-array name="config_longPressVibePattern">
@@ -273,7 +273,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareWakeKeys">65</integer>
+    <!--integer name="config_deviceHardwareWakeKeys">65</integer-->
 
     <!-- Panel auto brightness value -->
     <!--integer name="config_panelAutoBrightnessValue">1</integer-->
@@ -282,7 +282,7 @@
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
     <!-- Performance profiles -->
-    <string name="config_perf_profile_prop">sys.perf.profile</string>
-    <string name="config_perf_profile_default_entry">1</string>
+    <!--string name="config_perf_profile_prop">sys.perf.profile</string-->
+    <!--string name="config_perf_profile_default_entry">1</string-->
 
 </resources>
