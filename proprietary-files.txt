@@ -11,7 +11,7 @@ lib/libcsd-client.so
 # Bluetooth
 vendor/firmware/bcm4334.hcd
 vendor/firmware/bcm4334_murata.hcd
-vendor/firmware/bcm4334_semco.hcd
+vendor/firmware/bcm4334_semcosh.hcd
 
 # Camera
 bin/mm-qcamera-daemon
