@@ -59,7 +59,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
 
     public d2lteRIL(Context context, int networkMode,
             int cdmaSubscription) {
-        super(context, networkMode, cdmaSubscription);
+        super(context, networkMode, cdmaSubscription, null);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
         mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 4);
     }
