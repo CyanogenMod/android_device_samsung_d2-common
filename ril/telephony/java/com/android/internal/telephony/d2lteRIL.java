@@ -46,8 +46,8 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     private AudioManager mAudioManager;
     private boolean isGSM = false;
     private boolean mIsSendingSMS = false;
+    private static final int RIL_REQUEST_DIAL_EMERGENCY = 10001;
     public static final long SEND_SMS_TIMEOUT_IN_MS = 30000;
-    private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
     private Object mSMSLock = new Object();
 
     public d2lteRIL(Context context, int networkModes, int cdmaSubscription) {
@@ -525,7 +525,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
-        if (samsungEmergency && PhoneNumberUtils.isEmergencyNumber(address)) {
+        if (PhoneNumberUtils.isEmergencyNumber(address)) {
             dialEmergencyCall(address, clirMode, result);
             return;
         }
@@ -597,7 +597,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         }
     }
 
-    static final int RIL_REQUEST_DIAL_EMERGENCY = 10016;
    private void
     dialEmergencyCall(String address, int clirMode, Message result) {
         RILRequest rr;
