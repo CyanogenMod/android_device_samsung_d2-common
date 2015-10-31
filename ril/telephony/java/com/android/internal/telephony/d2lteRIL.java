@@ -50,16 +50,15 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
     private Object mSMSLock = new Object();
 
-    public d2lteRIL(Context context, int preferredNetworkType,
-            int cdmaSubscription, Integer instanceId) {
-        super(context, preferredNetworkType, cdmaSubscription, instanceId);
+    public d2lteRIL(Context context, int networkModes, int cdmaSubscription) {
+        this(context, networkModes, cdmaSubscription, null);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
         mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 4);
     }
 
-    public d2lteRIL(Context context, int networkMode,
-            int cdmaSubscription) {
-        super(context, networkMode, cdmaSubscription, null);
+    public d2lteRIL(Context context, int preferredNetworkType,
+            int cdmaSubscription, Integer instanceId) {
+        super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
         mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 4);
     }
