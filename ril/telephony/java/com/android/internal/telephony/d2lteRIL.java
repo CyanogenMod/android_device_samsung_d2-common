@@ -224,6 +224,11 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             dc.als = p.readInt();
             voiceSettings = p.readInt();
             dc.isVoice = (0 == voiceSettings) ? false : true;
+            if (!isGSM) {
+                p.readInt();
+                p.readInt();
+                p.readString();
+            }
             dc.isVoicePrivacy = (0 != p.readInt());
             if (isGSM) {
                 p.readInt();
