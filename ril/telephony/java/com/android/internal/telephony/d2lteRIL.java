@@ -46,7 +46,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     private AudioManager mAudioManager;
     private boolean isGSM = false;
     private boolean mIsSendingSMS = false;
-    private static final int RIL_REQUEST_DIAL_EMERGENCY = 10001;
     public static final long SEND_SMS_TIMEOUT_IN_MS = 30000;
     private Object mSMSLock = new Object();
 
@@ -313,15 +312,8 @@ public class d2lteRIL extends RIL implements CommandsInterface {
                     Rlog.e(RILJ_LOG_TAG, "am " + amString + " could not be executed.");
                 }
                 break;
-            case 11021: // RIL_UNSOL_RESPONSE_HANDOVER:
+            case 1037:
                 ret = responseVoid(p);
-                break;
-            case 1036:
-                ret = responseVoid(p);
-                break;
-            case 11017: // RIL_UNSOL_WB_AMR_STATE:
-                ret = responseInts(p);
-                setWbAmr(((int[])ret)[0]);
                 break;
             case 11055: // RIL_UNSOL_ON_SS:
                 p.setDataPosition(dataPosition);
@@ -542,10 +534,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
-        if (PhoneNumberUtils.isEmergencyNumber(address)) {
-            dialEmergencyCall(address, clirMode, result);
-            return;
-        }
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_DIAL, result);
 
         rr.mParcel.writeString(address);
@@ -614,20 +602,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         }
     }
 
-   private void
-    dialEmergencyCall(String address, int clirMode, Message result) {
-        RILRequest rr;
-        Rlog.v(RILJ_LOG_TAG, "Emergency dial: " + address);
-
-        rr = RILRequest.obtain(RIL_REQUEST_DIAL_EMERGENCY, result);
-        rr.mParcel.writeString(address + "/");
-        rr.mParcel.writeInt(clirMode);
-        rr.mParcel.writeInt(0);  // UUS information is absent
-
-        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
-
-        send(rr);
-    }
 
     // This call causes ril to crash the socket, stopping further communication
     @Override
@@ -642,3 +616,4 @@ public class d2lteRIL extends RIL implements CommandsInterface {
         }
     }
 }
+
