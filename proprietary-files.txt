@@ -102,7 +102,6 @@ lib/libcordon.so
 lib/libfactoryutil.so
 lib/libomission_avoidance.so
 lib/libreference-ril.so
-lib/libril.so
 lib/libsecril-client.so
 lib/libxml.so
 vendor/lib/libconfigdb.so
