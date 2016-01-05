@@ -41,7 +41,7 @@ extern "C"
 typedef struct
 {
    char                 name[128];
-   long                 val;
+   long long            val;
 } loc_name_val_s_type;
 
 #define NAME_VAL(x) {"" #x "", x }
