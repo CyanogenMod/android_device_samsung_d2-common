@@ -49,7 +49,7 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
 
     public d2lteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
-        this(context, networkModes, cdmaSubscription, null);
+        this(context, preferredNetworkType, cdmaSubscription, null);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
