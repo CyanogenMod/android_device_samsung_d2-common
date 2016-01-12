@@ -45,7 +45,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
 
     private AudioManager mAudioManager;
     private boolean isGSM = false;
-    private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
 
     public d2lteRIL(Context context, int networkModes, int cdmaSubscription) {
         this(context, networkModes, cdmaSubscription, null);
@@ -468,10 +467,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
     @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
-        if (samsungEmergency && PhoneNumberUtils.isEmergencyNumber(address)) {
-            dialEmergencyCall(address, clirMode, result);
-            return;
-        }
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_DIAL, result);
 
         rr.mParcel.writeString(address);
@@ -538,22 +533,6 @@ public class d2lteRIL extends RIL implements CommandsInterface {
                 result.sendToTarget();
             }
         }
-    }
-
-    static final int RIL_REQUEST_DIAL_EMERGENCY = 10016;
-   private void
-    dialEmergencyCall(String address, int clirMode, Message result) {
-        RILRequest rr;
-        Rlog.v(RILJ_LOG_TAG, "Emergency dial: " + address);
-
-        rr = RILRequest.obtain(RIL_REQUEST_DIAL_EMERGENCY, result);
-        rr.mParcel.writeString(address + "/");
-        rr.mParcel.writeInt(clirMode);
-        rr.mParcel.writeInt(0);  // UUS information is absent
-
-        if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
-
-        send(rr);
     }
 
     // This call causes ril to crash the socket, stopping further communication
