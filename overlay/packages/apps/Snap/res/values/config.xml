@@ -20,4 +20,6 @@
 
     <!-- Restart preview for front camera onPictureTaken -->
     <bool name="front_camera_restart_preview_onPictureTaken">true</bool>
+
+    <string name="manufacturer_key_values">cam_mode=0</string>
 </resources>
