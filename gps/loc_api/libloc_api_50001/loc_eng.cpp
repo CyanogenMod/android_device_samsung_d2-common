@@ -809,16 +809,7 @@ void LocEngReportPosition::proc() const {
     }
 }
 void LocEngReportPosition::locallog() const {
-    LOC_LOGV("flags: %d\n  source: %d\n  latitude: %f\n  longitude: %f\n  "
-             "altitude: %f\n  speed: %f\n  bearing: %f\n  accuracy: %f\n  "
-             "timestamp: %lld\n  rawDataSize: %d\n  rawData: %p\n  Session"
-             " status: %d\n Technology mask: %u",
-             mLocation.gpsLocation.flags, mLocation.position_source,
-             mLocation.gpsLocation.latitude, mLocation.gpsLocation.longitude,
-             mLocation.gpsLocation.altitude, mLocation.gpsLocation.speed,
-             mLocation.gpsLocation.bearing, mLocation.gpsLocation.accuracy,
-             mLocation.gpsLocation.timestamp, mLocation.rawDataSize,
-             mLocation.rawData, mStatus, mTechMask);
+    LOC_LOGV("LocEngReportPosition");
 }
 void LocEngReportPosition::log() const {
     locallog();
@@ -859,19 +850,7 @@ void LocEngReportSv::proc() const {
     }
 }
 void LocEngReportSv::locallog() const {
-    LOC_LOGV("num sv: %d\n  ephemeris mask: %dxn  almanac mask: %x\n  "
-             "used in fix mask: %x\n      sv: prn         snr       "
-             "elevation      azimuth",
-             mSvStatus.num_svs, mSvStatus.ephemeris_mask,
-             mSvStatus.almanac_mask, mSvStatus.used_in_fix_mask);
-    for (int i = 0; i < mSvStatus.num_svs && i < GPS_MAX_SVS; i++) {
-        LOC_LOGV("   %d:   %d    %f    %f    %f\n  ",
-                 i,
-                 mSvStatus.sv_list[i].prn,
-                 mSvStatus.sv_list[i].snr,
-                 mSvStatus.sv_list[i].elevation,
-                 mSvStatus.sv_list[i].azimuth);
-    }
+    LOC_LOGV("%s:%d] LocEngReportSv",__func__, __LINE__);
 }
 inline void LocEngReportSv::log() const {
     locallog();
@@ -1759,7 +1738,9 @@ static int loc_eng_start_handler(loc_eng_data_s_type &loc_eng_data)
        ret_val = loc_eng_data.adapter->startFix();
 
        if (ret_val == LOC_API_ADAPTER_ERR_SUCCESS ||
-           ret_val == LOC_API_ADAPTER_ERR_ENGINE_DOWN)
+           ret_val == LOC_API_ADAPTER_ERR_ENGINE_DOWN ||
+           ret_val == LOC_API_ADAPTER_ERR_PHONE_OFFLINE ||
+           ret_val == LOC_API_ADAPTER_ERR_INTERNAL)
        {
            loc_eng_data.adapter->setInSession(TRUE);
            loc_inform_gps_status(loc_eng_data, GPS_STATUS_SESSION_BEGIN);
