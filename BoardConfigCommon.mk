@@ -72,6 +72,10 @@ TARGET_USERIMAGES_USE_F2FS := true
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/d2-common/ril
 
+# Sensors
+TARGET_INVENSENSE_SENSOR := 60xx
+BOARD_USES_GENERIC_INVENSENSE := true
+
 # Wifi
 BOARD_WLAN_DEVICE := bcmdhd
 BOARD_HAVE_SAMSUNG_WIFI := true
