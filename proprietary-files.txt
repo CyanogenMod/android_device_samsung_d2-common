@@ -117,13 +117,6 @@ vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
 vendor/lib/libril-qcril-hook-oem.so
 
-# Sensors
-lib/hw/sensors.msm8960.so
-lib/libakmd.so
-lib/libinvensense_hal.so
-lib/libmllite.so
-lib/libmlplatform.so
-
 # Wi-Fi
 etc/wifi/bcmdhd_apsta.bin_b2
 etc/wifi/bcmdhd_p2p.bin_b2

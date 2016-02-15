@@ -49,6 +49,10 @@ PRODUCT_PACKAGES += \
     libloc_core \
     libloc_eng
 
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.msm8960
+
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/gps/etc/gps.conf:system/etc/gps.conf \
     device/samsung/d2-common/gps/etc/sap.conf:system/etc/sap.conf
