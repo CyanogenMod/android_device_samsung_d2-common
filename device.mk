@@ -91,6 +91,10 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
+# SPN override
+PRODUCT_COPY_FILES += \
+    device/samsung/d2-common/selective-spn-conf.xml:system/etc/selective-spn-conf.xml
+
 # Wifi
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
