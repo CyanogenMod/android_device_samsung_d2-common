@@ -53,6 +53,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/d2-common/gps/etc/gps.conf:system/etc/gps.conf \
     device/samsung/d2-common/gps/etc/sap.conf:system/etc/sap.conf
 
+# Sensors
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.sensor.ambient_temperature.xml:system/etc/permissions/android.hardware.sensor.ambient_temperature.xml
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/keylayout/fsa9485.kl:system/usr/keylayout/fsa9485.kl \
