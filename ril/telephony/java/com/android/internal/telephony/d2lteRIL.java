@@ -43,13 +43,12 @@ import java.util.Collections;
  */
 public class d2lteRIL extends RIL implements CommandsInterface {
 
-    private boolean setPreferredNetworkTypeSeen = false;
     private AudioManager mAudioManager;
     private boolean isGSM = false;
     private boolean samsungEmergency = needsOldRilFeature("samsungEMSReq");
 
-    public d2lteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
-        this(context, preferredNetworkType, cdmaSubscription, null);
+    public d2lteRIL(Context context, int networkModes, int cdmaSubscription) {
+        this(context, networkModes, cdmaSubscription, null);
         mAudioManager = (AudioManager)mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
@@ -578,18 +577,5 @@ public class d2lteRIL extends RIL implements CommandsInterface {
             AsyncResult.forMessage(response, ret, null);
             response.sendToTarget();
         }
-    }
-
-    @Override
-    public void setPreferredNetworkType(int networkType , Message response) {
-        riljLog("setPreferredNetworkType: " + networkType);
-
-        if (!setPreferredNetworkTypeSeen) {
-            riljLog("Need to reboot modem!");
-            setRadioPower(false, null);
-            setPreferredNetworkTypeSeen = true;
-        }
-
-        super.setPreferredNetworkType(networkType, response);
     }
 }
