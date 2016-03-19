@@ -18,12 +18,15 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
+#define BTA_DISABLE_DELAY 100 /* in milliseconds */
+
 #define BTM_DEF_LOCAL_NAME   "Samsung Galaxy S III"
-#define MAX_ACL_CONNECTIONS 7
-#define MAX_L2CAP_CHANNELS  16
 
 #define BTA_SKIP_BLE_READ_REMOTE_FEAT TRUE
-#define BTA_DISABLE_DELAY 1000 /* in milliseconds */
+#define SC_MODE_INCLUDED FALSE
+#define HCI_RAW_CMD_INCLUDED FALSE
+#define SDP_DEBUG FALSE
+#define BTSNOOP_MEM FALSE
 
 #define BLE_VND_INCLUDED TRUE
 #endif
