@@ -4,11 +4,11 @@
 # audio
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.disable=1 \
-    persist.audio.fluence.mode=endfire \
-    persist.audio.vr.enable=false \
-    persist.audio.handset.mic=digital \
-    persist.audio.speaker.location=high \
-    ro.qc.sdk.audio.fluencetype=fluence
+    ro.qc.sdk.audio.fluencetype=fluence \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true \
+    use.dedicated.device.for.voip=true
 
 # radio
 PRODUCT_PROPERTY_OVERRIDES += \
