@@ -67,10 +67,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/d2-common/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl \
     device/samsung/d2-common/keylayout/sii9234_rcp.kl:system/usr/keylayout/sii9234_rcp.kl
 
-# Logo
-PRODUCT_COPY_FILES += \
-    device/samsung/d2-common/initlogo.rle:root/initlogo.rle
-
 # Media configuration
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/media/media_profiles.xml:system/etc/media_profiles.xml
