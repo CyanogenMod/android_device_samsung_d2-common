@@ -45,11 +45,11 @@ PRODUCT_PACKAGES += \
     SamsungDoze
 
 # GPS
-PRODUCT_PACKAGES += \
-    gps.msm8960 \
-    libgps.utils \
-    libloc_core \
-    libloc_eng
+#PRODUCT_PACKAGES += \
+#    gps.msm8960 \
+#    libgps.utils \
+#    libloc_core \
+#    libloc_eng
 
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/gps/etc/gps.conf:system/etc/gps.conf \
