@@ -25,3 +25,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # camera
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.zsl.prop.enable=0
+
+# storage
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.sdcardfs=true
