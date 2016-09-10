@@ -472,10 +472,10 @@
   <spnOverride numeric="26606"  spn="CTS Mobile" />
   <spnOverride numeric="26601"  spn="GibTel" />
   <!-- Greece -->
-  <spnOverride numeric="20201"  spn="Cosmote" />
-  <spnOverride numeric="20205"  spn="Vodafone" />
-  <spnOverride numeric="20209"  spn="Wind" />
-  <spnOverride numeric="20210"  spn="Wind" />
+  <spnOverride numeric="20201"  spn="GR COSMOTE"/>
+  <spnOverride numeric="20205"  spn="vodafone GR"/>
+  <spnOverride numeric="20209"  spn="Q-TELECOM"/>
+  <spnOverride numeric="20210"  spn="WIND GR"/>
   <!-- Greenland (Denmark) -->
   <spnOverride numeric="29001"  spn="TELE Greenland A/S" />
   <!-- Grenada -->
