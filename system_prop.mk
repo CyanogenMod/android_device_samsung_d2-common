@@ -8,7 +8,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true \
-    use.dedicated.device.for.voip=true
+    use.dedicated.device.for.voip=true \
+    use.voice.path.for.pcm.voip=true
 
 # radio
 PRODUCT_PROPERTY_OVERRIDES += \
