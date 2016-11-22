@@ -13,6 +13,7 @@
 /dev/block/platform/msm_sdcc.1/by-name/cache        /cache        ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,errors=panic,journal_async_commit  wait,check,formattable
 /dev/block/platform/msm_sdcc.1/by-name/userdata     /data         f2fs    rw,nosuid,nodev,noatime,nodiratime,inline_xattr                                   wait,check,formattable,encryptable=footer
 /dev/block/platform/msm_sdcc.1/by-name/userdata     /data         ext4    nosuid,nodev,noatime,noauto_da_alloc,journal_async_commit,errors=panic            wait,check,formattable,encryptable=footer
+/dev/block/platform/msm_sdcc.1/by-name/fota         /misc         emmc    defaults                                                                          defaults
 
 /dev/block/platform/msm_sdcc.1/by-name/persist      /persist      ext4    nosuid,nodev,barrier=1                                                            wait,check,notrim
 /dev/block/platform/msm_sdcc.1/by-name/efs          /efs          ext4    nosuid,nodev,noatime,noauto_da_alloc,journal_async_commit,errors=panic            wait,check,notrim
