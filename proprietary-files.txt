@@ -75,7 +75,6 @@ lib/hw/nfc.msm8960.so
 # QMI
 lib/libqdi.so
 lib/libqdp.so
-lib/libqmi_client_qmux.so
 vendor/lib/libdiag.so
 
 # GPS
