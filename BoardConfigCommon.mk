@@ -59,6 +59,9 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 880803840
 TARGET_RECOVERY_FSTAB := device/samsung/d2-common/rootdir/etc/fstab.qcom
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Recovery
+TARGET_RECOVERY_DENSITY := hdpi
+
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/d2-common/ril
 
